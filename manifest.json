@@ -1,0 +1,8 @@
+{
+  "name": "MalCrypto Aladdin — Cross-Market Causal Risk Terminal",
+  "short_name": "MalCrypto",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#111315",
+  "theme_color": "#d8b876"
+}
