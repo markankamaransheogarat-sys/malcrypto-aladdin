@@ -5,6 +5,7 @@ import {
   BriefVerdictTracker,
   type ExecutiveBriefing,
 } from "../src/aladdin/briefing.js";
+import { HorizonForecastTracker } from "../src/aladdin/horizon-tracker.js";
 import { EventDatabaseStore } from "../src/feeds/events-db.js";
 import type { OhlcvCandle } from "../src/feeds/live-feeds.js";
 
@@ -125,5 +126,59 @@ describe("Phase 6: Honest Candle-Wick Resolver, Walk-Forward Backtest & Events D
     assert.equal(added, 2);
     assert.equal(db.query({ category: "INSIDER" }).length, 1);
     assert.equal(db.query({ search: "nvidia" }).length, 1);
+  });
+
+  it("tracks 24h horizon P10..P90 forecasts and computes Brier score after 24h", () => {
+    const tracker = new HorizonForecastTracker();
+    const t0 = Date.UTC(2026, 10, 10, 0, 0);
+    const brief: ExecutiveBriefing = {
+      verdict: "WAIT",
+      confidencePct: 50,
+      compositeScore: 8,
+      btcPrice: 70_000,
+      entryPrice: 70_000,
+      stopLossPrice: 68_500,
+      takeProfitPrice: 73_300,
+      riskRewardRatio: 2.2,
+      headlineSummary: "test",
+      drivers: [],
+      horizons: [
+        {
+          horizonLabel: "Сегодня (24ч)",
+          hours: 24,
+          probUpPct: 20,
+          probRangePct: 65,
+          probDownPct: 15,
+          p10Price: 68_000,
+          p50Price: 70_200,
+          p90Price: 72_200,
+          expectedMovePct: 0.28,
+        },
+      ],
+      topNewsCatalysts: [],
+      upcomingMacroEvents: [],
+    };
+    const rec = tracker.recordFromBriefing(brief, t0);
+    assert.ok(rec);
+    const after24h = t0 + 24 * 3600 * 1000 + 60_000;
+    const changed = tracker.resolveWithCandles(
+      [
+        {
+          openTime: t0 + 24 * 3600 * 1000,
+          closeTime: after24h,
+          open: 70_100,
+          high: 70_600,
+          low: 69_900,
+          close: 70_500,
+          volume: 100,
+        },
+      ],
+      after24h,
+    );
+    assert.equal(changed, true);
+    const stats = tracker.getStats();
+    assert.equal(stats.resolved, 1);
+    assert.equal(stats.p10p90CoveragePct, 100);
+    assert.equal(stats.avgBrierScore, 0.04);
   });
 });

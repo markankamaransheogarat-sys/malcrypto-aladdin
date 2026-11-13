@@ -12,6 +12,10 @@ import {
   type BriefVerdictRecord,
 } from "./aladdin/briefing.js";
 import { computeFragilityMetrics } from "./aladdin/fragility.js";
+import {
+  HorizonForecastTracker,
+  type HorizonForecastRecord,
+} from "./aladdin/horizon-tracker.js";
 import { AladdinSimulator, CalibrationTracker } from "./aladdin/simulator.js";
 import { CausalDiscoveryEngine } from "./causal/lead-lag.js";
 import { NewsLinkerEngine } from "./causal/news-linker.js";
@@ -48,6 +52,7 @@ import {
 
 const SNAPSHOT_PATH = resolve(process.cwd(), "data/snapshot.json");
 const VERDICTS_PATH = resolve(process.cwd(), "data/verdicts.json");
+const HORIZONS_PATH = resolve(process.cwd(), "data/horizon_forecasts.json");
 const EVENTS_DB_PATH = resolve(process.cwd(), "data/events_db.json");
 
 async function runWatchdog(): Promise<void> {
@@ -322,6 +327,27 @@ async function runWatchdog(): Promise<void> {
   briefTracker.recordVerdict(liveBrief);
   const verdictStats = briefTracker.getStats();
   writeFileSync(VERDICTS_PATH, JSON.stringify(verdictStats.records, null, 2));
+
+  // 24/7 24h Horizon Cone Tracker (data/horizon_forecasts.json)
+  const horizonTracker = new HorizonForecastTracker();
+  if (existsSync(HORIZONS_PATH)) {
+    try {
+      const savedHz = JSON.parse(
+        readFileSync(HORIZONS_PATH, "utf8"),
+      ) as HorizonForecastRecord[];
+      if (Array.isArray(savedHz)) horizonTracker.loadRecords(savedHz);
+    } catch {
+      // ignore
+    }
+  }
+  if (btcOhlcv15m.length > 0) {
+    horizonTracker.resolveWithCandles(btcOhlcv15m);
+  }
+  horizonTracker.recordFromBriefing(liveBrief);
+  writeFileSync(
+    HORIZONS_PATH,
+    JSON.stringify(horizonTracker.getStats().records, null, 2),
+  );
 
   // Persistent Global Events Database (data/events_db.json)
   const eventsDb = new EventDatabaseStore();

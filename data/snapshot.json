@@ -320,9 +320,9 @@
         "биток"
       ],
       "systemicWeight": 0.99,
-      "price": 69304.23,
-      "change24hPct": -5.752,
-      "fragilityScore": 57
+      "price": 68340.35,
+      "change24hPct": -4.51,
+      "fragilityScore": 61
     },
     {
       "id": "CRYPTO_ETH",
@@ -336,9 +336,9 @@
         "эфир"
       ],
       "systemicWeight": 0.92,
-      "price": 1951.79,
-      "change24hPct": -4.784,
-      "fragilityScore": 57
+      "price": 1931.14,
+      "change24hPct": -4.458,
+      "fragilityScore": 58
     },
     {
       "id": "CRYPTO_SOL",
@@ -352,8 +352,8 @@
         "солана"
       ],
       "systemicWeight": 0.86,
-      "price": 80.39,
-      "change24hPct": -3.505,
+      "price": 79.37,
+      "change24hPct": -2.745,
       "fragilityScore": 61
     },
     {
@@ -367,9 +367,9 @@
         "rndr"
       ],
       "systemicWeight": 0.68,
-      "price": 1.509,
-      "change24hPct": 0.133,
-      "fragilityScore": 27
+      "price": 1.536,
+      "change24hPct": 0.986,
+      "fragilityScore": 28
     },
     {
       "id": "CRYPTO_TAO",
@@ -382,9 +382,9 @@
         "bittensor"
       ],
       "systemicWeight": 0.72,
-      "price": 210.9,
-      "change24hPct": -1.861,
-      "fragilityScore": 37
+      "price": 215.8,
+      "change24hPct": 1.553,
+      "fragilityScore": 39
     },
     {
       "id": "CRYPTO_FET",
@@ -398,8 +398,8 @@
         "asi"
       ],
       "systemicWeight": 0.66,
-      "price": 0.1477,
-      "change24hPct": -0.135
+      "price": 0.1475,
+      "change24hPct": -1.272
     },
     {
       "id": "CRYPTO_LINK",
@@ -412,8 +412,8 @@
         "chainlink"
       ],
       "systemicWeight": 0.74,
-      "price": 9.977,
-      "change24hPct": -1.228
+      "price": 9.895,
+      "change24hPct": -2.156
     },
     {
       "id": "NAR_AI_COMPUTE",
@@ -598,6 +598,19 @@
       ],
       "systemicWeight": 0.66,
       "description": "DeFiLlama TVL: $5.58B (CEX)"
+    },
+    {
+      "id": "PROTO_GATE",
+      "label": "Gate (GT)",
+      "ticker": "GT",
+      "tier": "INFRA_STABLE",
+      "sector": "CEX",
+      "aliases": [
+        "gate",
+        "gt"
+      ],
+      "systemicWeight": 0.66,
+      "description": "DeFiLlama TVL: $5.51B (CEX)"
     }
   ],
   "edges": [
@@ -1395,6 +1408,21 @@
       "validFrom": 1794563831608,
       "validTo": null,
       "evidence": "DeFiLlama TVL $5.58B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_GATE",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_GATE",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794605707598,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $5.51B"
     }
   ]
 }

@@ -13,6 +13,7 @@
     "test": "node --import tsx --test tests/**/*.test.ts",
     "terminal": "node --import tsx src/index.ts",
     "watchdog": "node --import tsx src/watchdog.ts",
+    "audit": "node --import tsx src/audit-cli.ts",
     "clean": "rm -rf dist"
   },
   "keywords": [

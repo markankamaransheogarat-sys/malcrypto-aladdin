@@ -1,0 +1,232 @@
+{
+  "generatedAt": "2026-11-13T21:35:12.641Z",
+  "systemHealthStatus": "ПОЛОЖИТЕЛЬНОЕ_МАТОЖИДАНИЕ",
+  "liveVerdicts": {
+    "total": 0,
+    "resolved": 0,
+    "wins": 0,
+    "winRatePct": 0,
+    "avgReturnPct": 0
+  },
+  "liveHorizons24h": {
+    "total": 1,
+    "resolved": 0,
+    "p10p90CoveragePct": 0,
+    "avgBrierScore": 0,
+    "maePct": 0
+  },
+  "walkForward166d": {
+    "candlesTested": 1000,
+    "startDateIso": "2026-05-31",
+    "endDateIso": "2026-11-13",
+    "totalTrades": 40,
+    "wins": 25,
+    "losses": 15,
+    "winRate": 0.625,
+    "expectancyPct": 0.34,
+    "profitFactor": 1.48,
+    "maxDrawdownPct": 6.61,
+    "recommendedThreshold": 22,
+    "recommendedWinRate": 0.8
+  },
+  "historicalShocks4Cases": {
+    "overallBrierScore": 0.0931,
+    "overallDirectionalAccuracyPct": 100,
+    "overallIntervalCoveragePct": 40,
+    "overallMaePct": 4.84,
+    "cases": [
+      {
+        "caseId": "deepseek_nvda_2025",
+        "name": "DeepSeek / NVIDIA AI Capex Shock",
+        "dateLabel": "2025-01-27",
+        "triggerNodeId": "EQ_NVDA",
+        "shockPct": -16.9,
+        "predictedBtcPct": -6.25,
+        "actualBtcPct": -5.8,
+        "predictedCrashProb": 0.74,
+        "actualCrashOccurred": 1,
+        "brierContribution": 0.0676,
+        "directionalHits": 6,
+        "directionalTotal": 6,
+        "maePct": 3.14,
+        "intervalHits": 4,
+        "assetComparisons": [
+          {
+            "nodeId": "EQ_QQQ",
+            "predictedPct": -9.09,
+            "p10Pct": -12.72,
+            "p90Pct": -6.36,
+            "actualPct": -3,
+            "inBand": false
+          },
+          {
+            "nodeId": "EQ_TSMC",
+            "predictedPct": -11.24,
+            "p10Pct": -15.73,
+            "p90Pct": -7.87,
+            "actualPct": -13.3,
+            "inBand": true
+          },
+          {
+            "nodeId": "CRYPTO_BTC",
+            "predictedPct": -6.25,
+            "p10Pct": -9.5,
+            "p90Pct": -3.81,
+            "actualPct": -5.8,
+            "inBand": true
+          },
+          {
+            "nodeId": "CRYPTO_SOL",
+            "predictedPct": -5.01,
+            "p10Pct": -8.22,
+            "p90Pct": -2.61,
+            "actualPct": -9.8,
+            "inBand": false
+          },
+          {
+            "nodeId": "CRYPTO_RENDER",
+            "predictedPct": -11.26,
+            "p10Pct": -17.12,
+            "p90Pct": -6.87,
+            "actualPct": -14.2,
+            "inBand": true
+          },
+          {
+            "nodeId": "CRYPTO_TAO",
+            "predictedPct": -10.99,
+            "p10Pct": -16.7,
+            "p90Pct": -6.7,
+            "actualPct": -13.5,
+            "inBand": true
+          }
+        ]
+      },
+      {
+        "caseId": "yen_carry_aug_2024",
+        "name": "Yen Carry Trade Global Unwind",
+        "dateLabel": "2024-08-05",
+        "triggerNodeId": "EQ_QQQ",
+        "shockPct": -5.5,
+        "predictedBtcPct": -6.41,
+        "actualBtcPct": -14.5,
+        "predictedCrashProb": 0.69,
+        "actualCrashOccurred": 1,
+        "brierContribution": 0.0961,
+        "directionalHits": 4,
+        "directionalTotal": 4,
+        "maePct": 9.85,
+        "intervalHits": 0,
+        "assetComparisons": [
+          {
+            "nodeId": "CRYPTO_BTC",
+            "predictedPct": -6.41,
+            "p10Pct": -8.98,
+            "p90Pct": -4.49,
+            "actualPct": -14.5,
+            "inBand": false
+          },
+          {
+            "nodeId": "CRYPTO_ETH",
+            "predictedPct": -6.75,
+            "p10Pct": -10.26,
+            "p90Pct": -4.12,
+            "actualPct": -21,
+            "inBand": false
+          },
+          {
+            "nodeId": "CRYPTO_SOL",
+            "predictedPct": -6.68,
+            "p10Pct": -10.16,
+            "p90Pct": -4.08,
+            "actualPct": -18.5,
+            "inBand": false
+          },
+          {
+            "nodeId": "EQ_MSTR",
+            "predictedPct": -6.75,
+            "p10Pct": -10.26,
+            "p90Pct": -4.12,
+            "actualPct": -12,
+            "inBand": false
+          }
+        ]
+      },
+      {
+        "caseId": "svb_usdc_depeg_2023",
+        "name": "SVB Collapse & USDC Depeg",
+        "dateLabel": "2023-03-11",
+        "triggerNodeId": "INFRA_USDC",
+        "shockPct": -12,
+        "predictedBtcPct": 0,
+        "actualBtcPct": 0,
+        "predictedCrashProb": 0.5,
+        "actualCrashOccurred": 0,
+        "brierContribution": 0.25,
+        "directionalHits": 1,
+        "directionalTotal": 1,
+        "maePct": 0.88,
+        "intervalHits": 1,
+        "assetComparisons": [
+          {
+            "nodeId": "INFRA_AAVE",
+            "predictedPct": -12.38,
+            "p10Pct": -17.33,
+            "p90Pct": -8.66,
+            "actualPct": -11.5,
+            "inBand": true
+          }
+        ]
+      },
+      {
+        "caseId": "fomc_hawkish_shock",
+        "name": "Hawkish Fed / US10Y Yield Spike",
+        "dateLabel": "2024-12-18",
+        "triggerNodeId": "ACTOR_POWELL",
+        "shockPct": 5.5,
+        "predictedBtcPct": -3.01,
+        "actualBtcPct": -5.2,
+        "predictedCrashProb": 0.66,
+        "actualCrashOccurred": 1,
+        "brierContribution": 0.1156,
+        "directionalHits": 4,
+        "directionalTotal": 4,
+        "maePct": 3.38,
+        "intervalHits": 1,
+        "assetComparisons": [
+          {
+            "nodeId": "EQ_QQQ",
+            "predictedPct": -2.84,
+            "p10Pct": -4.32,
+            "p90Pct": -1.73,
+            "actualPct": -3.6,
+            "inBand": true
+          },
+          {
+            "nodeId": "CRYPTO_BTC",
+            "predictedPct": -3.01,
+            "p10Pct": -4.57,
+            "p90Pct": -1.84,
+            "actualPct": -5.2,
+            "inBand": false
+          },
+          {
+            "nodeId": "CRYPTO_ETH",
+            "predictedPct": -2.53,
+            "p10Pct": -4.15,
+            "p90Pct": -1.32,
+            "actualPct": -7.1,
+            "inBand": false
+          },
+          {
+            "nodeId": "CRYPTO_SOL",
+            "predictedPct": -2.41,
+            "p10Pct": -3.96,
+            "p90Pct": -1.25,
+            "actualPct": -8.4,
+            "inBand": false
+          }
+        ]
+      }
+    ]
+  }
+}
