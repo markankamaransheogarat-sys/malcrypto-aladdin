@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1794564791284,
+  "exportedAt": 1794565471554,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -122,8 +122,8 @@
       ],
       "systemicWeight": 0.96,
       "description": "Bellwether of global AI capex cycle and risk-on equity momentum.",
-      "price": 170.09,
-      "change24hPct": 2.35
+      "price": 170.43,
+      "change24hPct": 2.55
     },
     {
       "id": "EQ_TSMC",
@@ -138,8 +138,8 @@
       ],
       "systemicWeight": 0.85,
       "description": "Sole leading-edge fab for NVIDIA, Apple, and AMD GPUs.",
-      "price": 407.61,
-      "change24hPct": 0.52
+      "price": 408.3,
+      "change24hPct": 0.69
     },
     {
       "id": "EQ_AMD",
@@ -152,8 +152,8 @@
         "advanced micro devices"
       ],
       "systemicWeight": 0.76,
-      "price": 569.25,
-      "change24hPct": -2.74
+      "price": 571.6791,
+      "change24hPct": -2.33
     },
     {
       "id": "EQ_QQQ",
@@ -182,8 +182,8 @@
         "microstrategy stock"
       ],
       "systemicWeight": 0.8,
-      "price": 113.2275,
-      "change24hPct": -1.03
+      "price": 112.7975,
+      "change24hPct": -1.41
     },
     {
       "id": "EQ_COIN",
@@ -197,8 +197,8 @@
         "brian armstrong"
       ],
       "systemicWeight": 0.82,
-      "price": 127.8291,
-      "change24hPct": -2.17
+      "price": 127.49,
+      "change24hPct": -2.43
     },
     {
       "id": "MACRO_DXY",
@@ -320,9 +320,9 @@
         "биток"
       ],
       "systemicWeight": 0.99,
-      "price": 69462.95,
-      "change24hPct": -5.381,
-      "fragilityScore": 58
+      "price": 69304.23,
+      "change24hPct": -5.752,
+      "fragilityScore": 57
     },
     {
       "id": "CRYPTO_ETH",
@@ -336,8 +336,8 @@
         "эфир"
       ],
       "systemicWeight": 0.92,
-      "price": 1956.18,
-      "change24hPct": -4.23,
+      "price": 1951.79,
+      "change24hPct": -4.784,
       "fragilityScore": 57
     },
     {
@@ -352,8 +352,8 @@
         "солана"
       ],
       "systemicWeight": 0.86,
-      "price": 80.48,
-      "change24hPct": -3.048,
+      "price": 80.39,
+      "change24hPct": -3.505,
       "fragilityScore": 61
     },
     {
@@ -367,8 +367,8 @@
         "rndr"
       ],
       "systemicWeight": 0.68,
-      "price": 1.508,
-      "change24hPct": 0.6,
+      "price": 1.509,
+      "change24hPct": 0.133,
       "fragilityScore": 27
     },
     {
@@ -382,9 +382,9 @@
         "bittensor"
       ],
       "systemicWeight": 0.72,
-      "price": 211.1,
-      "change24hPct": -1.401,
-      "fragilityScore": 38
+      "price": 210.9,
+      "change24hPct": -1.861,
+      "fragilityScore": 37
     },
     {
       "id": "CRYPTO_FET",
@@ -398,8 +398,8 @@
         "asi"
       ],
       "systemicWeight": 0.66,
-      "price": 0.1472,
-      "change24hPct": 0.272
+      "price": 0.1477,
+      "change24hPct": -0.135
     },
     {
       "id": "CRYPTO_LINK",
@@ -412,8 +412,8 @@
         "chainlink"
       ],
       "systemicWeight": 0.74,
-      "price": 9.968,
-      "change24hPct": -1.013
+      "price": 9.977,
+      "change24hPct": -1.228
     },
     {
       "id": "NAR_AI_COMPUTE",

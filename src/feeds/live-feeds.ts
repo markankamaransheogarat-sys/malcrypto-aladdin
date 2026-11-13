@@ -462,3 +462,264 @@ export async function fetchSecRecentFilings(
     return null;
   }
 }
+
+export interface OhlcvCandle {
+  openTime: number;
+  closeTime: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
+
+export async function fetchBinanceKlinesOhlcv(
+  symbol = "BTCUSDT",
+  interval = "15m",
+  limit = 200,
+): Promise<OhlcvCandle[]> {
+  try {
+    const url = `https://api.binance.com/api/v3/klines?symbol=${encodeURIComponent(symbol)}&interval=${encodeURIComponent(interval)}&limit=${limit}`;
+    const res = await fetch(url, { signal: AbortSignal.timeout(7000) });
+    if (!res.ok) return [];
+    const rows = (await res.json()) as Array<Array<string | number>>;
+    return rows
+      .map((r) => ({
+        openTime: Number(r[0]),
+        open: Number(r[1]),
+        high: Number(r[2]),
+        low: Number(r[3]),
+        close: Number(r[4]),
+        volume: Number(r[5]),
+        closeTime: Number(r[6]),
+      }))
+      .filter((c) => Number.isFinite(c.close) && c.close > 0);
+  } catch {
+    return [];
+  }
+}
+
+export interface DeribitOptionsSummary {
+  currency: "BTC" | "ETH";
+  totalOpenInterest: number;
+  putOpenInterest: number;
+  callOpenInterest: number;
+  putCallRatio: number;
+  avgMarkIvPct: number;
+}
+
+export async function fetchDeribitOptionsSummary(
+  currency: "BTC" | "ETH" = "BTC",
+): Promise<DeribitOptionsSummary | null> {
+  try {
+    const url = `https://www.deribit.com/api/v2/public/get_book_summary_by_currency?currency=${currency}&kind=option`;
+    const res = await fetch(url, { signal: AbortSignal.timeout(7000) });
+    if (!res.ok) return null;
+    const json = (await res.json()) as {
+      result?: Array<{
+        instrument_name?: string;
+        open_interest?: number;
+        mark_iv?: number;
+      }>;
+    };
+    const items = json.result ?? [];
+    if (items.length === 0) return null;
+    let putOi = 0;
+    let callOi = 0;
+    let ivWeightedSum = 0;
+    let ivOiSum = 0;
+    for (const it of items) {
+      const name = it.instrument_name ?? "";
+      const oi = Number(it.open_interest ?? 0);
+      const iv = Number(it.mark_iv ?? 0);
+      if (oi <= 0) continue;
+      if (name.endsWith("-P")) putOi += oi;
+      else if (name.endsWith("-C")) callOi += oi;
+      if (iv > 0 && iv < 300) {
+        ivWeightedSum += iv * oi;
+        ivOiSum += oi;
+      }
+    }
+    const total = putOi + callOi;
+    if (total <= 0) return null;
+    return {
+      currency,
+      totalOpenInterest: Number(total.toFixed(1)),
+      putOpenInterest: Number(putOi.toFixed(1)),
+      callOpenInterest: Number(callOi.toFixed(1)),
+      putCallRatio: Number((putOi / Math.max(1, callOi)).toFixed(3)),
+      avgMarkIvPct:
+        ivOiSum > 0 ? Number((ivWeightedSum / ivOiSum).toFixed(2)) : 0,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export interface MempoolOnchainSnapshot {
+  fastestFeeSatVb: number;
+  halfHourFeeSatVb: number;
+  mempoolTxCount: number;
+  mempoolVsizeMb: number;
+}
+
+export async function fetchMempoolOnchain(): Promise<MempoolOnchainSnapshot | null> {
+  try {
+    const [feeRes, memRes] = await Promise.all([
+      fetch("https://mempool.space/api/v1/fees/recommended", {
+        signal: AbortSignal.timeout(5000),
+      }),
+      fetch("https://mempool.space/api/mempool", {
+        signal: AbortSignal.timeout(5000),
+      }),
+    ]);
+    if (!feeRes.ok || !memRes.ok) return null;
+    const fees = (await feeRes.json()) as {
+      fastestFee?: number;
+      halfHourFee?: number;
+    };
+    const mem = (await memRes.json()) as { count?: number; vsize?: number };
+    return {
+      fastestFeeSatVb: Number(fees.fastestFee ?? 0),
+      halfHourFeeSatVb: Number(fees.halfHourFee ?? 0),
+      mempoolTxCount: Number(mem.count ?? 0),
+      mempoolVsizeMb: Number(((mem.vsize ?? 0) / 1_000_000).toFixed(2)),
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchFearAndGreedHistory(
+  limit = 90,
+): Promise<
+  Array<{ timestamp: number; value: number; classification: string }>
+> {
+  try {
+    const res = await fetch(`https://api.alternative.me/fng/?limit=${limit}`, {
+      signal: AbortSignal.timeout(6000),
+    });
+    if (!res.ok) return [];
+    const json = (await res.json()) as {
+      data?: Array<{
+        value: string;
+        value_classification: string;
+        timestamp: string;
+      }>;
+    };
+    return (json.data ?? [])
+      .map((d) => ({
+        timestamp: Number(d.timestamp) * 1000,
+        value: Number(d.value),
+        classification: d.value_classification,
+      }))
+      .filter((d) => Number.isFinite(d.value) && Number.isFinite(d.timestamp))
+      .sort((a, b) => a.timestamp - b.timestamp);
+  } catch {
+    return [];
+  }
+}
+
+export interface ExternalNewsItem {
+  id: string;
+  title: string;
+  url: string;
+  source: string;
+  publishedAt: number;
+  category: "CRYPTO" | "MACRO" | "REGULATORY" | "ONCHAIN" | "DERIVATIVES";
+}
+
+export async function fetchCryptoCompareNews(
+  limit = 25,
+): Promise<ExternalNewsItem[]> {
+  try {
+    const res = await fetch(
+      "https://min-api.cryptocompare.com/data/v2/news/?lang=EN",
+      { signal: AbortSignal.timeout(6000) },
+    );
+    if (!res.ok) return [];
+    const json = (await res.json()) as {
+      Data?: Array<{
+        id?: string;
+        title?: string;
+        url?: string;
+        source?: string;
+        published_on?: number;
+      }>;
+    };
+    return (json.Data ?? [])
+      .filter((d) => d.title && d.url)
+      .slice(0, limit)
+      .map((d) => ({
+        id: `cc_${d.id ?? d.published_on ?? Math.random()}`,
+        title: d.title!.trim(),
+        url: d.url!,
+        source: d.source ?? "CryptoCompare",
+        publishedAt: (d.published_on ?? Math.floor(Date.now() / 1000)) * 1000,
+        category: "CRYPTO" as const,
+      }));
+  } catch {
+    return [];
+  }
+}
+
+export async function fetchRssHeadlines(
+  feedUrl: string,
+  sourceName: string,
+  category: ExternalNewsItem["category"],
+  limit = 15,
+): Promise<ExternalNewsItem[]> {
+  try {
+    const res = await fetch(feedUrl, {
+      headers: { "User-Agent": "MalCryptoAladdin/1.0" },
+      signal: AbortSignal.timeout(6000),
+    });
+    if (!res.ok) return [];
+    const xml = await res.text();
+    const items: ExternalNewsItem[] = [];
+    const itemRegex = /<(?:item|entry)\b[^>]*>([\s\S]*?)<\/(?:item|entry)>/gi;
+    let match: RegExpExecArray | null;
+    while ((match = itemRegex.exec(xml)) !== null && items.length < limit) {
+      const block = match[1];
+      const titleMatch = block.match(
+        /<title[^>]*>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/i,
+      );
+      const linkHrefMatch = block.match(/<link[^>]*href=["']([^"']+)["']/i);
+      const linkTextMatch = block.match(
+        /<link[^>]*>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/link>/i,
+      );
+      const dateMatch = block.match(
+        /<(?:pubDate|updated|published)[^>]*>([\s\S]*?)<\/(?:pubDate|updated|published)>/i,
+      );
+      const rawTitle = (titleMatch?.[1] ?? "")
+        .replace(/<[^>]+>/g, "")
+        .replace(/&amp;/g, "&")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .trim();
+      const rawUrl = (linkHrefMatch?.[1] ?? linkTextMatch?.[1] ?? "").trim();
+      const ts = dateMatch?.[1] ? Date.parse(dateMatch[1].trim()) : Date.now();
+      if (rawTitle.length > 8 && rawUrl) {
+        items.push({
+          id: `rss_${sourceName}_${Math.abs(hashStr(rawTitle))}`,
+          title: rawTitle,
+          url: rawUrl,
+          source: sourceName,
+          publishedAt: Number.isFinite(ts) ? ts : Date.now(),
+          category,
+        });
+      }
+    }
+    return items;
+  } catch {
+    return [];
+  }
+}
+
+function hashStr(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (h * 31 + s.charCodeAt(i)) | 0;
+  }
+  return h;
+}

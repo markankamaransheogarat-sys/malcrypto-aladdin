@@ -4,8 +4,13 @@
 
 import { BacktestEngine, type BacktestSummary } from "../aladdin/backtest.js";
 import {
+  BriefWalkForwardBacktester,
+  type BriefBacktestReport,
+} from "../aladdin/brief-backtest.js";
+import {
   BriefVerdictTracker,
   ExecutiveBriefingEngine,
+  type BriefVerdictRecord,
 } from "../aladdin/briefing.js";
 import { computeFragilityMetrics } from "../aladdin/fragility.js";
 import {
@@ -29,15 +34,24 @@ import type {
   SimulationResult,
 } from "../core/types.js";
 import {
+  EventDatabaseStore,
+  type StoredMarketEvent,
+} from "../feeds/events-db.js";
+import {
+  fetchBinanceKlinesOhlcv,
   fetchBinanceKlinesReturns,
   fetchBinancePerpFragilityInputs,
   fetchBinanceSpotQuotes,
+  fetchCryptoCompareNews,
   fetchDefiLlamaGlobalTvl,
   fetchDefiLlamaTopProtocols,
   fetchDeribitDvol,
+  fetchDeribitOptionsSummary,
   fetchFearAndGreed,
+  fetchFearAndGreedHistory,
   fetchGdeltNews,
   fetchMacroFxProxy,
+  fetchMempoolOnchain,
   fetchNasdaqEquityQuote,
   fetchPolymarketTopSignals,
   fetchStablecoinPegs,
@@ -87,6 +101,11 @@ class MalCryptoApp {
   private backtest = new BacktestEngine();
   private briefingEngine = new ExecutiveBriefingEngine();
   private briefTracker = new BriefVerdictTracker();
+  private briefBacktester = new BriefWalkForwardBacktester();
+  private briefBacktestReport: BriefBacktestReport | null = null;
+  private eventsDb = new EventDatabaseStore();
+  private deribitPutCallRatio: number | undefined;
+  private mempoolFeeSatVb: number | undefined;
   private portfolioEngine = new PortfolioRiskEngine();
   private portfolio: PortfolioPosition[] = [...DEFAULT_PORTFOLIO];
   private dvolBtcPct = 45;
@@ -146,6 +165,27 @@ class MalCryptoApp {
     const savedVerdicts = await idbStore.loadBriefVerdicts();
     if (savedVerdicts && savedVerdicts.length > 0) {
       this.briefTracker.loadRecords(savedVerdicts);
+    }
+    // Hydrate 24/7 Watchdog verdicts & global events DB
+    try {
+      const [vRes, evRes] = await Promise.all([
+        fetch("./data/verdicts.json", { signal: AbortSignal.timeout(3000) }),
+        fetch("./data/events_db.json", { signal: AbortSignal.timeout(3000) }),
+      ]);
+      if (vRes.ok) {
+        const remoteVerdicts = (await vRes.json()) as BriefVerdictRecord[];
+        if (Array.isArray(remoteVerdicts)) {
+          this.briefTracker.loadRecords(remoteVerdicts);
+        }
+      }
+      if (evRes.ok) {
+        const remoteEvents = (await evRes.json()) as StoredMarketEvent[];
+        if (Array.isArray(remoteEvents)) {
+          this.eventsDb.load(remoteEvents);
+        }
+      }
+    } catch {
+      // No remote data yet
     }
 
     const canvasEl = document.getElementById(
@@ -218,7 +258,7 @@ class MalCryptoApp {
 
   async refreshLiveFeeds(): Promise<void> {
     this.setStatus(
-      "Syncing Zero-Key Feeds (Binance Perps, DeFiLlama, Frankfurter FX, Polymarket, GDELT)...",
+      "Синхронизация реальных данных (Binance, Deribit, Mempool, DeFiLlama, Polymarket, GDELT, CryptoCompare)...",
     );
 
     const perpSymbols = [
@@ -235,23 +275,92 @@ class MalCryptoApp {
       ["EQ_COIN", "COIN"],
     ];
 
-    const [quotes, perpResults, poly, gdelt, tvl, pegs, fx, fng, eqResults] =
-      await Promise.all([
-        fetchBinanceSpotQuotes(),
-        Promise.all(perpSymbols.map((s) => fetchBinancePerpFragilityInputs(s))),
-        fetchPolymarketTopSignals(),
-        fetchGdeltNews(),
-        fetchDefiLlamaGlobalTvl(),
-        fetchStablecoinPegs(),
-        fetchMacroFxProxy(),
-        fetchFearAndGreed(),
-        Promise.all(
-          equityPairs.map(async ([nodeId, sym]) => ({
-            nodeId,
-            q: await fetchNasdaqEquityQuote(sym),
-          })),
-        ),
-      ]);
+    const [
+      quotes,
+      perpResults,
+      poly,
+      gdelt,
+      tvl,
+      pegs,
+      fx,
+      fng,
+      eqResults,
+      dvol,
+      deribitOpt,
+      mempool,
+      ccNews,
+      btcOhlcv15m,
+      btcOhlcv4h,
+      fgHistory,
+    ] = await Promise.all([
+      fetchBinanceSpotQuotes(),
+      Promise.all(perpSymbols.map((s) => fetchBinancePerpFragilityInputs(s))),
+      fetchPolymarketTopSignals(),
+      fetchGdeltNews(),
+      fetchDefiLlamaGlobalTvl(),
+      fetchStablecoinPegs(),
+      fetchMacroFxProxy(),
+      fetchFearAndGreed(),
+      Promise.all(
+        equityPairs.map(async ([nodeId, sym]) => ({
+          nodeId,
+          q: await fetchNasdaqEquityQuote(sym),
+        })),
+      ),
+      fetchDeribitDvol("BTC"),
+      fetchDeribitOptionsSummary("BTC"),
+      fetchMempoolOnchain(),
+      fetchCryptoCompareNews(25),
+      fetchBinanceKlinesOhlcv("BTCUSDT", "15m", 192),
+      fetchBinanceKlinesOhlcv("BTCUSDT", "4h", 300),
+      fetchFearAndGreedHistory(90),
+    ]);
+
+    if (dvol) this.dvolBtcPct = dvol.dvolPct;
+    if (deribitOpt) this.deribitPutCallRatio = deribitOpt.putCallRatio;
+    if (mempool) this.mempoolFeeSatVb = mempool.fastestFeeSatVb;
+
+    if (btcOhlcv15m.length > 0) {
+      const resolved =
+        this.briefTracker.resolveDueVerdictsWithCandles(btcOhlcv15m);
+      if (resolved) {
+        void idbStore.saveBriefVerdicts(this.briefTracker.getStats().records);
+      }
+    }
+    if (btcOhlcv4h.length >= 20) {
+      this.briefBacktestReport = this.briefBacktester.run(
+        btcOhlcv4h,
+        fgHistory,
+        this.dvolBtcPct,
+      );
+    }
+    if (ccNews.length > 0) {
+      const dbItems: StoredMarketEvent[] = ccNews.map((item) => {
+        const ev = this.newsLinker.analyzeNews(this.graph, {
+          id: item.id,
+          title: item.title,
+          source: item.source,
+          url: item.url,
+        });
+        return {
+          id: item.id,
+          timestamp: item.publishedAt,
+          title: item.title,
+          source: item.source,
+          category: item.category,
+          url: item.url,
+          matchedNodes: ev.matchedNodes,
+          surpriseScore: Number(ev.surpriseScore.toFixed(2)),
+          impact:
+            Math.abs(ev.surpriseScore) >= 0.45
+              ? "CRITICAL"
+              : ev.matchedNodes.length > 0
+                ? "HIGH"
+                : "MEDIUM",
+        };
+      });
+      this.eventsDb.upsertMany(dbItems);
+    }
 
     for (const q of quotes) {
       this.graph.updateNodeMarketData(q.nodeId, {
@@ -328,15 +437,11 @@ class MalCryptoApp {
       await idbStore.saveNews(this.newsFeed);
     }
 
-    // Autonomous DeFiLlama top protocol discovery & Deribit DVOL
-    const [topProtos, dvol] = await Promise.all([
-      fetchDefiLlamaTopProtocols(12),
-      fetchDeribitDvol("BTC"),
-    ]);
+    // Autonomous DeFiLlama top protocol discovery
+    const topProtos = await fetchDefiLlamaTopProtocols(12);
     if (topProtos.length > 0) {
       this.expander.ingestTopProtocols(this.graph, topProtos);
     }
-    if (dvol) this.dvolBtcPct = dvol.dvolPct;
 
     await this.runOnlineCausalScan();
     this.calibration.autoResolveDuePredictions(this.graph);
@@ -484,6 +589,23 @@ class MalCryptoApp {
     document.getElementById("btn-refresh")?.addEventListener("click", () => {
       void this.refreshLiveFeeds();
     });
+    document.getElementById("btn-help")?.addEventListener("click", () => {
+      document.getElementById("help-modal")?.classList.remove("hidden");
+    });
+    document.getElementById("btn-help-close")?.addEventListener("click", () => {
+      document.getElementById("help-modal")?.classList.add("hidden");
+    });
+    document.getElementById("help-modal")?.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement)?.id === "help-modal") {
+        document.getElementById("help-modal")?.classList.add("hidden");
+      }
+    });
+    document
+      .getElementById("events-search")
+      ?.addEventListener("input", () => this.renderWire());
+    document
+      .getElementById("events-category")
+      ?.addEventListener("change", () => this.renderWire());
 
     document
       .getElementById("players-search")
@@ -802,6 +924,8 @@ class MalCryptoApp {
       regime: this.currentRegime,
       newsFeed: this.newsFeed,
       jpyPerUsd: this.macroFx?.jpyPerUsd,
+      deribitPutCallRatio: this.deribitPutCallRatio,
+      mempoolFeeSatVb: this.mempoolFeeSatVb,
     });
 
     const resolvedChanged = this.briefTracker.resolveDueVerdicts(b.btcPrice);
@@ -967,12 +1091,13 @@ class MalCryptoApp {
     if (!el) return;
     el.innerHTML = `
       <span>${this.wsConnected ? '<b class="pos">● WS</b>' : '<b class="muted">○ WS</b>'}</span>
-      <span>BTC: <b>${btc?.price ? "$" + btc.price.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "Syncing"}</b></span>
+      <span>BTC: <b>${btc?.price ? "$" + btc.price.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "Загрузка"}</b></span>
       <span>DVOL: <b class="gold">${this.dvolBtcPct}%</b></span>
-      <span>FRAGILITY: <b class="${btcFrag?.status === "TINDERBOX" ? "neg" : "gold"}">${btcFrag?.fragilityScore ?? "—"}/100</b></span>
-      <span>5m LIQS: <b class="neg">${liqStats ? "$" + (liqStats.totalUsd / 1e3).toFixed(0) + "K" : "$0"}</b></span>
-      <span>F&amp;G: <b class="cyan">${this.fearGreed ? `${this.fearGreed.value} (${this.fearGreed.classification})` : "—"}</b></span>
-      <span>USD/JPY: <b>${this.macroFx ? this.macroFx.jpyPerUsd.toFixed(1) : "—"}</b></span>
+      <span>ХРУПКОСТЬ: <b class="${btcFrag?.status === "TINDERBOX" ? "neg" : "gold"}">${btcFrag?.fragilityScore ?? "—"}/100</b></span>
+      <span>ЛИКВ 5м: <b class="neg">${liqStats ? "$" + (liqStats.totalUsd / 1e3).toFixed(0) + "K" : "$0"}</b></span>
+      <span>СТРАХ/ЖАДН: <b class="cyan">${this.fearGreed ? `${this.fearGreed.value}` : "—"}</b></span>
+      <span>P/C ОПЦ: <b>${this.deribitPutCallRatio ? this.deribitPutCallRatio.toFixed(2) : "—"}</b></span>
+      <span>МЕМПУЛ: <b>${this.mempoolFeeSatVb ? this.mempoolFeeSatVb + " s/vB" : "—"}</b></span>
       <span>DEFI TVL: <b>${this.tvlUsd ? "$" + (this.tvlUsd / 1e9).toFixed(1) + "B" : "—"}</b></span>
     `;
   }
@@ -1059,17 +1184,17 @@ class MalCryptoApp {
 
     el.innerHTML = `
       <div class="poly-strip">${pegBadges}</div>
-      <h3>Live Multi-Asset Perp Fragility ("Tinderbox" Radar)</h3>
+      <h3>Живая хрупкость фьючерсных рынков (Радар «Пороховая бочка»)</h3>
       <table class="data-table">
-        <thead><tr><th>Node</th><th>Open Interest</th><th>±2% Depth</th><th>OI/Depth</th><th>Funding 8h</th><th>Fragility</th></tr></thead>
-        <tbody>${fragRows || '<tr><td colspan="6" class="muted">Syncing live Binance Perp metrics...</td></tr>'}</tbody>
+        <thead><tr><th>Актив</th><th>Открытый интерес</th><th>Глубина ±2%</th><th>OI / Глубина</th><th>Фандинг 8ч</th><th>Хрупкость</th></tr></thead>
+        <tbody>${fragRows || '<tr><td colspan="6" class="muted">Синхронизация метрик Binance Futures...</td></tr>'}</tbody>
       </table>
-      <h3 style="margin-top:18px;">Active Scenario Tree — Trigger: ${this.activeSim?.triggerLabel ?? "None"} (${this.activeSim?.shockPct ?? 0}%)</h3>
+      <h3 style="margin-top:18px;">Дерево сценариев — Триггер: ${this.activeSim?.triggerLabel ?? "Нет"} (${this.activeSim?.shockPct ?? 0}%)</h3>
       <div class="scen-grid">${scenRows}</div>
-      <h3 style="margin-top:18px;">Live Forced Liquidations Stream (5m Window: $${((liqStats?.totalUsd ?? 0) / 1e3).toFixed(1)}K)</h3>
+      <h3 style="margin-top:18px;">Поток принудительных ликвидаций (Окно 5м: $${((liqStats?.totalUsd ?? 0) / 1e3).toFixed(1)}K)</h3>
       <table class="data-table">
-        <thead><tr><th>Symbol</th><th>Side</th><th>Notional</th><th>Price</th></tr></thead>
-        <tbody>${liqRows || '<tr><td colspan="4" class="muted">Listening to Binance Futures !forceOrder@arr WebSocket...</td></tr>'}</tbody>
+        <thead><tr><th>Тикер</th><th>Сторона</th><th>Объём</th><th>Цена</th></tr></thead>
+        <tbody>${liqRows || '<tr><td colspan="4" class="muted">Ожидание ликвидаций из потока Binance !forceOrder@arr...</td></tr>'}</tbody>
       </table>
     `;
   }
@@ -1078,7 +1203,7 @@ class MalCryptoApp {
     const el = document.getElementById("causal-content");
     if (!el) return;
     if (this.discoveries.length === 0) {
-      el.innerHTML = `<p class="muted">Running off-main-thread WebWorker Granger & Tail-Beta scan on live 15m klines...</p>`;
+      el.innerHTML = `<p class="muted">Выполняется расчёт теста Грейнджера и Tail-Beta в WebWorker по 15-минутным свечам...</p>`;
       return;
     }
     const rows = this.discoveries
@@ -1099,7 +1224,7 @@ class MalCryptoApp {
 
     el.innerHTML = `
       <table class="data-table">
-        <thead><tr><th>Directed Pair</th><th>Lag</th><th>Corr</th><th>Tail Beta (>1.5σ)</th><th>Granger F</th><th>p-value</th><th>Status</th></tr></thead>
+        <thead><tr><th>Направленная пара</th><th>Лаг</th><th>Корреляция</th><th>Tail Beta (&gt;1.5σ)</th><th>Granger F</th><th>p-value</th><th>Статус</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
     `;
@@ -1113,33 +1238,65 @@ class MalCryptoApp {
       .slice(0, 5)
       .map(
         (p) =>
-          `<div class="poly-pill"><span>${p.question}</span><b>YES ${(p.yesProbability * 100).toFixed(0)}%</b></div>`,
+          `<div class="poly-pill"><span>${p.question}</span><b>ДА ${(p.yesProbability * 100).toFixed(0)}%</b></div>`,
       )
       .join("");
 
-    const newsHtml =
+    const searchQ =
+      (document.getElementById("events-search") as HTMLInputElement)?.value ??
+      "";
+    const catFilter =
+      (document.getElementById("events-category") as HTMLSelectElement)
+        ?.value ?? "ALL";
+    const dbEvents = this.eventsDb.query({
+      category: catFilter,
+      search: searchQ,
+      limit: 60,
+    });
+
+    const dbHtml =
+      dbEvents.length > 0
+        ? dbEvents
+            .map(
+              (ev) => `
+        <div class="news-item">
+          <div class="news-meta">
+            <span class="badge ${ev.impact === "CRITICAL" ? "neg" : "gold"}">${ev.category}</span>
+            <span>${ev.source}</span>
+            <span>${new Date(ev.timestamp).toISOString().slice(0, 16).replace("T", " ")} UTC</span>
+            <span class="${ev.surpriseScore < 0 ? "neg" : "pos"}">Сюрприз: ${ev.surpriseScore}</span>
+          </div>
+          <div class="news-title">${ev.url ? `<a href="${ev.url}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;">${ev.title} ↗</a>` : ev.title}</div>
+          <div class="news-nodes">Узлы графа: ${ev.matchedNodes.length ? ev.matchedNodes.join(", ") : "Общий рынок"}</div>
+        </div>`,
+            )
+            .join("")
+        : "";
+
+    const liveNewsHtml =
       this.newsFeed.length > 0
         ? this.newsFeed
-            .slice(0, 25)
+            .slice(0, 20)
             .map(
               (n) => `
         <div class="news-item">
           <div class="news-meta">
             <span class="badge">${n.status}</span>
-            <span>${n.source} (Trust ${(n.trustScore * 100).toFixed(0)}%)</span>
-            <span>Cat: ${n.category}</span>
-            <span class="${n.surpriseScore < 0 ? "neg" : "pos"}">Surprise: ${n.surpriseScore}</span>
+            <span>${n.source} (Доверие ${(n.trustScore * 100).toFixed(0)}%)</span>
+            <span>Кат: ${n.category}</span>
+            <span class="${n.surpriseScore < 0 ? "neg" : "pos"}">Сюрприз: ${n.surpriseScore}</span>
           </div>
           <div class="news-title">${n.title}</div>
-          <div class="news-nodes">Nodes: ${n.matchedNodes.length ? n.matchedNodes.join(", ") : "None matched"}</div>
+          <div class="news-nodes">Узлы графа: ${n.matchedNodes.length ? n.matchedNodes.join(", ") : "Не найдены"}</div>
         </div>`,
             )
             .join("")
-        : '<p class="muted">No live news fetched yet. Paste a headline above or click Sync Live Feeds.</p>';
+        : "";
 
     el.innerHTML = `
       <div class="poly-strip">${polyHtml}</div>
-      <div class="news-list">${newsHtml}</div>
+      <h3>Единая база событий (${this.eventsDb.getAll().length} записей из CoinDesk, Cointelegraph, Fed, SEC EDGAR, CryptoCompare, GDELT)</h3>
+      <div class="news-list">${dbHtml || liveNewsHtml || '<p class="muted">События ещё загружаются. Нажмите «Обновить данные».</p>'}</div>
     `;
   }
 
@@ -1166,10 +1323,10 @@ class MalCryptoApp {
       <div class="sim-summary">
         Trigger: <b>${this.activeSim.triggerLabel}</b> (${this.activeSim.shockPct}%) |
         Systemic Risk Score: <b class="neg">${this.activeSim.totalSystemicRiskScore}/100</b> |
-        Max Depth: <b>${this.activeSim.maxCascadeDepth} hops</b>
+        Макс. глубина: <b>${this.activeSim.maxCascadeDepth} шагов</b>
       </div>
       <table class="data-table">
-        <thead><tr><th>Hop</th><th>Asset / Node</th><th>ETA</th><th>Expected</th><th>P10..P90</th><th>Fragility Amp</th><th>Contagion Path</th></tr></thead>
+        <thead><tr><th>Шаг</th><th>Актив / Узел</th><th>Время (ETA)</th><th>Прогноз</th><th>Диапазон P10..P90</th><th>Усиление хрупкости</th><th>Путь заражения</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
     `;
@@ -1181,9 +1338,10 @@ class MalCryptoApp {
     const rep = this.calibration.getReport();
     const bt = this.backtestSummary;
     const bv = this.briefTracker.getStats();
+    const wf = this.briefBacktestReport;
     const recentRows = [...bv.records]
       .reverse()
-      .slice(0, 10)
+      .slice(0, 15)
       .map(
         (r) => `
       <tr>
@@ -1191,23 +1349,26 @@ class MalCryptoApp {
         <td><span class="badge ${r.verdict === "LONG" ? "pos" : "neg"}">${r.verdict}</span></td>
         <td>$${r.entryPrice.toLocaleString()}</td>
         <td>$${r.stopLossPrice.toLocaleString()} / $${r.takeProfitPrice.toLocaleString()}</td>
-        <td>${r.outcome ? `<span class="badge ${r.outcome === "WIN" ? "pos" : "neg"}">${r.outcome} (${r.resolveReason})</span>` : '<span class="badge muted">OPEN</span>'}</td>
+        <td>${r.outcome ? `<span class="badge ${r.outcome === "WIN" ? "pos" : "neg"}">${r.outcome} (${r.resolveReason})</span>` : '<span class="badge muted">ОТКРЫТ</span>'}</td>
         <td class="${(r.returnPct ?? 0) >= 0 ? "pos" : "neg"}">${r.returnPct !== undefined ? `${r.returnPct >= 0 ? "+" : ""}${r.returnPct}%` : "—"}</td>
       </tr>`,
       )
       .join("");
     el.innerHTML = `
       <div class="calib-cards" style="margin-bottom:16px;">
-        <div class="c-card"><span>Live Predictions Queued</span><b>${rep.totalPredictions}</b></div>
-        <div class="c-card"><span>Live Resolved</span><b>${rep.resolvedCount}</b></div>
-        <div class="c-card"><span>Historical Brier (4 Shocks)</span><b>${bt?.overallBrierScore ?? "—"}</b></div>
-        <div class="c-card"><span>Directional Accuracy</span><b>${bt ? (bt.overallDirectionalAccuracy * 100).toFixed(1) + "%" : "—"}</b></div>
-        <div class="c-card"><span>Brief Win Rate</span><b>${bv.resolved > 0 ? `${(bv.winRate * 100).toFixed(1)}% (${bv.wins}/${bv.resolved})` : `0/${bv.total} open`}</b></div>
-        <div class="c-card"><span>Brief Avg Return</span><b class="${bv.avgReturnPct >= 0 ? "pos" : "neg"}">${bv.resolved > 0 ? `${bv.avgReturnPct >= 0 ? "+" : ""}${bv.avgReturnPct}%` : "—"}</b></div>
+        <div class="c-card"><span>Сигналы в очереди</span><b>${rep.totalPredictions}</b></div>
+        <div class="c-card"><span>Исполнено прогнозов</span><b>${rep.resolvedCount}</b></div>
+        <div class="c-card"><span>Brier Score (4 краха)</span><b>${bt?.overallBrierScore ?? "—"}</b></div>
+        <div class="c-card"><span>Точность направления</span><b>${bt ? (bt.overallDirectionalAccuracy * 100).toFixed(1) + "%" : "—"}</b></div>
+        <div class="c-card"><span>Win Rate (СВОДКА 24/7)</span><b>${bv.resolved > 0 ? `${(bv.winRate * 100).toFixed(1)}% (${bv.wins}/${bv.resolved})` : `0/${bv.total} откр.`}</b></div>
+        <div class="c-card"><span>Средн. доходность (СВОДКА)</span><b class="${bv.avgReturnPct >= 0 ? "pos" : "neg"}">${bv.resolved > 0 ? `${bv.avgReturnPct >= 0 ? "+" : ""}${bv.avgReturnPct}%` : "—"}</b></div>
+        <div class="c-card"><span>Walk-Forward 4ч BTC (50д+)</span><b>${wf && wf.totalTrades > 0 ? `${(wf.winRate * 100).toFixed(1)}% (${wf.wins}/${wf.totalTrades})` : "Расчёт..."}</b></div>
+        <div class="c-card"><span>Profit Factor / Матожид.</span><b class="${(wf?.expectancyPct ?? 0) >= 0 ? "pos" : "neg"}">${wf && wf.totalTrades > 0 ? `${wf.profitFactor} / ${wf.expectancyPct >= 0 ? "+" : ""}${wf.expectancyPct}%` : "—"}</b></div>
       </div>
-      <h3>История сигналов BRIEF &lt;GO&gt; (авто-трекинг 24ч / TP / SL)</h3>
+      ${wf && wf.totalTrades > 0 ? `<div class="insp-impact" style="margin-bottom:14px;"><b>Реальный Walk-Forward бэктест (${wf.startDateIso} .. ${wf.endDateIso}, ${wf.candlesTested} свечей 4ч Binance):</b> Макс. просадка: <b>${wf.maxDrawdownPct}%</b> • Оптимальный порог Composite Score: <b>±${wf.recommendedThreshold}</b> (Win Rate ${(wf.recommendedWinRate * 100).toFixed(1)}%).</div>` : ""}
+      <h3>История сигналов СВОДКИ (честный трекинг по фитилям свечей 15м / 24ч)</h3>
       <table class="data-table">
-        <thead><tr><th>Время (UTC)</th><th>Сигнал</th><th>Entry</th><th>SL / TP</th><th>Статус</th><th>Доходность</th></tr></thead>
+        <thead><tr><th>Время (UTC)</th><th>Сигнал</th><th>Вход</th><th>SL / TP</th><th>Статус</th><th>Доходность</th></tr></thead>
         <tbody>${recentRows || '<tr><td colspan="6" class="muted">Пока нет записанных LONG/SHORT вердиктов (WAIT не логируются).</td></tr>'}</tbody>
       </table>
     `;
@@ -1224,8 +1385,8 @@ class MalCryptoApp {
       <tr>
         <td><b>${c.name}</b><br/><span class="muted">${c.dateLabel} • ${c.triggerNodeId} (${c.shockPct}%)</span></td>
         <td class="${c.predictedBtcPct < 0 ? "neg" : "pos"}">${c.predictedBtcPct}%</td>
-        <td class="neg">${c.actualBtcPct ? c.actualBtcPct + "%" : "N/A"}</td>
-        <td>${(c.predictedCrashProb * 100).toFixed(0)}% (Actual: ${c.actualCrashOccurred})</td>
+        <td class="neg">${c.actualBtcPct ? c.actualBtcPct + "%" : "Н/Д"}</td>
+        <td>${(c.predictedCrashProb * 100).toFixed(0)}% (Факт: ${c.actualCrashOccurred ? "Да" : "Нет"})</td>
         <td>${c.directionalHits}/${c.directionalTotal}</td>
         <td>${c.intervalHits}/${c.directionalTotal}</td>
         <td>${c.maePct}%</td>
@@ -1235,13 +1396,13 @@ class MalCryptoApp {
 
     el.innerHTML = `
       <div class="calib-cards" style="margin-bottom:16px;">
-        <div class="c-card"><span>Historical Brier Score</span><b>${s.overallBrierScore}</b></div>
-        <div class="c-card"><span>Directional Accuracy</span><b>${(s.overallDirectionalAccuracy * 100).toFixed(1)}%</b></div>
-        <div class="c-card"><span>P10..P90 Band Coverage</span><b>${(s.overallIntervalCoverage * 100).toFixed(1)}%</b></div>
-        <div class="c-card"><span>Mean Abs Error</span><b>${s.overallMaePct}%</b></div>
+        <div class="c-card"><span>Исторический Brier Score</span><b>${s.overallBrierScore}</b></div>
+        <div class="c-card"><span>Точность направления</span><b>${(s.overallDirectionalAccuracy * 100).toFixed(1)}%</b></div>
+        <div class="c-card"><span>Попадание в коридор P10..P90</span><b>${(s.overallIntervalCoverage * 100).toFixed(1)}%</b></div>
+        <div class="c-card"><span>Средняя ошибка (MAE)</span><b>${s.overallMaePct}%</b></div>
       </div>
       <table class="data-table">
-        <thead><tr><th>Historical Shock Event</th><th>Pred BTC</th><th>Actual BTC</th><th>Crash Prob</th><th>Dir Hits</th><th>In P10..P90</th><th>MAE</th></tr></thead>
+        <thead><tr><th>Исторический шок</th><th>Прогноз BTC</th><th>Факт BTC</th><th>Вероятность краха</th><th>Верное направление</th><th>В коридоре P10..P90</th><th>MAE</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
     `;
@@ -1271,14 +1432,14 @@ class MalCryptoApp {
 
     el.innerHTML = `
       <div class="calib-cards" style="margin-bottom:14px;">
-        <div class="c-card"><span>Total Portfolio</span><b>$${rep.totalUsd.toLocaleString()}</b></div>
-        <div class="c-card"><span>Shock Expected P&amp;L</span><b class="${rep.expectedPnlUsd < 0 ? "neg" : "pos"}">${rep.expectedPnlUsd >= 0 ? "+" : ""}$${rep.expectedPnlUsd.toLocaleString()} (${rep.expectedPnlPct}%)</b></div>
-        <div class="c-card"><span>1D VaR 95% (DVOL ${rep.dvolPctUsed}%)</span><b class="gold">-$${rep.var95DailyUsd.toLocaleString()}</b></div>
-        <div class="c-card"><span>1D VaR 99% (Tail)</span><b class="neg">-$${rep.var99DailyUsd.toLocaleString()}</b></div>
+        <div class="c-card"><span>Общий капитал</span><b>$${rep.totalUsd.toLocaleString()}</b></div>
+        <div class="c-card"><span>Ожидаемый P&amp;L при шоке</span><b class="${rep.expectedPnlUsd < 0 ? "neg" : "pos"}">${rep.expectedPnlUsd >= 0 ? "+" : ""}$${rep.expectedPnlUsd.toLocaleString()} (${rep.expectedPnlPct}%)</b></div>
+        <div class="c-card"><span>Дневной VaR 95% (DVOL ${rep.dvolPctUsed}%)</span><b class="gold">-$${rep.var95DailyUsd.toLocaleString()}</b></div>
+        <div class="c-card"><span>Хвостовой VaR 99%</span><b class="neg">-$${rep.var99DailyUsd.toLocaleString()}</b></div>
       </div>
-      <div class="insp-impact" style="margin-bottom:14px;"><b>Aladdin Hedge Desk:</b> ${rep.hedgeRecommendation}</div>
+      <div class="insp-impact" style="margin-bottom:14px;"><b>Рекомендация хеджа (Aladdin):</b> ${rep.hedgeRecommendation}</div>
       <table class="data-table">
-        <thead><tr><th>Asset</th><th>Allocation</th><th>Shock Move</th><th>Expected P&amp;L</th><th>P10..P90 P&amp;L Band</th></tr></thead>
+        <thead><tr><th>Актив</th><th>Позиция</th><th>Движение при шоке</th><th>Ожидаемый P&amp;L</th><th>Коридор P10..P90</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
     `;

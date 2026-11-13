@@ -12,7 +12,7 @@ import type {
   MarketRegime,
   NewsEvent,
 } from "../core/types.js";
-import type { StablecoinPegQuote } from "../feeds/live-feeds.js";
+import type { OhlcvCandle, StablecoinPegQuote } from "../feeds/live-feeds.js";
 import {
   MacroCalendarEngine,
   type MacroCalendarEvent,
@@ -53,6 +53,24 @@ export interface ExecutiveBriefing {
   upcomingMacroEvents: MacroCalendarEvent[];
 }
 
+export interface BriefingWeights {
+  newsScale: number;
+  derivScale: number;
+  fgScale: number;
+  pegScale: number;
+  momentumScale: number;
+  verdictThreshold: number;
+}
+
+export const DEFAULT_BRIEFING_WEIGHTS: BriefingWeights = {
+  newsScale: 1,
+  derivScale: 1,
+  fgScale: 1,
+  pegScale: 1,
+  momentumScale: 1,
+  verdictThreshold: 18,
+};
+
 export interface BriefingInputs {
   btcPrice: number;
   btcChange24hPct: number;
@@ -65,6 +83,9 @@ export interface BriefingInputs {
   regime: MarketRegime;
   newsFeed: NewsEvent[];
   jpyPerUsd?: number;
+  deribitPutCallRatio?: number;
+  mempoolFeeSatVb?: number;
+  weights?: Partial<BriefingWeights>;
   now?: number;
 }
 
@@ -186,7 +207,35 @@ export class ExecutiveBriefingEngine {
       explanation: `BTC 24h: ${chg >= 0 ? "+" : ""}${chg.toFixed(2)}%. Ликвидации (5м): Long $${(input.liq5mLongUsd / 1e3).toFixed(0)}K vs Short $${(input.liq5mShortUsd / 1e3).toFixed(0)}K.`,
     });
 
-    // 6. Imminent Macro / Options Expiry Calendar (<=48h)
+    // 6. Deribit Options Put/Call OI & Mempool On-Chain Congestion
+    if (
+      typeof input.deribitPutCallRatio === "number" &&
+      input.deribitPutCallRatio > 0
+    ) {
+      const pcr = input.deribitPutCallRatio;
+      const pcrPts = pcr >= 1.1 ? -8 : pcr <= 0.65 ? 6 : 0;
+      score += pcrPts;
+      drivers.push({
+        factor: "Deribit Options Put/Call",
+        impact: pcrPts > 0 ? "BULLISH" : pcrPts < 0 ? "BEARISH" : "NEUTRAL",
+        weight: pcrPts,
+        explanation: `Deribit BTC Put/Call OI: ${pcr.toFixed(2)}${pcr >= 1.1 ? " (хедж путами повышен)" : pcr <= 0.65 ? " (преобладает спрос на коллы)" : " (нейтральный баланс)"}.`,
+      });
+    }
+
+    if (
+      typeof input.mempoolFeeSatVb === "number" &&
+      input.mempoolFeeSatVb > 0
+    ) {
+      drivers.push({
+        factor: "Bitcoin Mempool On-Chain",
+        impact: "NEUTRAL",
+        weight: 0,
+        explanation: `Комиссия сети BTC: ${input.mempoolFeeSatVb} sat/vB${input.mempoolFeeSatVb >= 60 ? " (высокая перегрузка мемпула)" : " (сеть спокойная)"}.`,
+      });
+    }
+
+    // 7. Imminent Macro / Options Expiry Calendar (<=48h)
     if (imminentEvent) {
       drivers.push({
         factor: "Macro Event Calendar",
@@ -196,10 +245,13 @@ export class ExecutiveBriefingEngine {
       });
     }
 
+    const thresh =
+      input.weights?.verdictThreshold ??
+      DEFAULT_BRIEFING_WEIGHTS.verdictThreshold;
     const compositeScore = Math.round(clamp(score, -100, 100));
     let verdict: ExecutiveBriefing["verdict"] = "WAIT";
-    if (compositeScore >= 18) verdict = "LONG";
-    else if (compositeScore <= -18) verdict = "SHORT";
+    if (compositeScore >= thresh) verdict = "LONG";
+    else if (compositeScore <= -thresh) verdict = "SHORT";
 
     const confidencePct = Math.round(
       clamp(45 + Math.abs(compositeScore) * 0.5, 45, 92),
@@ -421,6 +473,87 @@ export class BriefVerdictTracker {
             : (r.entryPrice - currentBtcPrice) / r.entryPrice;
         r.resolvedAt = now;
         r.exitPrice = Math.round(currentBtcPrice);
+        r.returnPct = Number((rawReturn * 100).toFixed(2));
+        r.outcome = rawReturn > 0 ? "WIN" : "LOSS";
+        r.resolveReason = reason;
+        changed = true;
+      }
+    }
+    return changed;
+  }
+
+  /**
+   * Honest historical candle-wick resolver: checks every real OHLCV candle
+   * since the verdict timestamp so SL/TP hits between browser visits are never missed.
+   * Conservatively checks SL before TP if both are touched within the same bar.
+   */
+  resolveDueVerdictsWithCandles(
+    candles: OhlcvCandle[],
+    now = Date.now(),
+  ): boolean {
+    if (candles.length === 0) return false;
+    const sorted = [...candles].sort((a, b) => a.openTime - b.openTime);
+    let changed = false;
+
+    for (const r of this.records) {
+      if (r.resolvedAt) continue;
+
+      const relevant = sorted.filter((c) => c.closeTime > r.timestamp);
+      let exitPrice: number | undefined;
+      let resolvedAt: number | undefined;
+      let reason: BriefVerdictRecord["resolveReason"] | undefined;
+
+      for (const c of relevant) {
+        if (r.verdict === "LONG") {
+          if (c.low <= r.stopLossPrice) {
+            reason = "SL_HIT";
+            exitPrice = r.stopLossPrice;
+            resolvedAt = c.closeTime;
+            break;
+          }
+          if (c.high >= r.takeProfitPrice) {
+            reason = "TP_HIT";
+            exitPrice = r.takeProfitPrice;
+            resolvedAt = c.closeTime;
+            break;
+          }
+        } else {
+          if (c.high >= r.stopLossPrice) {
+            reason = "SL_HIT";
+            exitPrice = r.stopLossPrice;
+            resolvedAt = c.closeTime;
+            break;
+          }
+          if (c.low <= r.takeProfitPrice) {
+            reason = "TP_HIT";
+            exitPrice = r.takeProfitPrice;
+            resolvedAt = c.closeTime;
+            break;
+          }
+        }
+
+        if (c.closeTime - r.timestamp >= this.horizonMs) {
+          reason = "EXPIRED_24H";
+          exitPrice = c.close;
+          resolvedAt = c.closeTime;
+          break;
+        }
+      }
+
+      if (!reason && now - r.timestamp >= this.horizonMs) {
+        const last = sorted[sorted.length - 1];
+        reason = "EXPIRED_24H";
+        exitPrice = last.close;
+        resolvedAt = now;
+      }
+
+      if (reason && exitPrice !== undefined && resolvedAt !== undefined) {
+        const rawReturn =
+          r.verdict === "LONG"
+            ? (exitPrice - r.entryPrice) / r.entryPrice
+            : (r.entryPrice - exitPrice) / r.entryPrice;
+        r.resolvedAt = resolvedAt;
+        r.exitPrice = Math.round(exitPrice);
         r.returnPct = Number((rawReturn * 100).toFixed(2));
         r.outcome = rawReturn > 0 ? "WIN" : "LOSS";
         r.resolveReason = reason;

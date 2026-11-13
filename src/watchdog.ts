@@ -6,21 +6,36 @@
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
+import {
+  BriefVerdictTracker,
+  ExecutiveBriefingEngine,
+  type BriefVerdictRecord,
+} from "./aladdin/briefing.js";
 import { computeFragilityMetrics } from "./aladdin/fragility.js";
 import { AladdinSimulator, CalibrationTracker } from "./aladdin/simulator.js";
 import { CausalDiscoveryEngine } from "./causal/lead-lag.js";
 import { NewsLinkerEngine } from "./causal/news-linker.js";
 import { detectMarketRegime } from "./core/math.js";
-import type { FragilityMetrics } from "./core/types.js";
+import type { FragilityMetrics, NewsEvent } from "./core/types.js";
 import {
+  EventDatabaseStore,
+  type StoredMarketEvent,
+} from "./feeds/events-db.js";
+import {
+  fetchBinanceKlinesOhlcv,
   fetchBinanceKlinesReturns,
   fetchBinancePerpFragilityInputs,
   fetchBinanceSpotQuotes,
+  fetchCryptoCompareNews,
   fetchDefiLlamaTopProtocols,
   fetchDeribitDvol,
+  fetchDeribitOptionsSummary,
+  fetchFearAndGreed,
   fetchGdeltNews,
   fetchMacroFxProxy,
+  fetchMempoolOnchain,
   fetchNasdaqEquityQuote,
+  fetchRssHeadlines,
   fetchSecRecentFilings,
   fetchStablecoinPegs,
 } from "./feeds/live-feeds.js";
@@ -32,6 +47,8 @@ import {
 } from "./graph/temporal-graph.js";
 
 const SNAPSHOT_PATH = resolve(process.cwd(), "data/snapshot.json");
+const VERDICTS_PATH = resolve(process.cwd(), "data/verdicts.json");
+const EVENTS_DB_PATH = resolve(process.cwd(), "data/events_db.json");
 
 async function runWatchdog(): Promise<void> {
   const graph = new TemporalKnowledgeGraph(true);
@@ -79,6 +96,14 @@ async function runWatchdog(): Promise<void> {
     protocols,
     dvolBtc,
     secFilings,
+    btcOhlcv15m,
+    deribitOpt,
+    mempool,
+    fearGreed,
+    ccNews,
+    coindeskRss,
+    cointelegraphRss,
+    fedRss,
   ] = await Promise.all([
     fetchBinanceSpotQuotes(),
     Promise.all(
@@ -98,6 +123,29 @@ async function runWatchdog(): Promise<void> {
       fetchSecRecentFilings("EQ_MSTR", "MSTR", "0001050446"),
       fetchSecRecentFilings("EQ_COIN", "COIN", "0001679788"),
     ]),
+    fetchBinanceKlinesOhlcv("BTCUSDT", "15m", 192),
+    fetchDeribitOptionsSummary("BTC"),
+    fetchMempoolOnchain(),
+    fetchFearAndGreed(),
+    fetchCryptoCompareNews(25),
+    fetchRssHeadlines(
+      "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "CoinDesk",
+      "CRYPTO",
+      15,
+    ),
+    fetchRssHeadlines(
+      "https://cointelegraph.com/rss",
+      "Cointelegraph",
+      "CRYPTO",
+      15,
+    ),
+    fetchRssHeadlines(
+      "https://www.federalreserve.gov/feeds/press_all.xml",
+      "Federal Reserve",
+      "MACRO",
+      10,
+    ),
   ]);
 
   for (const q of quotes) {
@@ -226,6 +274,132 @@ async function runWatchdog(): Promise<void> {
   mkdirSync(dirname(SNAPSHOT_PATH), { recursive: true });
   writeFileSync(SNAPSHOT_PATH, JSON.stringify(graph.exportSnapshot(), null, 2));
 
+  // 24/7 Honest Candle-Wick Verdict Tracking (data/verdicts.json)
+  const briefTracker = new BriefVerdictTracker();
+  if (existsSync(VERDICTS_PATH)) {
+    try {
+      const saved = JSON.parse(
+        readFileSync(VERDICTS_PATH, "utf8"),
+      ) as BriefVerdictRecord[];
+      if (Array.isArray(saved)) briefTracker.loadRecords(saved);
+    } catch {
+      // ignore corrupt file
+    }
+  }
+  if (btcOhlcv15m.length > 0) {
+    briefTracker.resolveDueVerdictsWithCandles(btcOhlcv15m);
+  }
+  const btcNode = graph.getNode("CRYPTO_BTC");
+  const analyzedNews: NewsEvent[] = [];
+  for (const [i, item] of [...ccNews, ...coindeskRss, ...fedRss]
+    .slice(0, 20)
+    .entries()) {
+    analyzedNews.push(
+      newsLinker.analyzeNews(graph, {
+        id: `wd_feed_${i}_${item.id}`,
+        title: item.title,
+        source: item.source,
+        url: item.url,
+      }),
+    );
+  }
+  const briefingEngine = new ExecutiveBriefingEngine();
+  const liveBrief = briefingEngine.generate({
+    btcPrice: btcNode?.price ?? 71_000,
+    btcChange24hPct: btcNode?.change24hPct ?? 0,
+    dvolPct: dvolBtc?.dvolPct ?? 42,
+    btcFragility: fragilityMap.get("CRYPTO_BTC"),
+    fearGreed,
+    stablePegs: pegs,
+    liq5mLongUsd: 0,
+    liq5mShortUsd: 0,
+    regime,
+    newsFeed: analyzedNews,
+    jpyPerUsd: fx?.jpyPerUsd,
+    deribitPutCallRatio: deribitOpt?.putCallRatio,
+    mempoolFeeSatVb: mempool?.fastestFeeSatVb,
+  });
+  briefTracker.recordVerdict(liveBrief);
+  const verdictStats = briefTracker.getStats();
+  writeFileSync(VERDICTS_PATH, JSON.stringify(verdictStats.records, null, 2));
+
+  // Persistent Global Events Database (data/events_db.json)
+  const eventsDb = new EventDatabaseStore();
+  if (existsSync(EVENTS_DB_PATH)) {
+    try {
+      const savedEv = JSON.parse(
+        readFileSync(EVENTS_DB_PATH, "utf8"),
+      ) as StoredMarketEvent[];
+      if (Array.isArray(savedEv)) eventsDb.load(savedEv);
+    } catch {
+      // ignore corrupt file
+    }
+  }
+  const newDbItems: StoredMarketEvent[] = [];
+  for (const item of [
+    ...ccNews,
+    ...coindeskRss,
+    ...cointelegraphRss,
+    ...fedRss,
+  ]) {
+    const ev = newsLinker.analyzeNews(graph, {
+      id: item.id,
+      title: item.title,
+      source: item.source,
+      url: item.url,
+    });
+    newDbItems.push({
+      id: item.id,
+      timestamp: item.publishedAt,
+      title: item.title,
+      source: item.source,
+      category: item.category,
+      url: item.url,
+      matchedNodes: ev.matchedNodes,
+      surpriseScore: Number(ev.surpriseScore.toFixed(2)),
+      impact:
+        Math.abs(ev.surpriseScore) >= 0.45
+          ? "CRITICAL"
+          : ev.matchedNodes.length > 0
+            ? "HIGH"
+            : "MEDIUM",
+    });
+  }
+  for (const art of gdelt.slice(0, 15)) {
+    const ev = newsLinker.analyzeNews(graph, {
+      id: `gdelt_${art.seendate}_${art.title.slice(0, 24)}`,
+      title: art.title,
+      source: art.domain || "GDELT",
+      url: art.url,
+    });
+    newDbItems.push({
+      id: ev.id,
+      timestamp: Date.now(),
+      title: art.title,
+      source: art.domain || "GDELT",
+      category: "MACRO",
+      url: art.url,
+      matchedNodes: ev.matchedNodes,
+      surpriseScore: Number(ev.surpriseScore.toFixed(2)),
+      impact: Math.abs(ev.surpriseScore) >= 0.45 ? "CRITICAL" : "HIGH",
+    });
+  }
+  for (const s of secFilings) {
+    if (!s || s.recentForm4Count30d === 0) continue;
+    newDbItems.push({
+      id: `sec_${s.ticker}_${s.latestFiling}`,
+      timestamp: Date.now(),
+      title: `SEC EDGAR: ${s.ticker} — ${s.recentForm4Count30d} инсайдерских форм Form 4/144 за 30д (последняя: ${s.latestFiling})`,
+      source: "SEC EDGAR",
+      category: "INSIDER",
+      matchedNodes: [s.nodeId],
+      surpriseScore: s.recentForm4Count30d >= 5 ? -0.35 : 0.1,
+      impact: s.recentForm4Count30d >= 5 ? "HIGH" : "MEDIUM",
+    });
+  }
+  const addedDb = eventsDb.upsertMany(newDbItems);
+  writeFileSync(EVENTS_DB_PATH, JSON.stringify(eventsDb.getAll(), null, 2));
+
   const secSummary = secFilings
     .filter((s): s is NonNullable<typeof s> => s !== null)
     .map((s) => `${s.ticker}:Form4(30d)=${s.recentForm4Count30d}`)
@@ -234,7 +408,9 @@ async function runWatchdog(): Promise<void> {
   console.log(
     `[Watchdog] Nodes=${graph.getAllNodes().length} (+${addedProtocols} proto, +${addedNewsNodes} news) | ` +
       `ActiveEdges=${graph.getActiveEdges().length} (+${syncedEdges} causal, -${pruned} pruned) | ` +
-      `Regime=${regime} | DVOL=${dvolBtc?.dvolPct ?? "N/A"}% | SEC=[${secSummary || "N/A"}] | HighRiskAlerts=${highImpactSims.length}`,
+      `Regime=${regime} | DVOL=${dvolBtc?.dvolPct ?? "N/A"}% | OptPCR=${deribitOpt?.putCallRatio ?? "N/A"} | ` +
+      `Mempool=${mempool?.fastestFeeSatVb ?? "N/A"}sat/vB | Verdicts=${verdictStats.resolved}/${verdictStats.total} | ` +
+      `EventsDB=${eventsDb.getAll().length} (+${addedDb}) | SEC=[${secSummary || "N/A"}] | HighRiskAlerts=${highImpactSims.length}`,
   );
 }
 
