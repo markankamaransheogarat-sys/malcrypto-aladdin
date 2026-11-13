@@ -3,6 +3,7 @@
  */
 
 import { BacktestEngine, type BacktestSummary } from "../aladdin/backtest.js";
+import { ExecutiveBriefingEngine } from "../aladdin/briefing.js";
 import { computeFragilityMetrics } from "../aladdin/fragility.js";
 import {
   DEFAULT_PORTFOLIO,
@@ -52,7 +53,9 @@ import {
 import { MaltegoGraphCanvas } from "./graph-canvas.js";
 
 type TabId =
+  | "BRIEF"
   | "GRAPH"
+  | "PLAYERS"
   | "RADAR"
   | "CAUSAL"
   | "WIRE"
@@ -79,6 +82,7 @@ class MalCryptoApp {
   private simulator = new AladdinSimulator();
   private calibration = new CalibrationTracker();
   private backtest = new BacktestEngine();
+  private briefingEngine = new ExecutiveBriefingEngine();
   private portfolioEngine = new PortfolioRiskEngine();
   private portfolio: PortfolioPosition[] = [...DEFAULT_PORTFOLIO];
   private dvolBtcPct = 45;
@@ -99,7 +103,7 @@ class MalCryptoApp {
   private currentRegime: MarketRegime = "EUPHORIA_OVERLEVERAGED";
   private activeSim: SimulationResult | null = null;
   private selectedNodeId: string | null = "ACTOR_HUANG";
-  private activeTab: TabId = "GRAPH";
+  private activeTab: TabId = "BRIEF";
   private canvasRenderer: MaltegoGraphCanvas | null = null;
   private wsHub: LiveWebSocketHub | null = null;
   private tvlUsd = 0;
@@ -453,14 +457,15 @@ class MalCryptoApp {
 
     window.addEventListener("keydown", (e) => {
       const map: Record<string, TabId> = {
-        F1: "GRAPH",
-        F2: "RADAR",
-        F3: "CAUSAL",
-        F4: "WIRE",
-        F5: "CASCADE",
-        F6: "CALIB",
-        F7: "BACKTEST",
+        F1: "BRIEF",
+        F2: "GRAPH",
+        F3: "PLAYERS",
+        F4: "RADAR",
+        F5: "CAUSAL",
+        F6: "WIRE",
+        F7: "CASCADE",
         F8: "PORTFOLIO",
+        F9: "BACKTEST",
       };
       if (map[e.key]) {
         e.preventDefault();
@@ -471,6 +476,13 @@ class MalCryptoApp {
     document.getElementById("btn-refresh")?.addEventListener("click", () => {
       void this.refreshLiveFeeds();
     });
+
+    document
+      .getElementById("players-search")
+      ?.addEventListener("input", () => this.renderPlayers());
+    document
+      .getElementById("players-tier")
+      ?.addEventListener("change", () => this.renderPlayers());
 
     document.getElementById("btn-run-sim")?.addEventListener("click", () => {
       const trigger = (
@@ -753,6 +765,8 @@ class MalCryptoApp {
 
   private renderAll(): void {
     this.renderHeaderMetrics();
+    this.renderBriefing();
+    this.renderPlayers();
     this.renderNodeInspector();
     this.renderRadar();
     this.renderCausal();
@@ -761,6 +775,152 @@ class MalCryptoApp {
     this.renderCalib();
     this.renderBacktest();
     this.renderPortfolio();
+  }
+
+  private renderBriefing(): void {
+    const el = document.getElementById("brief-content");
+    if (!el) return;
+    const btc = this.graph.getNode("CRYPTO_BTC");
+    const liq = this.wsHub?.getLiquidationStats(5 * 60 * 1000);
+    const b = this.briefingEngine.generate({
+      btcPrice: btc?.price ?? 71_000,
+      btcChange24hPct: btc?.change24hPct ?? 0,
+      dvolPct: this.dvolBtcPct,
+      btcFragility: this.fragilityMap.get("CRYPTO_BTC"),
+      fearGreed: this.fearGreed,
+      stablePegs: this.stablePegs,
+      liq5mLongUsd: liq?.longLiqUsd ?? 0,
+      liq5mShortUsd: liq?.shortLiqUsd ?? 0,
+      regime: this.currentRegime,
+      newsFeed: this.newsFeed,
+      jpyPerUsd: this.macroFx?.jpyPerUsd,
+    });
+
+    const vClass =
+      b.verdict === "LONG" ? "pos" : b.verdict === "SHORT" ? "neg" : "gold";
+
+    const horizonCards = b.horizons
+      .map(
+        (h) => `
+      <div class="scen-card">
+        <div class="scen-head"><span>${h.horizonLabel}</span><b class="${h.expectedMovePct >= 0 ? "pos" : "neg"}">${h.expectedMovePct >= 0 ? "+" : ""}${h.expectedMovePct}%</b></div>
+        <div style="font-family:monospace; font-size:12px; margin:6px 0;">
+          <span class="pos">Рост: ${h.probUpPct}%</span> •
+          <span class="muted">Флэт: ${h.probRangePct}%</span> •
+          <span class="neg">Падение: ${h.probDownPct}%</span>
+        </div>
+        <div class="scen-cond">Диапазон (P10..P90): <b>$${h.p10Price.toLocaleString()} — $${h.p90Price.toLocaleString()}</b> (Медиана: $${h.p50Price.toLocaleString()})</div>
+      </div>`,
+      )
+      .join("");
+
+    const driverRows = b.drivers
+      .map(
+        (d) => `
+      <tr>
+        <td><b>${d.factor}</b></td>
+        <td><span class="badge ${d.impact === "BULLISH" ? "pos" : d.impact === "BEARISH" ? "neg" : "muted"}">${d.impact} (${d.weight >= 0 ? "+" : ""}${d.weight})</span></td>
+        <td>${d.explanation}</td>
+      </tr>`,
+      )
+      .join("");
+
+    el.innerHTML = `
+      <div class="scen-card" style="margin-bottom:14px; border-color:${b.verdict === "LONG" ? "#8caa6b" : b.verdict === "SHORT" ? "#cf6a6a" : "#d8b876"};">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <div class="muted" style="font-size:11px; text-transform:uppercase;">BTC Command Verdict (Composite Score: ${b.compositeScore}/100)</div>
+            <div class="${vClass}" style="font-size:26px; font-weight:800; font-family:monospace;">${b.verdict} <span style="font-size:14px; color:#e6e8ea;">(Уверенность ${b.confidencePct}%)</span></div>
+          </div>
+          <div style="font-family:monospace; font-size:13px; display:flex; gap:18px;">
+            <div>Entry: <b>$${b.entryPrice.toLocaleString()}</b></div>
+            <div>Stop-Loss: <b class="neg">$${b.stopLossPrice.toLocaleString()}</b></div>
+            <div>Take-Profit: <b class="pos">$${b.takeProfitPrice.toLocaleString()}</b></div>
+            <div>R:R: <b class="gold">${b.riskRewardRatio}</b></div>
+          </div>
+        </div>
+        <div style="margin-top:8px; color:#c7cdd3;">${b.headlineSummary}</div>
+      </div>
+
+      <h3>Вероятности движения BTC (на базе Deribit DVOL ${this.dvolBtcPct}% + Fragility + News)</h3>
+      <div class="scen-grid" style="margin-bottom:16px;">${horizonCards}</div>
+
+      <h3>Почему BTC сейчас ведёт себя именно так (Разбор по факторам)</h3>
+      <table class="data-table">
+        <thead><tr><th>Фактор</th><th>Влияние</th><th>Что происходит прямо сейчас</th></tr></thead>
+        <tbody>${driverRows}</tbody>
+      </table>
+    `;
+  }
+
+  private renderPlayers(): void {
+    const el = document.getElementById("players-content");
+    if (!el) return;
+    const q = (
+      (document.getElementById("players-search") as HTMLInputElement)?.value ??
+      ""
+    )
+      .trim()
+      .toLowerCase();
+    const tierFilter =
+      (document.getElementById("players-tier") as HTMLSelectElement)?.value ??
+      "ALL";
+
+    const nodes = this.graph
+      .getAllNodes()
+      .filter((n) => tierFilter === "ALL" || n.tier === tierFilter)
+      .filter(
+        (n) =>
+          !q ||
+          n.label.toLowerCase().includes(q) ||
+          n.sector.toLowerCase().includes(q) ||
+          n.aliases.some((a) => a.includes(q)),
+      )
+      .sort((a, b) => b.systemicWeight - a.systemicWeight);
+
+    const rows = nodes
+      .map((n) => {
+        const out = this.graph.getOutgoingEdges(n.id);
+        return `
+      <tr>
+        <td><b>${n.label}</b><br/><span class="muted">${n.sector}</span></td>
+        <td><span class="badge">${n.tier}</span></td>
+        <td><b>${(n.systemicWeight * 100).toFixed(0)}%</b></td>
+        <td>${n.price ? "$" + n.price.toLocaleString() : "—"}</td>
+        <td class="muted">${
+          n.description ??
+          out
+            .map((e) => `${e.target} (${e.relation})`)
+            .slice(0, 2)
+            .join(", ")
+        }</td>
+        <td><button class="btn-sec" data-sim-node="${n.id}">⚡ Shock -8%</button></td>
+      </tr>`;
+      })
+      .join("");
+
+    el.innerHTML = `
+      <div class="muted" style="margin-bottom:8px;">Показано игроков в базе: <b>${nodes.length}</b> (всего узлов в графе: ${this.graph.getAllNodes().length})</div>
+      <table class="data-table">
+        <thead><tr><th>Игрок / Узел</th><th>Эшелон</th><th>Вес</th><th>Цена</th><th>Как влияет на рынок</th><th>Действие</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+
+    el.querySelectorAll<HTMLButtonElement>("[data-sim-node]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.dataset.simNode!;
+        this.activeSim = this.simulator.simulateShock(
+          this.graph,
+          { triggerNodeId: id, shockPct: -8, regime: this.currentRegime },
+          this.fragilityMap,
+          this.currentRegime,
+        );
+        this.canvasRenderer?.setSimulation(this.activeSim);
+        this.renderAll();
+        this.switchTab("CASCADE");
+      });
+    });
   }
 
   private renderHeaderMetrics(): void {
@@ -983,12 +1143,13 @@ class MalCryptoApp {
     const el = document.getElementById("calib-content");
     if (!el) return;
     const rep = this.calibration.getReport();
+    const bt = this.backtestSummary;
     el.innerHTML = `
       <div class="calib-cards">
-        <div class="c-card"><span>Total Predictions</span><b>${rep.totalPredictions}</b></div>
-        <div class="c-card"><span>Resolved</span><b>${rep.resolvedCount}</b></div>
-        <div class="c-card"><span>Brier Score (0=Best)</span><b>${rep.brierScore}</b></div>
-        <div class="c-card"><span>Hit Rate</span><b>${(rep.hitRate * 100).toFixed(1)}%</b></div>
+        <div class="c-card"><span>Live Predictions Queued</span><b>${rep.totalPredictions}</b></div>
+        <div class="c-card"><span>Live Resolved</span><b>${rep.resolvedCount}</b></div>
+        <div class="c-card"><span>Historical Brier (4 Shocks)</span><b>${bt?.overallBrierScore ?? "—"}</b></div>
+        <div class="c-card"><span>Directional Accuracy</span><b>${bt ? (bt.overallDirectionalAccuracy * 100).toFixed(1) + "%" : "—"}</b></div>
       </div>
     `;
   }

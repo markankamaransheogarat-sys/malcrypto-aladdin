@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1794563526032,
+  "exportedAt": 1794563831945,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -122,8 +122,8 @@
       ],
       "systemicWeight": 0.96,
       "description": "Bellwether of global AI capex cycle and risk-on equity momentum.",
-      "price": 169.51,
-      "change24hPct": 2
+      "price": 168.96,
+      "change24hPct": 1.67
     },
     {
       "id": "EQ_TSMC",
@@ -152,8 +152,8 @@
         "advanced micro devices"
       ],
       "systemicWeight": 0.76,
-      "price": 568.25,
-      "change24hPct": -2.91
+      "price": 566.35,
+      "change24hPct": -3.24
     },
     {
       "id": "EQ_QQQ",
@@ -197,8 +197,8 @@
         "brian armstrong"
       ],
       "systemicWeight": 0.82,
-      "price": 127.15,
-      "change24hPct": -2.69
+      "price": 126.9,
+      "change24hPct": -2.89
     },
     {
       "id": "MACRO_DXY",
@@ -320,8 +320,8 @@
         "биток"
       ],
       "systemicWeight": 0.99,
-      "price": 68993.75,
-      "change24hPct": -6.065,
+      "price": 69063.01,
+      "change24hPct": -5.958,
       "fragilityScore": 57
     },
     {
@@ -336,8 +336,8 @@
         "эфир"
       ],
       "systemicWeight": 0.92,
-      "price": 1938.38,
-      "change24hPct": -5.242,
+      "price": 1939.84,
+      "change24hPct": -5.118,
       "fragilityScore": 58
     },
     {
@@ -352,8 +352,8 @@
         "солана"
       ],
       "systemicWeight": 0.86,
-      "price": 79.98,
-      "change24hPct": -3.72,
+      "price": 79.99,
+      "change24hPct": -3.708,
       "fragilityScore": 61
     },
     {
@@ -367,8 +367,8 @@
         "rndr"
       ],
       "systemicWeight": 0.68,
-      "price": 1.503,
-      "change24hPct": -0.529,
+      "price": 1.501,
+      "change24hPct": -0.53,
       "fragilityScore": 27
     },
     {
@@ -382,8 +382,8 @@
         "bittensor"
       ],
       "systemicWeight": 0.72,
-      "price": 211,
-      "change24hPct": -1.494,
+      "price": 211.1,
+      "change24hPct": -1.493,
       "fragilityScore": 37
     },
     {
@@ -398,8 +398,8 @@
         "asi"
       ],
       "systemicWeight": 0.66,
-      "price": 0.1467,
-      "change24hPct": -0.34
+      "price": 0.1462,
+      "change24hPct": -0.747
     },
     {
       "id": "CRYPTO_LINK",
@@ -412,8 +412,8 @@
         "chainlink"
       ],
       "systemicWeight": 0.74,
-      "price": 9.917,
-      "change24hPct": -1.802
+      "price": 9.925,
+      "change24hPct": -1.713
     },
     {
       "id": "NAR_AI_COMPUTE",
@@ -587,6 +587,17 @@
       ],
       "systemicWeight": 0.67,
       "description": "DeFiLlama TVL: $6.03B (Bridge)"
+    },
+    {
+      "id": "PROTO_BITGET",
+      "label": "Bitget",
+      "tier": "INFRA_STABLE",
+      "sector": "CEX",
+      "aliases": [
+        "bitget"
+      ],
+      "systemicWeight": 0.66,
+      "description": "DeFiLlama TVL: $5.58B (CEX)"
     }
   ],
   "edges": [
@@ -1369,6 +1380,21 @@
       "validFrom": 1794563525712,
       "validTo": null,
       "evidence": "DeFiLlama TVL $6.03B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_BITGET",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_BITGET",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563831608,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $5.58B"
     }
   ]
 }

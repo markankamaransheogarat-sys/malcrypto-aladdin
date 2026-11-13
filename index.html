@@ -339,28 +339,32 @@
 
     <div class="nav-bar">
       <div class="tabs">
-        <button class="tab-btn active" data-tab="GRAPH">
-          🕸️ GRAPH &lt;GO&gt; [F1]
+        <button class="tab-btn active" data-tab="BRIEF">
+          🎯 BRIEF &lt;GO&gt; [F1]
+        </button>
+        <button class="tab-btn" data-tab="GRAPH">
+          🕸️ GRAPH &lt;GO&gt; [F2]
+        </button>
+        <button class="tab-btn" data-tab="PLAYERS">
+          👥 PLAYERS &lt;GO&gt; [F3]
         </button>
         <button class="tab-btn" data-tab="RADAR">
-          🎯 RADAR &lt;GO&gt; [F2]
+          📡 RADAR &lt;GO&gt; [F4]
         </button>
         <button class="tab-btn" data-tab="CAUSAL">
-          🔬 CAUSAL &lt;GO&gt; [F3]
+          🔬 CAUSAL &lt;GO&gt; [F5]
         </button>
-        <button class="tab-btn" data-tab="WIRE">📰 WIRE &lt;GO&gt; [F4]</button>
+        <button class="tab-btn" data-tab="WIRE">📰 WIRE &lt;GO&gt; [F6]</button>
         <button class="tab-btn" data-tab="CASCADE">
-          ⚡ CASCADE &lt;GO&gt; [F5]
-        </button>
-        <button class="tab-btn" data-tab="CALIB">
-          📊 CALIB &lt;GO&gt; [F6]
-        </button>
-        <button class="tab-btn" data-tab="BACKTEST">
-          ⏪ BACKTEST &lt;GO&gt; [F7]
+          ⚡ CASCADE &lt;GO&gt; [F7]
         </button>
         <button class="tab-btn" data-tab="PORTFOLIO">
           💼 PORTFOLIO &lt;GO&gt; [F8]
         </button>
+        <button class="tab-btn" data-tab="BACKTEST">
+          ⏪ BACKTEST &lt;GO&gt; [F9]
+        </button>
+        <button class="tab-btn" data-tab="CALIB">📊 CALIB &lt;GO&gt;</button>
       </div>
       <div>
         <button id="btn-refresh" class="btn-primary">⟳ Sync Live Feeds</button>
@@ -368,9 +372,32 @@
     </div>
 
     <main>
-      <section id="panel-GRAPH" class="tab-panel">
+      <section id="panel-BRIEF" class="tab-panel">
+        <div id="brief-content"></div>
+      </section>
+
+      <section id="panel-GRAPH" class="tab-panel hidden">
         <canvas id="graph-canvas"></canvas>
         <aside id="node-inspector" class="inspector"></aside>
+      </section>
+
+      <section id="panel-PLAYERS" class="tab-panel hidden">
+        <div class="controls-row">
+          <input
+            id="players-search"
+            type="text"
+            style="flex: 1; min-width: 240px"
+            placeholder="Поиск игрока (e.g. BlackRock, Powell, Tether, BoJ, Huang, Wintermute)..."
+          />
+          <select id="players-tier">
+            <option value="ALL">All Tiers</option>
+            <option value="ACTOR">Key Actors / Funds / Central Banks</option>
+            <option value="MACRO_EQUITY">Macro &amp; Tech Equities</option>
+            <option value="INFRA_STABLE">Exchanges &amp; Stablecoins</option>
+            <option value="CRYPTO_ASSET">Crypto Assets</option>
+          </select>
+        </div>
+        <div id="players-content"></div>
       </section>
 
       <section id="panel-RADAR" class="tab-panel hidden">

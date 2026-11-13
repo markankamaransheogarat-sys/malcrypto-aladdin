@@ -12,14 +12,14 @@ describe("Phase 3: Autonomous Graph Expansion & Auto-Resolver", () => {
     const beforeCount = graph.getAllNodes().length;
     const { newNodes, newEdges } = expander.discoverFromHeadline(
       graph,
-      "Hyperliquid volume surges as Anthropic partners with NVIDIA",
+      "Cerebras IPO surges as Anthropic partners with NVIDIA",
       ["EQ_NVDA"],
       1000,
     );
 
     assert.ok(
-      newNodes.some((n) => n.label === "Hyperliquid"),
-      "Should discover Hyperliquid",
+      newNodes.some((n) => n.label === "Anthropic"),
+      "Should discover Anthropic",
     );
     assert.ok(newEdges.length >= 1, "Should link Hyperliquid to EQ_NVDA");
     assert.ok(graph.getAllNodes().length > beforeCount);

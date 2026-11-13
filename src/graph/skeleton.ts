@@ -4,10 +4,15 @@
  */
 
 import type { GraphEdge, GraphNode } from "../core/types.js";
+import {
+  EXTENDED_PLAYERS_EDGES,
+  EXTENDED_PLAYERS_NODES,
+} from "./players-db.js";
 
 const BASE_VALID_FROM = Date.UTC(2024, 0, 1);
 
 export const SEED_NODES: GraphNode[] = [
+  ...EXTENDED_PLAYERS_NODES,
   // === TIER 0: KEY ACTORS & INSTITUTIONS ===
   {
     id: "ACTOR_HUANG",
@@ -350,6 +355,7 @@ function edge(
 }
 
 export const SEED_EDGES: GraphEdge[] = [
+  ...EXTENDED_PLAYERS_EDGES,
   // Huang -> NVIDIA -> Semis -> NASDAQ -> Crypto & AI
   edge(
     "ACTOR_HUANG",
