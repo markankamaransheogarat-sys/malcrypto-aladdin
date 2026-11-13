@@ -13,6 +13,10 @@ import type {
   NewsEvent,
 } from "../core/types.js";
 import type { StablecoinPegQuote } from "../feeds/live-feeds.js";
+import {
+  MacroCalendarEngine,
+  type MacroCalendarEvent,
+} from "./macro-calendar.js";
 
 export interface HorizonForecast {
   horizonLabel: string;
@@ -46,6 +50,7 @@ export interface ExecutiveBriefing {
   drivers: BriefingDriver[];
   horizons: HorizonForecast[];
   topNewsCatalysts: NewsEvent[];
+  upcomingMacroEvents: MacroCalendarEvent[];
 }
 
 export interface BriefingInputs {
@@ -60,10 +65,18 @@ export interface BriefingInputs {
   regime: MarketRegime;
   newsFeed: NewsEvent[];
   jpyPerUsd?: number;
+  now?: number;
 }
 
 export class ExecutiveBriefingEngine {
+  private macroCalendar = new MacroCalendarEngine();
+
   generate(input: BriefingInputs): ExecutiveBriefing {
+    const now = input.now ?? Date.now();
+    const upcomingMacroEvents = this.macroCalendar.getUpcomingEvents(now, 14);
+    const { boostPct, imminentEvent } =
+      this.macroCalendar.getImminentDvolBoostPct(now);
+    const effectiveDvol = input.dvolPct * (1 + boostPct / 100);
     const price = input.btcPrice > 0 ? input.btcPrice : 71_000;
     const drivers: BriefingDriver[] = [];
     let score = 0;
@@ -173,6 +186,16 @@ export class ExecutiveBriefingEngine {
       explanation: `BTC 24h: ${chg >= 0 ? "+" : ""}${chg.toFixed(2)}%. Ликвидации (5м): Long $${(input.liq5mLongUsd / 1e3).toFixed(0)}K vs Short $${(input.liq5mShortUsd / 1e3).toFixed(0)}K.`,
     });
 
+    // 6. Imminent Macro / Options Expiry Calendar (<=48h)
+    if (imminentEvent) {
+      drivers.push({
+        factor: "Macro Event Calendar",
+        impact: "NEUTRAL",
+        weight: 0,
+        explanation: `${imminentEvent.title} через ${imminentEvent.hoursUntil}ч (${imminentEvent.impact}). Ожидается всплеск волатильности (DVOL +${boostPct}%).`,
+      });
+    }
+
     const compositeScore = Math.round(clamp(score, -100, 100));
     let verdict: ExecutiveBriefing["verdict"] = "WAIT";
     if (compositeScore >= 18) verdict = "LONG";
@@ -182,8 +205,8 @@ export class ExecutiveBriefingEngine {
       clamp(45 + Math.abs(compositeScore) * 0.5, 45, 92),
     );
 
-    // Trade levels anchored to DVOL daily sigma
-    const dailyVolPct = Math.max(1.5, input.dvolPct / Math.sqrt(365));
+    // Trade levels anchored to effective DVOL daily sigma
+    const dailyVolPct = Math.max(1.5, effectiveDvol / Math.sqrt(365));
     const stopPct = dailyVolPct * 1.15;
     const tpPct = stopPct * 2.2;
 
@@ -203,21 +226,21 @@ export class ExecutiveBriefingEngine {
         "Сегодня (24ч)",
         24,
         price,
-        input.dvolPct,
+        effectiveDvol,
         compositeScore,
       ),
       this.computeHorizon(
         "Ближайшие 3 дня",
         72,
         price,
-        input.dvolPct,
+        effectiveDvol,
         compositeScore,
       ),
       this.computeHorizon(
         "Неделя (7 дней)",
         168,
         price,
-        input.dvolPct,
+        effectiveDvol,
         compositeScore,
       ),
     ];
@@ -243,6 +266,7 @@ export class ExecutiveBriefingEngine {
       drivers: drivers.sort((a, b) => Math.abs(b.weight) - Math.abs(a.weight)),
       horizons,
       topNewsCatalysts: btcNews.slice(0, 3),
+      upcomingMacroEvents,
     };
   }
 
@@ -298,4 +322,131 @@ function normalCdf(z: number): number {
     (0.3193815 +
       t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
   return z > 0 ? 1 - p : p;
+}
+
+export interface BriefVerdictRecord {
+  id: string;
+  timestamp: number;
+  verdict: "LONG" | "SHORT";
+  confidencePct: number;
+  entryPrice: number;
+  stopLossPrice: number;
+  takeProfitPrice: number;
+  resolvedAt?: number;
+  exitPrice?: number;
+  outcome?: "WIN" | "LOSS";
+  returnPct?: number;
+  resolveReason?: "TP_HIT" | "SL_HIT" | "EXPIRED_24H";
+}
+
+export interface BriefVerdictStats {
+  total: number;
+  resolved: number;
+  wins: number;
+  winRate: number;
+  avgReturnPct: number;
+  records: BriefVerdictRecord[];
+}
+
+export class BriefVerdictTracker {
+  private records: BriefVerdictRecord[] = [];
+  private readonly throttleMs = 4 * 3600 * 1000;
+  private readonly horizonMs = 24 * 3600 * 1000;
+
+  loadRecords(saved: BriefVerdictRecord[]): void {
+    const seen = new Set(this.records.map((r) => r.id));
+    for (const r of saved) {
+      if (!seen.has(r.id)) {
+        this.records.push(r);
+        seen.add(r.id);
+      }
+    }
+    if (this.records.length > 200) {
+      this.records = this.records.slice(-200);
+    }
+  }
+
+  recordVerdict(
+    briefing: ExecutiveBriefing,
+    now = Date.now(),
+  ): BriefVerdictRecord | null {
+    if (briefing.verdict === "WAIT" || briefing.entryPrice <= 0) return null;
+
+    const recentSame = this.records.find(
+      (r) =>
+        r.verdict === briefing.verdict && now - r.timestamp < this.throttleMs,
+    );
+    if (recentSame) return null;
+
+    const rec: BriefVerdictRecord = {
+      id: `brief_${now}_${briefing.verdict}`,
+      timestamp: now,
+      verdict: briefing.verdict,
+      confidencePct: briefing.confidencePct,
+      entryPrice: briefing.entryPrice,
+      stopLossPrice: briefing.stopLossPrice,
+      takeProfitPrice: briefing.takeProfitPrice,
+    };
+    this.records.push(rec);
+    if (this.records.length > 200) {
+      this.records = this.records.slice(-200);
+    }
+    return rec;
+  }
+
+  resolveDueVerdicts(currentBtcPrice: number, now = Date.now()): boolean {
+    if (currentBtcPrice <= 0) return false;
+    let changed = false;
+
+    for (const r of this.records) {
+      if (r.resolvedAt) continue;
+
+      let reason: BriefVerdictRecord["resolveReason"] | undefined;
+      if (r.verdict === "LONG") {
+        if (currentBtcPrice >= r.takeProfitPrice) reason = "TP_HIT";
+        else if (currentBtcPrice <= r.stopLossPrice) reason = "SL_HIT";
+      } else {
+        if (currentBtcPrice <= r.takeProfitPrice) reason = "TP_HIT";
+        else if (currentBtcPrice >= r.stopLossPrice) reason = "SL_HIT";
+      }
+
+      if (!reason && now - r.timestamp >= this.horizonMs) {
+        reason = "EXPIRED_24H";
+      }
+
+      if (reason) {
+        const rawReturn =
+          r.verdict === "LONG"
+            ? (currentBtcPrice - r.entryPrice) / r.entryPrice
+            : (r.entryPrice - currentBtcPrice) / r.entryPrice;
+        r.resolvedAt = now;
+        r.exitPrice = Math.round(currentBtcPrice);
+        r.returnPct = Number((rawReturn * 100).toFixed(2));
+        r.outcome = rawReturn > 0 ? "WIN" : "LOSS";
+        r.resolveReason = reason;
+        changed = true;
+      }
+    }
+    return changed;
+  }
+
+  getStats(): BriefVerdictStats {
+    const resolvedList = this.records.filter((r) => r.resolvedAt !== undefined);
+    const wins = resolvedList.filter((r) => r.outcome === "WIN").length;
+    const sumReturn = resolvedList.reduce(
+      (acc, r) => acc + (r.returnPct ?? 0),
+      0,
+    );
+    return {
+      total: this.records.length,
+      resolved: resolvedList.length,
+      wins,
+      winRate: resolvedList.length > 0 ? wins / resolvedList.length : 0,
+      avgReturnPct:
+        resolvedList.length > 0
+          ? Number((sumReturn / resolvedList.length).toFixed(2))
+          : 0,
+      records: [...this.records],
+    };
+  }
 }

@@ -3,7 +3,10 @@
  */
 
 import { BacktestEngine, type BacktestSummary } from "../aladdin/backtest.js";
-import { ExecutiveBriefingEngine } from "../aladdin/briefing.js";
+import {
+  BriefVerdictTracker,
+  ExecutiveBriefingEngine,
+} from "../aladdin/briefing.js";
 import { computeFragilityMetrics } from "../aladdin/fragility.js";
 import {
   DEFAULT_PORTFOLIO,
@@ -83,6 +86,7 @@ class MalCryptoApp {
   private calibration = new CalibrationTracker();
   private backtest = new BacktestEngine();
   private briefingEngine = new ExecutiveBriefingEngine();
+  private briefTracker = new BriefVerdictTracker();
   private portfolioEngine = new PortfolioRiskEngine();
   private portfolio: PortfolioPosition[] = [...DEFAULT_PORTFOLIO];
   private dvolBtcPct = 45;
@@ -139,6 +143,10 @@ class MalCryptoApp {
     }
     const savedPort = await idbStore.loadPortfolio();
     if (savedPort && savedPort.length > 0) this.portfolio = savedPort;
+    const savedVerdicts = await idbStore.loadBriefVerdicts();
+    if (savedVerdicts && savedVerdicts.length > 0) {
+      this.briefTracker.loadRecords(savedVerdicts);
+    }
 
     const canvasEl = document.getElementById(
       "graph-canvas",
@@ -796,6 +804,13 @@ class MalCryptoApp {
       jpyPerUsd: this.macroFx?.jpyPerUsd,
     });
 
+    const resolvedChanged = this.briefTracker.resolveDueVerdicts(b.btcPrice);
+    const newRec = this.briefTracker.recordVerdict(b);
+    if (resolvedChanged || newRec) {
+      void idbStore.saveBriefVerdicts(this.briefTracker.getStats().records);
+    }
+    const briefStats = this.briefTracker.getStats();
+
     const vClass =
       b.verdict === "LONG" ? "pos" : b.verdict === "SHORT" ? "neg" : "gold";
 
@@ -837,6 +852,7 @@ class MalCryptoApp {
             <div>Stop-Loss: <b class="neg">$${b.stopLossPrice.toLocaleString()}</b></div>
             <div>Take-Profit: <b class="pos">$${b.takeProfitPrice.toLocaleString()}</b></div>
             <div>R:R: <b class="gold">${b.riskRewardRatio}</b></div>
+            <div>Brief Win Rate: <b class="${briefStats.winRate >= 0.5 ? "pos" : "gold"}">${briefStats.resolved > 0 ? `${(briefStats.winRate * 100).toFixed(0)}% (${briefStats.wins}/${briefStats.resolved})` : `${briefStats.total} в треке`}</b></div>
           </div>
         </div>
         <div style="margin-top:8px; color:#c7cdd3;">${b.headlineSummary}</div>
@@ -846,9 +862,29 @@ class MalCryptoApp {
       <div class="scen-grid" style="margin-bottom:16px;">${horizonCards}</div>
 
       <h3>Почему BTC сейчас ведёт себя именно так (Разбор по факторам)</h3>
-      <table class="data-table">
+      <table class="data-table" style="margin-bottom:16px;">
         <thead><tr><th>Фактор</th><th>Влияние</th><th>Что происходит прямо сейчас</th></tr></thead>
         <tbody>${driverRows}</tbody>
+      </table>
+
+      <h3>Ближайшие макро-события и экспирации (14 дней)</h3>
+      <table class="data-table">
+        <thead><tr><th>Событие</th><th>Категория</th><th>До события</th><th>Риск / Влияние</th></tr></thead>
+        <tbody>${
+          b.upcomingMacroEvents.length > 0
+            ? b.upcomingMacroEvents
+                .map(
+                  (ev) => `
+          <tr>
+            <td><b>${ev.title}</b></td>
+            <td><span class="badge muted">${ev.category}</span></td>
+            <td>${ev.hoursUntil}ч (${new Date(ev.timestamp).toISOString().slice(0, 10)})</td>
+            <td><span class="badge ${ev.impact === "CRITICAL" ? "neg" : "gold"}">${ev.impact}${ev.hoursUntil <= 48 ? ` • DVOL +${ev.dvolBoostPct}%` : ""}</span></td>
+          </tr>`,
+                )
+                .join("")
+            : '<tr><td colspan="4" class="muted">Крупных макро-катализаторов в ближайшие 14 дней не запланировано.</td></tr>'
+        }</tbody>
       </table>
     `;
   }
@@ -1144,13 +1180,36 @@ class MalCryptoApp {
     if (!el) return;
     const rep = this.calibration.getReport();
     const bt = this.backtestSummary;
+    const bv = this.briefTracker.getStats();
+    const recentRows = [...bv.records]
+      .reverse()
+      .slice(0, 10)
+      .map(
+        (r) => `
+      <tr>
+        <td>${new Date(r.timestamp).toISOString().slice(0, 16).replace("T", " ")}</td>
+        <td><span class="badge ${r.verdict === "LONG" ? "pos" : "neg"}">${r.verdict}</span></td>
+        <td>$${r.entryPrice.toLocaleString()}</td>
+        <td>$${r.stopLossPrice.toLocaleString()} / $${r.takeProfitPrice.toLocaleString()}</td>
+        <td>${r.outcome ? `<span class="badge ${r.outcome === "WIN" ? "pos" : "neg"}">${r.outcome} (${r.resolveReason})</span>` : '<span class="badge muted">OPEN</span>'}</td>
+        <td class="${(r.returnPct ?? 0) >= 0 ? "pos" : "neg"}">${r.returnPct !== undefined ? `${r.returnPct >= 0 ? "+" : ""}${r.returnPct}%` : "—"}</td>
+      </tr>`,
+      )
+      .join("");
     el.innerHTML = `
-      <div class="calib-cards">
+      <div class="calib-cards" style="margin-bottom:16px;">
         <div class="c-card"><span>Live Predictions Queued</span><b>${rep.totalPredictions}</b></div>
         <div class="c-card"><span>Live Resolved</span><b>${rep.resolvedCount}</b></div>
         <div class="c-card"><span>Historical Brier (4 Shocks)</span><b>${bt?.overallBrierScore ?? "—"}</b></div>
         <div class="c-card"><span>Directional Accuracy</span><b>${bt ? (bt.overallDirectionalAccuracy * 100).toFixed(1) + "%" : "—"}</b></div>
+        <div class="c-card"><span>Brief Win Rate</span><b>${bv.resolved > 0 ? `${(bv.winRate * 100).toFixed(1)}% (${bv.wins}/${bv.resolved})` : `0/${bv.total} open`}</b></div>
+        <div class="c-card"><span>Brief Avg Return</span><b class="${bv.avgReturnPct >= 0 ? "pos" : "neg"}">${bv.resolved > 0 ? `${bv.avgReturnPct >= 0 ? "+" : ""}${bv.avgReturnPct}%` : "—"}</b></div>
       </div>
+      <h3>История сигналов BRIEF &lt;GO&gt; (авто-трекинг 24ч / TP / SL)</h3>
+      <table class="data-table">
+        <thead><tr><th>Время (UTC)</th><th>Сигнал</th><th>Entry</th><th>SL / TP</th><th>Статус</th><th>Доходность</th></tr></thead>
+        <tbody>${recentRows || '<tr><td colspan="6" class="muted">Пока нет записанных LONG/SHORT вердиктов (WAIT не логируются).</td></tr>'}</tbody>
+      </table>
     `;
   }
 
