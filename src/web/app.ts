@@ -1,7 +1,8 @@
 /**
- * MalCrypto Aladdin — Browser Terminal Controller
+ * MalCrypto Aladdin — Browser Terminal Controller (Phase 2: Real-Time WS, Multi-Asset Fragility, WebWorker & Backtest)
  */
 
+import { BacktestEngine, type BacktestSummary } from "../aladdin/backtest.js";
 import { computeFragilityMetrics } from "../aladdin/fragility.js";
 import { AladdinSimulator, CalibrationTracker } from "../aladdin/simulator.js";
 import { CausalDiscoveryEngine } from "../causal/lead-lag.js";
@@ -19,16 +20,34 @@ import {
   fetchBinancePerpFragilityInputs,
   fetchBinanceSpotQuotes,
   fetchDefiLlamaGlobalTvl,
+  fetchFearAndGreed,
   fetchGdeltNews,
+  fetchMacroFxProxy,
+  fetchNasdaqEquityQuote,
   fetchPolymarketTopSignals,
+  fetchStablecoinPegs,
+  type MacroFxSnapshot,
   type PolymarketSignal,
+  type StablecoinPegQuote,
 } from "../feeds/live-feeds.js";
 import { sendTelegramCascadeAlert } from "../feeds/telegram.js";
+import { LiveWebSocketHub } from "../feeds/ws-stream.js";
 import { idbStore } from "../graph/idb-store.js";
 import { TemporalKnowledgeGraph } from "../graph/temporal-graph.js";
 import { MaltegoGraphCanvas } from "./graph-canvas.js";
 
-type TabId = "GRAPH" | "RADAR" | "CAUSAL" | "WIRE" | "CASCADE" | "CALIB";
+type TabId =
+  "GRAPH" | "RADAR" | "CAUSAL" | "WIRE" | "CASCADE" | "CALIB" | "BACKTEST";
+
+const SYMBOL_TO_NODE: Record<string, string> = {
+  BTCUSDT: "CRYPTO_BTC",
+  ETHUSDT: "CRYPTO_ETH",
+  SOLUSDT: "CRYPTO_SOL",
+  RENDERUSDT: "CRYPTO_RENDER",
+  TAOUSDT: "CRYPTO_TAO",
+  FETUSDT: "CRYPTO_FET",
+  LINKUSDT: "CRYPTO_LINK",
+};
 
 class MalCryptoApp {
   private graph = new TemporalKnowledgeGraph(true);
@@ -36,19 +55,28 @@ class MalCryptoApp {
   private newsLinker = new NewsLinkerEngine();
   private simulator = new AladdinSimulator();
   private calibration = new CalibrationTracker();
+  private backtest = new BacktestEngine();
+  private backtestSummary: BacktestSummary | null = null;
+
   private fragilityMap = new Map<string, FragilityMetrics>();
   private discoveries: CausalDiscoveryResult[] = [];
   private newsFeed: NewsEvent[] = [];
   private polymarket: PolymarketSignal[] = [];
+  private stablePegs: StablecoinPegQuote[] = [];
+  private macroFx: MacroFxSnapshot | null = null;
+  private fearGreed: { value: number; classification: string } | null = null;
+  private wsConnected = false;
+
   private currentRegime: MarketRegime = "EUPHORIA_OVERLEVERAGED";
   private activeSim: SimulationResult | null = null;
   private selectedNodeId: string | null = "ACTOR_HUANG";
   private activeTab: TabId = "GRAPH";
   private canvasRenderer: MaltegoGraphCanvas | null = null;
+  private wsHub: LiveWebSocketHub | null = null;
   private tvlUsd = 0;
+  private lastUiRenderMs = 0;
 
   async init(): Promise<void> {
-    // Hydrate from IndexedDB if present
     const savedSnap = await idbStore.loadGraphSnapshot();
     if (savedSnap && savedSnap.nodes.length > 0) {
       this.graph.importSnapshot(savedSnap);
@@ -60,10 +88,6 @@ class MalCryptoApp {
       for (const p of savedPreds) this.calibration.recordPrediction(p);
     }
 
-    // Seed default fragility for BTC/ETH/SOL until live feed updates
-    this.seedBaselineFragility();
-
-    // Init 60 FPS Maltego Canvas
     const canvasEl = document.getElementById(
       "graph-canvas",
     ) as HTMLCanvasElement | null;
@@ -79,47 +103,43 @@ class MalCryptoApp {
     }
 
     this.bindUI();
+    this.backtestSummary = this.backtest.runHistoricalSuite(this.graph);
     this.runDefaultHuangDemo();
+    this.startWebSockets();
     this.renderAll();
 
-    // Async live zero-key data bootstrap
     void this.refreshLiveFeeds();
   }
 
-  private seedBaselineFragility(): void {
-    this.fragilityMap.set(
-      "CRYPTO_BTC",
-      computeFragilityMetrics({
-        nodeId: "CRYPTO_BTC",
-        openInterestUsd: 19_200_000_000,
-        spotDepth2PctUsd: 185_000_000,
-        fundingRate8h: 0.00032,
-        longShortRatio: 1.58,
-        nearestLiqClusterPct: 1.9,
-      }),
-    );
-    this.fragilityMap.set(
-      "CRYPTO_RENDER",
-      computeFragilityMetrics({
-        nodeId: "CRYPTO_RENDER",
-        openInterestUsd: 260_000_000,
-        spotDepth2PctUsd: 2_100_000,
-        fundingRate8h: 0.00045,
-        longShortRatio: 1.85,
-        nearestLiqClusterPct: 1.4,
-      }),
-    );
-    this.fragilityMap.set(
-      "CRYPTO_TAO",
-      computeFragilityMetrics({
-        nodeId: "CRYPTO_TAO",
-        openInterestUsd: 310_000_000,
-        spotDepth2PctUsd: 2_400_000,
-        fundingRate8h: 0.00041,
-        longShortRatio: 1.72,
-        nearestLiqClusterPct: 1.6,
-      }),
-    );
+  private startWebSockets(): void {
+    this.wsHub = new LiveWebSocketHub({
+      onStatus: (connected) => {
+        this.wsConnected = connected;
+        this.renderHeaderMetrics();
+      },
+      onTicker: (t) => {
+        const nodeId = SYMBOL_TO_NODE[t.symbol];
+        if (!nodeId) return;
+        this.graph.updateNodeMarketData(nodeId, {
+          price: t.price,
+          change24hPct: t.change24hPct,
+        });
+        const now = performance.now();
+        if (now - this.lastUiRenderMs > 800) {
+          this.lastUiRenderMs = now;
+          this.renderHeaderMetrics();
+        }
+      },
+      onLiquidation: () => {
+        const now = performance.now();
+        if (now - this.lastUiRenderMs > 1200) {
+          this.lastUiRenderMs = now;
+          this.renderHeaderMetrics();
+          if (this.activeTab === "RADAR") this.renderRadar();
+        }
+      },
+    });
+    this.wsHub.start();
   }
 
   private runDefaultHuangDemo(): void {
@@ -138,16 +158,40 @@ class MalCryptoApp {
 
   async refreshLiveFeeds(): Promise<void> {
     this.setStatus(
-      "Syncing Zero-Key Feeds (Binance, DeFiLlama, Polymarket, GDELT)...",
+      "Syncing Zero-Key Feeds (Binance Perps, DeFiLlama, Frankfurter FX, Polymarket, GDELT)...",
     );
 
-    const [quotes, btcPerp, poly, gdelt, tvl] = await Promise.all([
-      fetchBinanceSpotQuotes(),
-      fetchBinancePerpFragilityInputs("BTCUSDT"),
-      fetchPolymarketTopSignals(),
-      fetchGdeltNews(),
-      fetchDefiLlamaGlobalTvl(),
-    ]);
+    const perpSymbols = [
+      "BTCUSDT",
+      "ETHUSDT",
+      "SOLUSDT",
+      "RENDERUSDT",
+      "TAOUSDT",
+    ];
+    const equityPairs: Array<[string, string]> = [
+      ["EQ_NVDA", "NVDA"],
+      ["EQ_QQQ", "QQQ"],
+      ["EQ_MSTR", "MSTR"],
+      ["EQ_COIN", "COIN"],
+    ];
+
+    const [quotes, perpResults, poly, gdelt, tvl, pegs, fx, fng, eqResults] =
+      await Promise.all([
+        fetchBinanceSpotQuotes(),
+        Promise.all(perpSymbols.map((s) => fetchBinancePerpFragilityInputs(s))),
+        fetchPolymarketTopSignals(),
+        fetchGdeltNews(),
+        fetchDefiLlamaGlobalTvl(),
+        fetchStablecoinPegs(),
+        fetchMacroFxProxy(),
+        fetchFearAndGreed(),
+        Promise.all(
+          equityPairs.map(async ([nodeId, sym]) => ({
+            nodeId,
+            q: await fetchNasdaqEquityQuote(sym),
+          })),
+        ),
+      ]);
 
     for (const q of quotes) {
       this.graph.updateNodeMarketData(q.nodeId, {
@@ -156,28 +200,52 @@ class MalCryptoApp {
       });
     }
 
-    if (btcPerp) {
-      const btcFrag = computeFragilityMetrics({
-        nodeId: "CRYPTO_BTC",
-        openInterestUsd: btcPerp.openInterestUsd,
-        spotDepth2PctUsd: btcPerp.spotDepth2PctUsd,
-        fundingRate8h: btcPerp.fundingRate8h,
-        longShortRatio: 1.48,
-        nearestLiqClusterPct: 2.1,
+    for (const eq of eqResults) {
+      if (eq.q) {
+        this.graph.updateNodeMarketData(eq.nodeId, {
+          price: eq.q.price,
+          change24hPct: eq.q.changePct,
+        });
+      }
+    }
+
+    for (const p of perpResults) {
+      if (!p) continue;
+      const frag = computeFragilityMetrics({
+        nodeId: p.nodeId,
+        openInterestUsd: p.openInterestUsd,
+        spotDepth2PctUsd: p.spotDepth2PctUsd,
+        fundingRate8h: p.fundingRate8h,
+        longShortRatio: 1.45,
+        nearestLiqClusterPct: 2.0,
       });
-      this.fragilityMap.set("CRYPTO_BTC", btcFrag);
-      this.graph.updateNodeMarketData("CRYPTO_BTC", {
-        fragilityScore: btcFrag.fragilityScore,
+      this.fragilityMap.set(p.nodeId, frag);
+      this.graph.updateNodeMarketData(p.nodeId, {
+        fragilityScore: frag.fragilityScore,
       });
 
-      this.currentRegime = detectMarketRegime(
-        52,
-        btcPerp.fundingRate8h * 100,
-        -2.5,
-      );
+      if (p.nodeId === "CRYPTO_BTC") {
+        const btcNode = this.graph.getNode("CRYPTO_BTC");
+        this.currentRegime = detectMarketRegime(
+          50,
+          p.fundingRate8h * 100,
+          btcNode?.change24hPct ?? 0,
+        );
+      }
     }
 
     if (tvl) this.tvlUsd = tvl.totalTvlUsd;
+    if (pegs.length > 0) {
+      this.stablePegs = pegs;
+      for (const peg of pegs) {
+        this.graph.updateNodeMarketData(peg.nodeId, { price: peg.price });
+      }
+    }
+    if (fx) {
+      this.macroFx = fx;
+      this.graph.updateNodeMarketData("MACRO_DXY", { price: fx.dxyProxy });
+    }
+    if (fng) this.fearGreed = fng;
     if (poly.length > 0) this.polymarket = poly;
 
     if (gdelt.length > 0) {
@@ -195,9 +263,9 @@ class MalCryptoApp {
       await idbStore.saveNews(this.newsFeed);
     }
 
-    // Run online Lead-Lag Causal Discovery on 15m klines
     await this.runOnlineCausalScan();
 
+    this.backtestSummary = this.backtest.runHistoricalSuite(this.graph);
     this.canvasRenderer?.setData(
       this.graph.getAllNodes(),
       this.graph.getActiveEdges(),
@@ -228,19 +296,86 @@ class MalCryptoApp {
       })),
     );
 
-    const seriesMap = new Map<string, number[]>();
+    const entries: Array<[string, number[]]> = [];
     for (const r of results) {
-      if (r.ret.length >= 30) seriesMap.set(r.nodeId, r.ret);
+      if (r.ret.length >= 30) entries.push([r.nodeId, r.ret]);
+    }
+    if (entries.length < 2) return;
+
+    this.discoveries = await this.runDiscoveryInWorker(entries);
+    this.causal.syncDiscoveriesToGraph(this.graph, this.discoveries);
+  }
+
+  private runDiscoveryInWorker(
+    entries: Array<[string, number[]]>,
+  ): Promise<CausalDiscoveryResult[]> {
+    if (typeof Worker === "undefined") {
+      return Promise.resolve(
+        this.causal.discoverLinks(new Map(entries), {
+          barMinutes: 15,
+          maxLagSteps: 4,
+          fdrAlpha: 0.05,
+        }),
+      );
     }
 
-    if (seriesMap.size >= 2) {
-      this.discoveries = this.causal.discoverLinks(seriesMap, {
-        barMinutes: 15,
-        maxLagSteps: 4,
-        fdrAlpha: 0.05,
-      });
-      this.causal.syncDiscoveriesToGraph(this.graph, this.discoveries);
-    }
+    return new Promise((resolve) => {
+      try {
+        const worker = new Worker("./dist/causal-worker.js", {
+          type: "module",
+        });
+        const reqId = Date.now();
+        const timer = setTimeout(() => {
+          worker.terminate();
+          resolve(
+            this.causal.discoverLinks(new Map(entries), {
+              barMinutes: 15,
+              maxLagSteps: 4,
+              fdrAlpha: 0.05,
+            }),
+          );
+        }, 5000);
+
+        worker.onmessage = (
+          ev: MessageEvent<{
+            id: number;
+            discoveries: CausalDiscoveryResult[];
+          }>,
+        ) => {
+          if (ev.data.id === reqId) {
+            clearTimeout(timer);
+            worker.terminate();
+            resolve(ev.data.discoveries);
+          }
+        };
+        worker.onerror = () => {
+          clearTimeout(timer);
+          worker.terminate();
+          resolve(
+            this.causal.discoverLinks(new Map(entries), {
+              barMinutes: 15,
+              maxLagSteps: 4,
+              fdrAlpha: 0.05,
+            }),
+          );
+        };
+        worker.postMessage({
+          id: reqId,
+          entries,
+          barMinutes: 15,
+          maxLagSteps: 4,
+          fdrAlpha: 0.05,
+        });
+      } catch {
+        resolve(
+          this.causal.discoverLinks(new Map(entries), {
+            barMinutes: 15,
+            maxLagSteps: 4,
+            fdrAlpha: 0.05,
+          }),
+        );
+      }
+    });
   }
 
   private bindUI(): void {
@@ -248,8 +383,7 @@ class MalCryptoApp {
       .querySelectorAll<HTMLButtonElement>("[data-tab]")
       .forEach((btn) => {
         btn.addEventListener("click", () => {
-          const tab = btn.dataset.tab as TabId;
-          this.switchTab(tab);
+          this.switchTab(btn.dataset.tab as TabId);
         });
       });
 
@@ -261,6 +395,7 @@ class MalCryptoApp {
         F4: "WIRE",
         F5: "CASCADE",
         F6: "CALIB",
+        F7: "BACKTEST",
       };
       if (map[e.key]) {
         e.preventDefault();
@@ -423,17 +558,22 @@ class MalCryptoApp {
     this.renderWire();
     this.renderCascade();
     this.renderCalib();
+    this.renderBacktest();
   }
 
   private renderHeaderMetrics(): void {
     const btc = this.graph.getNode("CRYPTO_BTC");
     const btcFrag = this.fragilityMap.get("CRYPTO_BTC");
+    const liqStats = this.wsHub?.getLiquidationStats(5 * 60 * 1000);
     const el = document.getElementById("header-kpis");
     if (!el) return;
     el.innerHTML = `
-      <span>BTC: <b>${btc?.price ? "$" + btc.price.toLocaleString() : "Offline/Seed"}</b></span>
-      <span>FRAGILITY: <b class="${btcFrag?.status === "TINDERBOX" ? "neg" : "gold"}">${btcFrag?.fragilityScore ?? 0}/100 (${btcFrag?.status ?? "N/A"})</b></span>
-      <span>REGIME: <b class="cyan">${this.currentRegime}</b></span>
+      <span>${this.wsConnected ? '<b class="pos">● WS</b>' : '<b class="muted">○ WS</b>'}</span>
+      <span>BTC: <b>${btc?.price ? "$" + btc.price.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "Syncing"}</b></span>
+      <span>FRAGILITY: <b class="${btcFrag?.status === "TINDERBOX" ? "neg" : "gold"}">${btcFrag?.fragilityScore ?? "—"}/100</b></span>
+      <span>5m LIQS: <b class="neg">${liqStats ? "$" + (liqStats.totalUsd / 1e3).toFixed(0) + "K" : "$0"}</b></span>
+      <span>F&amp;G: <b class="cyan">${this.fearGreed ? `${this.fearGreed.value} (${this.fearGreed.classification})` : "—"}</b></span>
+      <span>USD/JPY: <b>${this.macroFx ? this.macroFx.jpyPerUsd.toFixed(1) : "—"}</b></span>
       <span>DEFI TVL: <b>${this.tvlUsd ? "$" + (this.tvlUsd / 1e9).toFixed(1) + "B" : "—"}</b></span>
     `;
   }
@@ -451,7 +591,7 @@ class MalCryptoApp {
 
     el.innerHTML = `
       <div class="insp-title">${node.label} <span class="badge">${node.tier}</span></div>
-      <div class="insp-sub">${node.sector} • Systemic Weight: ${(node.systemicWeight * 100).toFixed(0)}%</div>
+      <div class="insp-sub">${node.sector} • Systemic: ${(node.systemicWeight * 100).toFixed(0)}% ${node.price ? `• $${node.price.toLocaleString()}` : ""}</div>
       ${node.description ? `<p class="insp-desc">${node.description}</p>` : ""}
       ${
         simHit
@@ -490,6 +630,22 @@ class MalCryptoApp {
       )
       .join("");
 
+    const pegBadges = this.stablePegs
+      .map(
+        (p) =>
+          `<div class="poly-pill"><span>${p.symbol} Peg</span><b>$${p.price.toFixed(4)} (${p.pegDeviationBps > 0 ? "+" : ""}${p.pegDeviationBps} bps)</b></div>`,
+      )
+      .join("");
+
+    const liqStats = this.wsHub?.getLiquidationStats(5 * 60 * 1000);
+    const liqRows = (liqStats?.recent ?? [])
+      .slice(0, 6)
+      .map(
+        (l) =>
+          `<tr><td>${l.symbol}</td><td class="${l.side === "SELL" ? "neg" : "pos"}">${l.side === "SELL" ? "LONG LIQ" : "SHORT LIQ"}</td><td>$${l.notionalUsd.toLocaleString(undefined, { maximumFractionDigits: 0 })}</td><td>$${l.price}</td></tr>`,
+      )
+      .join("");
+
     const scenRows =
       this.activeSim?.scenarios
         .map(
@@ -503,13 +659,19 @@ class MalCryptoApp {
         .join("") ?? "";
 
     el.innerHTML = `
-      <h3>Pre-Mortem Market Fragility ("Tinderbox" Radar)</h3>
+      <div class="poly-strip">${pegBadges}</div>
+      <h3>Live Multi-Asset Perp Fragility ("Tinderbox" Radar)</h3>
       <table class="data-table">
         <thead><tr><th>Node</th><th>Open Interest</th><th>±2% Depth</th><th>OI/Depth</th><th>Funding 8h</th><th>Fragility</th></tr></thead>
-        <tbody>${fragRows}</tbody>
+        <tbody>${fragRows || '<tr><td colspan="6" class="muted">Syncing live Binance Perp metrics...</td></tr>'}</tbody>
       </table>
       <h3 style="margin-top:18px;">Active Scenario Tree — Trigger: ${this.activeSim?.triggerLabel ?? "None"} (${this.activeSim?.shockPct ?? 0}%)</h3>
       <div class="scen-grid">${scenRows}</div>
+      <h3 style="margin-top:18px;">Live Forced Liquidations Stream (5m Window: $${((liqStats?.totalUsd ?? 0) / 1e3).toFixed(1)}K)</h3>
+      <table class="data-table">
+        <thead><tr><th>Symbol</th><th>Side</th><th>Notional</th><th>Price</th></tr></thead>
+        <tbody>${liqRows || '<tr><td colspan="4" class="muted">Listening to Binance Futures !forceOrder@arr WebSocket...</td></tr>'}</tbody>
+      </table>
     `;
   }
 
@@ -517,7 +679,7 @@ class MalCryptoApp {
     const el = document.getElementById("causal-content");
     if (!el) return;
     if (this.discoveries.length === 0) {
-      el.innerHTML = `<p class="muted">Waiting for live 15m klines or click "Sync Live Feeds" to run Granger & Tail-Beta discovery.</p>`;
+      el.innerHTML = `<p class="muted">Running off-main-thread WebWorker Granger & Tail-Beta scan on live 15m klines...</p>`;
       return;
     }
     const rows = this.discoveries
@@ -625,6 +787,40 @@ class MalCryptoApp {
         <div class="c-card"><span>Brier Score (0=Best)</span><b>${rep.brierScore}</b></div>
         <div class="c-card"><span>Hit Rate</span><b>${(rep.hitRate * 100).toFixed(1)}%</b></div>
       </div>
+    `;
+  }
+
+  private renderBacktest(): void {
+    const el = document.getElementById("backtest-content");
+    if (!el || !this.backtestSummary) return;
+    const s = this.backtestSummary;
+
+    const rows = s.cases
+      .map(
+        (c) => `
+      <tr>
+        <td><b>${c.name}</b><br/><span class="muted">${c.dateLabel} • ${c.triggerNodeId} (${c.shockPct}%)</span></td>
+        <td class="${c.predictedBtcPct < 0 ? "neg" : "pos"}">${c.predictedBtcPct}%</td>
+        <td class="neg">${c.actualBtcPct ? c.actualBtcPct + "%" : "N/A"}</td>
+        <td>${(c.predictedCrashProb * 100).toFixed(0)}% (Actual: ${c.actualCrashOccurred})</td>
+        <td>${c.directionalHits}/${c.directionalTotal}</td>
+        <td>${c.intervalHits}/${c.directionalTotal}</td>
+        <td>${c.maePct}%</td>
+      </tr>`,
+      )
+      .join("");
+
+    el.innerHTML = `
+      <div class="calib-cards" style="margin-bottom:16px;">
+        <div class="c-card"><span>Historical Brier Score</span><b>${s.overallBrierScore}</b></div>
+        <div class="c-card"><span>Directional Accuracy</span><b>${(s.overallDirectionalAccuracy * 100).toFixed(1)}%</b></div>
+        <div class="c-card"><span>P10..P90 Band Coverage</span><b>${(s.overallIntervalCoverage * 100).toFixed(1)}%</b></div>
+        <div class="c-card"><span>Mean Abs Error</span><b>${s.overallMaePct}%</b></div>
+      </div>
+      <table class="data-table">
+        <thead><tr><th>Historical Shock Event</th><th>Pred BTC</th><th>Actual BTC</th><th>Crash Prob</th><th>Dir Hits</th><th>In P10..P90</th><th>MAE</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
     `;
   }
 }

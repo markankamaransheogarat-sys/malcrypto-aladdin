@@ -219,3 +219,138 @@ export async function fetchDefiLlamaGlobalTvl(): Promise<{
     return null;
   }
 }
+
+export interface StablecoinPegQuote {
+  symbol: string;
+  nodeId: string;
+  price: number;
+  pegDeviationBps: number;
+}
+
+export async function fetchStablecoinPegs(): Promise<StablecoinPegQuote[]> {
+  try {
+    const res = await fetch(
+      "https://stablecoins.llama.fi/stablecoins?includePrices=true",
+      {
+        signal: AbortSignal.timeout(6000),
+      },
+    );
+    if (!res.ok) return [];
+    const json = (await res.json()) as {
+      peggedAssets?: Array<{ symbol?: string; price?: number }>;
+    };
+    const targets: Record<string, string> = {
+      USDT: "INFRA_USDT",
+      USDC: "INFRA_USDC",
+    };
+    const out: StablecoinPegQuote[] = [];
+    for (const asset of json.peggedAssets ?? []) {
+      const sym = asset.symbol?.toUpperCase() ?? "";
+      if (targets[sym] && typeof asset.price === "number") {
+        out.push({
+          symbol: sym,
+          nodeId: targets[sym],
+          price: asset.price,
+          pegDeviationBps: Number(((asset.price - 1) * 10_000).toFixed(1)),
+        });
+      }
+    }
+    return out;
+  } catch {
+    return [];
+  }
+}
+
+export interface MacroFxSnapshot {
+  eurPerUsd: number;
+  jpyPerUsd: number;
+  gbpPerUsd: number;
+  dxyProxy: number;
+}
+
+export async function fetchMacroFxProxy(): Promise<MacroFxSnapshot | null> {
+  try {
+    const res = await fetch(
+      "https://api.frankfurter.app/latest?from=USD&to=EUR,JPY,GBP",
+      {
+        signal: AbortSignal.timeout(5000),
+      },
+    );
+    if (!res.ok) return null;
+    const json = (await res.json()) as {
+      rates?: { EUR?: number; JPY?: number; GBP?: number };
+    };
+    const eur = json.rates?.EUR;
+    const jpy = json.rates?.JPY;
+    const gbp = json.rates?.GBP;
+    if (!eur || !jpy || !gbp) return null;
+
+    const dxyProxy = Number(
+      (
+        50.14348112 *
+        Math.pow(eur, 0.576) *
+        Math.pow(jpy, 0.136) *
+        Math.pow(gbp, 0.119)
+      ).toFixed(2),
+    );
+    return { eurPerUsd: eur, jpyPerUsd: jpy, gbpPerUsd: gbp, dxyProxy };
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchFearAndGreed(): Promise<{
+  value: number;
+  classification: string;
+} | null> {
+  try {
+    const res = await fetch("https://api.alternative.me/fng/?limit=1", {
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) return null;
+    const json = (await res.json()) as {
+      data?: Array<{ value: string; value_classification: string }>;
+    };
+    const item = json.data?.[0];
+    if (!item) return null;
+    return {
+      value: Number(item.value),
+      classification: item.value_classification,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchNasdaqEquityQuote(
+  symbol: string,
+): Promise<{ symbol: string; price: number; changePct: number } | null> {
+  try {
+    const res = await fetch(
+      `https://api.nasdaq.com/api/quote/${encodeURIComponent(symbol)}/info?assetclass=stocks`,
+      {
+        headers: { "User-Agent": "Mozilla/5.0" },
+        signal: AbortSignal.timeout(5000),
+      },
+    );
+    if (!res.ok) return null;
+    const json = (await res.json()) as {
+      data?: {
+        primaryData?: {
+          lastSalePrice?: string;
+          percentageChange?: string;
+        };
+      };
+    };
+    const pd = json.data?.primaryData;
+    if (!pd?.lastSalePrice) return null;
+    const price = Number(pd.lastSalePrice.replace(/[^0-9.-]/g, ""));
+    const changePct = Number(
+      (pd.percentageChange ?? "0").replace(/[^0-9.-]/g, ""),
+    );
+    if (!Number.isFinite(price) || price <= 0) return null;
+    return { symbol, price, changePct };
+  } catch {
+    return null;
+  }
+}

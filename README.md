@@ -20,6 +20,7 @@ Institutional **Bi-Temporal Knowledge Graph (Maltego-style)** + **BlackRock Alad
 | **`📰 WIRE <GO>`** `[F4]` | **News-to-Graph & Surprise Engine**: GDELT 2.0 + Polymarket + custom headline analyzer with Entity Resolution, Source Trust scoring, and `Surprise = Actual − Expected` filtering. |
 | **`⚡ CASCADE <GO>`** `[F5]` | **Interactive Stress-Test Simulator**: Simulate any trigger (e.g. `Jensen Huang / NVDA -9.5%`, `Fed`, `SEC`, `USDT depeg`) across regimes (`STRESS_CORRELATION_ONE`, `EUPHORIA_OVERLEVERAGED`, `RISK_ON_CALM`) with `P10 / P50 / P90` quantiles + Telegram Webhook Bridge. |
 | **`📊 CALIB <GO>`** `[F6]` | **Bi-Temporal Audit & Brier Calibration**: Tracks prediction accuracy via Brier Score, prunes weak news hypotheses, and exports/imports full graph snapshots. |
+| **`⏪ BACKTEST <GO>`** `[F7]` | **Bi-Temporal Historical Shock Replay**: Replays major historical crashes (`DeepSeek/NVDA`, `Yen Carry Unwind`, `SVB/USDC`, `Hawkish Fed`) with zero look-ahead bias, measuring Directional Accuracy, `P10..P90` Coverage, and Brier Score. |
 
 ---
 

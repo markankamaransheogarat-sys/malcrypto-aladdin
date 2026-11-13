@@ -355,6 +355,9 @@
         <button class="tab-btn" data-tab="CALIB">
           📊 CALIB &lt;GO&gt; [F6]
         </button>
+        <button class="tab-btn" data-tab="BACKTEST">
+          ⏪ BACKTEST &lt;GO&gt; [F7]
+        </button>
       </div>
       <div>
         <button id="btn-refresh" class="btn-primary">⟳ Sync Live Feeds</button>
@@ -458,6 +461,11 @@
           </button>
         </div>
         <div id="calib-content"></div>
+      </section>
+
+      <section id="panel-BACKTEST" class="tab-panel hidden">
+        <h3>Bi-Temporal Historical Shock Replay (Zero Look-Ahead Bias)</h3>
+        <div id="backtest-content"></div>
       </section>
     </main>
 

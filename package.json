@@ -9,7 +9,7 @@
     "malcrypto": "./bin/malcrypto.js"
   },
   "scripts": {
-    "build": "tsc && esbuild src/web/app.ts --bundle --format=esm --outfile=dist/web.js --platform=browser --minify",
+    "build": "tsc && esbuild src/web/app.ts --bundle --format=esm --outfile=dist/web.js --platform=browser --minify && esbuild src/web/causal-worker.ts --bundle --format=esm --outfile=dist/causal-worker.js --platform=browser --minify",
     "test": "node --import tsx --test tests/**/*.test.ts",
     "terminal": "node --import tsx src/index.ts",
     "clean": "rm -rf dist"
