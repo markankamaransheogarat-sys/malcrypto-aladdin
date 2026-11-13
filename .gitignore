@@ -2,5 +2,6 @@ node_modules/
 dist/*
 !dist/web.js
 !dist/causal-worker.js
+!dist/ai-worker.js
 *.log
 .DS_Store

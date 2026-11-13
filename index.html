@@ -384,6 +384,30 @@
 
       <section id="panel-WIRE" class="tab-panel hidden">
         <div class="controls-row">
+          <select id="ai-mode">
+            <option value="ALGORITHMIC">Mode 0: Algorithmic NLP (Fast)</option>
+            <option value="WEBGPU_LOCAL">
+              Mode 2: Browser Neural Engine (WebGPU/WASM)
+            </option>
+            <option value="OLLAMA_OPENAI">
+              Mode 1: Ollama / OpenAI Endpoint
+            </option>
+          </select>
+          <input
+            id="ai-endpoint"
+            type="text"
+            value="http://localhost:11434/v1/chat/completions"
+            style="width: 220px"
+            title="Ollama / OpenAI-compatible URL (Mode 1)"
+          />
+          <button id="btn-init-ai" class="btn-sec">
+            🧠 Load Browser Neural Net
+          </button>
+          <span id="ai-status" class="muted" style="font-family: monospace"
+            >AI: ALGORITHMIC</span
+          >
+        </div>
+        <div class="controls-row">
           <input
             id="custom-news-input"
             type="text"

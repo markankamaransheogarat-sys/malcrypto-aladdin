@@ -180,6 +180,7 @@ export interface PredictionRecord {
   predictedMovePct: number;
   horizonHours: number;
   thresholdPct: number;
+  baselinePrice?: number;
   resolvedAt?: number;
   actualMovePct?: number;
   outcomeOccurred?: 0 | 1;

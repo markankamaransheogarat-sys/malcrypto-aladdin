@@ -354,3 +354,34 @@ export async function fetchNasdaqEquityQuote(
     return null;
   }
 }
+
+export async function fetchDefiLlamaTopProtocols(
+  limit = 15,
+): Promise<
+  Array<{ name: string; symbol: string; tvlUsd: number; category: string }>
+> {
+  try {
+    const res = await fetch("https://api.llama.fi/protocols", {
+      signal: AbortSignal.timeout(7000),
+    });
+    if (!res.ok) return [];
+    const data = (await res.json()) as Array<{
+      name?: string;
+      symbol?: string;
+      tvl?: number;
+      category?: string;
+    }>;
+    return data
+      .filter((d) => typeof d.tvl === "number" && d.tvl > 0 && d.name)
+      .sort((a, b) => (b.tvl ?? 0) - (a.tvl ?? 0))
+      .slice(0, limit)
+      .map((d) => ({
+        name: d.name!,
+        symbol: d.symbol && d.symbol !== "-" ? d.symbol : "",
+        tvlUsd: d.tvl!,
+        category: d.category ?? "DeFi",
+      }));
+  } catch {
+    return [];
+  }
+}

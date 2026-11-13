@@ -235,6 +235,52 @@ export class CalibrationTracker {
     return [...this.records];
   }
 
+  /**
+   * Automatically resolves due predictions against live node prices and reinforces/decays graph edges.
+   */
+  autoResolveDuePredictions(
+    graph: TemporalKnowledgeGraph,
+    now = Date.now(),
+  ): number {
+    let resolvedCount = 0;
+    for (const rec of this.records) {
+      if (rec.outcomeOccurred !== undefined) continue;
+      const dueAt = rec.createdAt + rec.horizonHours * 3600_000;
+      if (now < dueAt) continue;
+
+      const targetNode = graph.getNode(rec.targetNodeId);
+      if (!targetNode?.price || !rec.baselinePrice || rec.baselinePrice <= 0)
+        continue;
+
+      const actualMovePct = Number(
+        (
+          ((targetNode.price - rec.baselinePrice) / rec.baselinePrice) *
+          100
+        ).toFixed(2),
+      );
+      const updated = this.resolvePrediction(rec.id, actualMovePct, now);
+      if (updated) {
+        resolvedCount++;
+        // Reinforce or decay direct edge between trigger -> target if present
+        const active = graph.getActiveEdges(now);
+        for (const e of active) {
+          if (e.source === rec.triggerNodeId && e.target === rec.targetNodeId) {
+            const delta = updated.outcomeOccurred === 1 ? 0.03 : -0.04;
+            graph.upsertEdge({
+              ...e,
+              confidence: clamp(
+                Number((e.confidence + delta).toFixed(2)),
+                0.1,
+                0.99,
+              ),
+            });
+          }
+        }
+      }
+    }
+    return resolvedCount;
+  }
+
   getReport(): CalibrationReport {
     const resolved = this.records.filter(
       (r) => r.outcomeOccurred !== undefined,

@@ -5,6 +5,10 @@
 import { BacktestEngine, type BacktestSummary } from "../aladdin/backtest.js";
 import { computeFragilityMetrics } from "../aladdin/fragility.js";
 import { AladdinSimulator, CalibrationTracker } from "../aladdin/simulator.js";
+import {
+  analyzeWithOpenAICompatible,
+  type AiEngineMode,
+} from "../causal/ai-adapter.js";
 import { CausalDiscoveryEngine } from "../causal/lead-lag.js";
 import { NewsLinkerEngine } from "../causal/news-linker.js";
 import { detectMarketRegime } from "../core/math.js";
@@ -20,6 +24,7 @@ import {
   fetchBinancePerpFragilityInputs,
   fetchBinanceSpotQuotes,
   fetchDefiLlamaGlobalTvl,
+  fetchDefiLlamaTopProtocols,
   fetchFearAndGreed,
   fetchGdeltNews,
   fetchMacroFxProxy,
@@ -32,8 +37,12 @@ import {
 } from "../feeds/live-feeds.js";
 import { sendTelegramCascadeAlert } from "../feeds/telegram.js";
 import { LiveWebSocketHub } from "../feeds/ws-stream.js";
+import { AutoGraphExpander } from "../graph/auto-discovery.js";
 import { idbStore } from "../graph/idb-store.js";
-import { TemporalKnowledgeGraph } from "../graph/temporal-graph.js";
+import {
+  TemporalKnowledgeGraph,
+  type GraphSnapshot,
+} from "../graph/temporal-graph.js";
 import { MaltegoGraphCanvas } from "./graph-canvas.js";
 
 type TabId =
@@ -51,12 +60,16 @@ const SYMBOL_TO_NODE: Record<string, string> = {
 
 class MalCryptoApp {
   private graph = new TemporalKnowledgeGraph(true);
+  private expander = new AutoGraphExpander();
   private causal = new CausalDiscoveryEngine();
   private newsLinker = new NewsLinkerEngine();
   private simulator = new AladdinSimulator();
   private calibration = new CalibrationTracker();
   private backtest = new BacktestEngine();
   private backtestSummary: BacktestSummary | null = null;
+  private aiWorker: Worker | null = null;
+  private aiMode: AiEngineMode = "ALGORITHMIC";
+  private aiReady = false;
 
   private fragilityMap = new Map<string, FragilityMetrics>();
   private discoveries: CausalDiscoveryResult[] = [];
@@ -80,6 +93,23 @@ class MalCryptoApp {
     const savedSnap = await idbStore.loadGraphSnapshot();
     if (savedSnap && savedSnap.nodes.length > 0) {
       this.graph.importSnapshot(savedSnap);
+    }
+    // Hydrate from 24/7 GitHub Actions Watchdog snapshot if newer
+    try {
+      const res = await fetch("./data/snapshot.json", {
+        signal: AbortSignal.timeout(3000),
+      });
+      if (res.ok) {
+        const remoteSnap = (await res.json()) as GraphSnapshot;
+        if (
+          remoteSnap.nodes?.length &&
+          (!savedSnap || remoteSnap.exportedAt > savedSnap.exportedAt)
+        ) {
+          this.graph.importSnapshot(remoteSnap);
+        }
+      }
+    } catch {
+      // No remote snapshot yet
     }
     const savedNews = await idbStore.loadNews();
     if (savedNews) this.newsFeed = savedNews;
@@ -256,6 +286,11 @@ class MalCryptoApp {
           source: art.domain || "gdelt",
           url: art.url,
         });
+        this.expander.discoverFromHeadline(
+          this.graph,
+          art.title,
+          ev.matchedNodes,
+        );
         this.newsLinker.proposeHypothesesFromNews(this.graph, ev);
         return ev;
       });
@@ -263,7 +298,14 @@ class MalCryptoApp {
       await idbStore.saveNews(this.newsFeed);
     }
 
+    // Autonomous DeFiLlama top protocol discovery
+    const topProtos = await fetchDefiLlamaTopProtocols(12);
+    if (topProtos.length > 0) {
+      this.expander.ingestTopProtocols(this.graph, topProtos);
+    }
+
     await this.runOnlineCausalScan();
+    this.calibration.autoResolveDuePredictions(this.graph);
 
     this.backtestSummary = this.backtest.runHistoricalSuite(this.graph);
     this.canvasRenderer?.setData(
@@ -429,45 +471,121 @@ class MalCryptoApp {
       this.renderAll();
     });
 
-    document.getElementById("btn-parse-news")?.addEventListener("click", () => {
-      const titleEl = document.getElementById(
-        "custom-news-input",
-      ) as HTMLInputElement;
-      const priorEl = document.getElementById(
-        "custom-news-prior",
-      ) as HTMLInputElement;
-      const text = titleEl.value.trim();
-      if (!text) return;
-
-      const ev = this.newsLinker.analyzeNews(this.graph, {
-        id: `manual_${Date.now()}`,
-        title: text,
-        source: "Reuters",
-        marketPriorPositiveProb: Number(priorEl.value || 0.7),
-      });
-      this.newsFeed.unshift(ev);
-      this.newsLinker.proposeHypothesesFromNews(this.graph, ev);
-
-      const sim = this.simulator.simulateFromNews(
-        this.graph,
-        ev,
-        this.fragilityMap,
-        this.currentRegime,
-      );
-      if (sim) {
-        this.activeSim = sim;
-        this.canvasRenderer?.setSimulation(sim);
-        this.recordSimPrediction(sim);
-      }
-      this.canvasRenderer?.setData(
-        this.graph.getAllNodes(),
-        this.graph.getActiveEdges(),
-      );
-      void idbStore.saveGraphSnapshot(this.graph.exportSnapshot());
-      void idbStore.saveNews(this.newsFeed);
-      titleEl.value = "";
-      this.renderAll();
+    document.getElementById("ai-mode")?.addEventListener("change", (e) => {
+      this.aiMode = (e.target as HTMLSelectElement).value as AiEngineMode;
+      const st = document.getElementById("ai-status");
+      if (st) st.textContent = `AI: ${this.aiMode}`;
     });
+
+    document.getElementById("btn-init-ai")?.addEventListener("click", () => {
+      const st = document.getElementById("ai-status");
+      if (typeof Worker === "undefined") return;
+      if (st)
+        st.textContent = "AI: Downloading ONNX models to browser cache...";
+      this.aiWorker = new Worker("./dist/ai-worker.js", { type: "module" });
+      this.aiWorker.onmessage = (
+        ev: MessageEvent<{
+          ok: boolean;
+          type?: string;
+          backend?: string;
+          error?: string;
+        }>,
+      ) => {
+        if (ev.data.type === "INIT") {
+          this.aiReady = ev.data.ok;
+          if (ev.data.ok) {
+            this.aiMode = "WEBGPU_LOCAL";
+            const sel = document.getElementById(
+              "ai-mode",
+            ) as HTMLSelectElement | null;
+            if (sel) sel.value = "WEBGPU_LOCAL";
+            if (st)
+              st.textContent = `AI: READY (${ev.data.backend?.toUpperCase() ?? "WASM"})`;
+          } else if (st) {
+            st.textContent = `AI Error: ${ev.data.error ?? "failed"}`;
+          }
+        }
+      };
+      this.aiWorker.postMessage({ type: "INIT", id: Date.now() });
+    });
+
+    document
+      .getElementById("btn-parse-news")
+      ?.addEventListener("click", async () => {
+        const titleEl = document.getElementById(
+          "custom-news-input",
+        ) as HTMLInputElement;
+        const priorEl = document.getElementById(
+          "custom-news-prior",
+        ) as HTMLInputElement;
+        const text = titleEl.value.trim();
+        if (!text) return;
+
+        const prior = Number(priorEl.value || 0.7);
+        const ev = this.newsLinker.analyzeNews(this.graph, {
+          id: `manual_${Date.now()}`,
+          title: text,
+          source: "Reuters",
+          marketPriorPositiveProb: prior,
+        });
+
+        // Enhance with Mode 2 (WebGPU/WASM) or Mode 1 (Ollama/OpenAI) if enabled
+        if (this.aiMode === "WEBGPU_LOCAL" && this.aiWorker && this.aiReady) {
+          const aiRes = await this.analyzeWithBrowserWorker(text);
+          if (aiRes) {
+            ev.sentiment = aiRes.sentiment;
+            ev.category = aiRes.category;
+            ev.surpriseScore = Number(
+              Math.max(
+                -1,
+                Math.min(1, aiRes.sentiment - (prior - 0.5) * 1.3),
+              ).toFixed(2),
+            );
+          }
+        } else if (this.aiMode === "OLLAMA_OPENAI") {
+          const endpoint = (
+            document.getElementById("ai-endpoint") as HTMLInputElement
+          )?.value;
+          const aiRes = await analyzeWithOpenAICompatible(text, {
+            mode: "OLLAMA_OPENAI",
+            endpointUrl: endpoint,
+          });
+          if (aiRes) {
+            ev.sentiment = aiRes.sentiment;
+            ev.category = aiRes.category;
+            ev.surpriseScore = Number(
+              Math.max(
+                -1,
+                Math.min(1, aiRes.sentiment - (prior - 0.5) * 1.3),
+              ).toFixed(2),
+            );
+          }
+        }
+
+        this.expander.discoverFromHeadline(this.graph, text, ev.matchedNodes);
+        this.newsFeed.unshift(ev);
+        this.newsLinker.proposeHypothesesFromNews(this.graph, ev);
+
+        const sim = this.simulator.simulateFromNews(
+          this.graph,
+          ev,
+          this.fragilityMap,
+          this.currentRegime,
+        );
+        if (sim) {
+          this.activeSim = sim;
+          this.canvasRenderer?.setSimulation(sim);
+          this.recordSimPrediction(sim);
+        }
+        this.canvasRenderer?.setData(
+          this.graph.getAllNodes(),
+          this.graph.getActiveEdges(),
+        );
+        void idbStore.saveGraphSnapshot(this.graph.exportSnapshot());
+        void idbStore.saveNews(this.newsFeed);
+        titleEl.value = "";
+        this.renderAll();
+      });
 
     document
       .getElementById("btn-send-tg")
@@ -515,10 +633,45 @@ class MalCryptoApp {
       });
   }
 
+  private analyzeWithBrowserWorker(
+    text: string,
+  ): Promise<{ sentiment: number; category: NewsEvent["category"] } | null> {
+    if (!this.aiWorker || !this.aiReady) return Promise.resolve(null);
+    return new Promise((resolve) => {
+      const reqId = Date.now();
+      const timer = setTimeout(() => resolve(null), 8000);
+      const handler = (
+        ev: MessageEvent<{
+          id: number;
+          ok: boolean;
+          type?: string;
+          sentiment?: number;
+          category?: NewsEvent["category"];
+        }>,
+      ) => {
+        if (ev.data.id === reqId && ev.data.type === "ANALYZE") {
+          clearTimeout(timer);
+          this.aiWorker?.removeEventListener("message", handler);
+          if (ev.data.ok && ev.data.sentiment !== undefined) {
+            resolve({
+              sentiment: ev.data.sentiment,
+              category: ev.data.category ?? "NARRATIVE",
+            });
+          } else {
+            resolve(null);
+          }
+        }
+      };
+      this.aiWorker!.addEventListener("message", handler);
+      this.aiWorker!.postMessage({ type: "ANALYZE", id: reqId, text });
+    });
+  }
+
   private recordSimPrediction(sim: SimulationResult): void {
     const cascade = sim.scenarios.find((s) => s.name === "CASCADE_CRASH");
     const btcNode = sim.affectedNodes.find((n) => n.nodeId === "CRYPTO_BTC");
     if (!cascade || !btcNode) return;
+    const liveBtcPrice = this.graph.getNode("CRYPTO_BTC")?.price;
     this.calibration.recordPrediction({
       id: `pred_${sim.id}`,
       createdAt: sim.timestamp,
@@ -528,6 +681,7 @@ class MalCryptoApp {
       predictedMovePct: btcNode.expectedMovePct,
       horizonHours: 12,
       thresholdPct: sim.shockPct < 0 ? -4 : 4,
+      baselinePrice: liveBtcPrice,
     });
     void idbStore.savePredictions(this.calibration.getRecords());
   }

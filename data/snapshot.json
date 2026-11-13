@@ -1,0 +1,1212 @@
+{
+  "version": 1,
+  "exportedAt": 1794563113154,
+  "nodes": [
+    {
+      "id": "ACTOR_HUANG",
+      "label": "Jensen Huang",
+      "tier": "ACTOR",
+      "sector": "AI / Semiconductors",
+      "aliases": [
+        "jensen huang",
+        "huang",
+        "nvidia ceo",
+        "хуанг",
+        "дженсен хуанг"
+      ],
+      "systemicWeight": 0.94,
+      "description": "CEO of NVIDIA; single-sentence guidance shifts global AI capex, NASDAQ, and AI-crypto beta."
+    },
+    {
+      "id": "ACTOR_POWELL",
+      "label": "Jerome Powell (Fed)",
+      "tier": "ACTOR",
+      "sector": "Central Bank",
+      "aliases": [
+        "jerome powell",
+        "powell",
+        "fomc",
+        "federal reserve",
+        "fed",
+        "пауэлл",
+        "фрс"
+      ],
+      "systemicWeight": 0.98,
+      "description": "Chair of the Federal Reserve; controls USD liquidity, yields (US10Y), and global risk appetite."
+    },
+    {
+      "id": "ACTOR_SEC",
+      "label": "US SEC / CFTC",
+      "tier": "ACTOR",
+      "sector": "Regulator",
+      "aliases": [
+        "sec",
+        "cftc",
+        "gensler",
+        "atkins",
+        "regulatory",
+        "lawsuit",
+        "etf approval"
+      ],
+      "systemicWeight": 0.88,
+      "description": "Primary US securities/derivatives enforcement affecting exchanges, ETFs, and token classification."
+    },
+    {
+      "id": "ACTOR_BLACKROCK",
+      "label": "BlackRock (IBIT/ETHA)",
+      "tier": "ACTOR",
+      "sector": "Asset Manager",
+      "aliases": [
+        "blackrock",
+        "ibit",
+        "larry fink",
+        "etha",
+        "блэкрок"
+      ],
+      "systemicWeight": 0.92,
+      "description": "Largest spot BTC/ETH ETF issuer; institutional inflow/outflow gatekeeper."
+    },
+    {
+      "id": "ACTOR_TETHER",
+      "label": "Tether Treasury",
+      "tier": "ACTOR",
+      "sector": "Stablecoin Issuer",
+      "aliases": [
+        "tether",
+        "paolo ardoino",
+        "usdt treasury",
+        "minted usdt"
+      ],
+      "systemicWeight": 0.95,
+      "description": "Issues dominant crypto settlement liquidity (USDT); holds >$100B US Treasuries."
+    },
+    {
+      "id": "ACTOR_WINTERMUTE",
+      "label": "Wintermute / Tier-1 MM",
+      "tier": "ACTOR",
+      "sector": "Market Maker",
+      "aliases": [
+        "wintermute",
+        "jump trading",
+        "cumberland",
+        "market maker"
+      ],
+      "systemicWeight": 0.82,
+      "description": "Major cross-venue liquidity provider; withdrawal of quotes causes instant orderbook air-pockets."
+    },
+    {
+      "id": "ACTOR_SAYLOR",
+      "label": "MicroStrategy (Strategy)",
+      "tier": "ACTOR",
+      "sector": "Corporate Treasury",
+      "aliases": [
+        "microstrategy",
+        "saylor",
+        "michael saylor",
+        "mstr",
+        "сейлор"
+      ],
+      "systemicWeight": 0.84,
+      "description": "Leveraged corporate BTC accumulator; convertible debt + equity reflexivity."
+    },
+    {
+      "id": "EQ_NVDA",
+      "label": "NVIDIA (NVDA)",
+      "ticker": "NVDA",
+      "tier": "MACRO_EQUITY",
+      "sector": "Semiconductors / AI",
+      "aliases": [
+        "nvda",
+        "nvidia",
+        "нвидиа"
+      ],
+      "systemicWeight": 0.96,
+      "description": "Bellwether of global AI capex cycle and risk-on equity momentum.",
+      "price": 169.39,
+      "change24hPct": 1.93
+    },
+    {
+      "id": "EQ_TSMC",
+      "label": "TSMC (TSM)",
+      "ticker": "TSM",
+      "tier": "MACRO_EQUITY",
+      "sector": "Foundry",
+      "aliases": [
+        "tsmc",
+        "tsm",
+        "taiwan semiconductor"
+      ],
+      "systemicWeight": 0.85,
+      "description": "Sole leading-edge fab for NVIDIA, Apple, and AMD GPUs.",
+      "price": 408.5,
+      "change24hPct": 0.74
+    },
+    {
+      "id": "EQ_AMD",
+      "label": "AMD",
+      "ticker": "AMD",
+      "tier": "MACRO_EQUITY",
+      "sector": "Semiconductors",
+      "aliases": [
+        "amd",
+        "advanced micro devices"
+      ],
+      "systemicWeight": 0.76,
+      "price": 571.45,
+      "change24hPct": -2.37
+    },
+    {
+      "id": "EQ_QQQ",
+      "label": "NASDAQ-100 (QQQ)",
+      "ticker": "QQQ",
+      "tier": "MACRO_EQUITY",
+      "sector": "Tech Index",
+      "aliases": [
+        "qqq",
+        "nasdaq",
+        "ndx",
+        "nasdaq 100",
+        "наздак"
+      ],
+      "systemicWeight": 0.95,
+      "description": "Primary TradFi risk-on benchmark tightly coupled to BTC during macro regimes."
+    },
+    {
+      "id": "EQ_MSTR",
+      "label": "MSTR Equity",
+      "ticker": "MSTR",
+      "tier": "MACRO_EQUITY",
+      "sector": "BTC Proxy",
+      "aliases": [
+        "mstr",
+        "microstrategy stock"
+      ],
+      "systemicWeight": 0.8,
+      "price": 112.38,
+      "change24hPct": -1.77
+    },
+    {
+      "id": "EQ_COIN",
+      "label": "Coinbase (COIN)",
+      "ticker": "COIN",
+      "tier": "MACRO_EQUITY",
+      "sector": "Crypto Equity",
+      "aliases": [
+        "coinbase",
+        "coin stock",
+        "brian armstrong"
+      ],
+      "systemicWeight": 0.82,
+      "price": 127.43,
+      "change24hPct": -2.48
+    },
+    {
+      "id": "MACRO_DXY",
+      "label": "US Dollar Index (DXY)",
+      "ticker": "DXY",
+      "tier": "MACRO_EQUITY",
+      "sector": "FX / Liquidity",
+      "aliases": [
+        "dxy",
+        "dollar index",
+        "usd strength"
+      ],
+      "systemicWeight": 0.93,
+      "description": "Inverse liquidity gauge: sharp DXY spikes compress global risk assets.",
+      "price": 91.12
+    },
+    {
+      "id": "MACRO_US10Y",
+      "label": "US 10Y Treasury Yield",
+      "ticker": "US10Y",
+      "tier": "MACRO_EQUITY",
+      "sector": "Rates",
+      "aliases": [
+        "us10y",
+        "10y yield",
+        "treasury yield",
+        "bond yields",
+        "cpi",
+        "inflation"
+      ],
+      "systemicWeight": 0.94
+    },
+    {
+      "id": "MACRO_VIX",
+      "label": "CBOE VIX",
+      "ticker": "VIX",
+      "tier": "MACRO_EQUITY",
+      "sector": "Volatility",
+      "aliases": [
+        "vix",
+        "volatility index",
+        "fear index"
+      ],
+      "systemicWeight": 0.9
+    },
+    {
+      "id": "INFRA_USDT",
+      "label": "Tether (USDT)",
+      "ticker": "USDT",
+      "tier": "INFRA_STABLE",
+      "sector": "Stablecoin",
+      "aliases": [
+        "usdt",
+        "tether"
+      ],
+      "systemicWeight": 0.96,
+      "price": 0.99897
+    },
+    {
+      "id": "INFRA_USDC",
+      "label": "Circle (USDC)",
+      "ticker": "USDC",
+      "tier": "INFRA_STABLE",
+      "sector": "Stablecoin",
+      "aliases": [
+        "usdc",
+        "circle"
+      ],
+      "systemicWeight": 0.89,
+      "price": 0.9997691759999999
+    },
+    {
+      "id": "INFRA_BINANCE",
+      "label": "Binance",
+      "tier": "INFRA_STABLE",
+      "sector": "CEX",
+      "aliases": [
+        "binance",
+        "cz",
+        "richard teng",
+        "бинанс"
+      ],
+      "systemicWeight": 0.95
+    },
+    {
+      "id": "INFRA_BYBIT",
+      "label": "Bybit",
+      "tier": "INFRA_STABLE",
+      "sector": "CEX",
+      "aliases": [
+        "bybit",
+        "байбит"
+      ],
+      "systemicWeight": 0.86
+    },
+    {
+      "id": "INFRA_AAVE",
+      "label": "Aave Protocol",
+      "ticker": "AAVE",
+      "tier": "INFRA_STABLE",
+      "sector": "DeFi Lending",
+      "aliases": [
+        "aave",
+        "defi lending",
+        "liquidation cascade"
+      ],
+      "systemicWeight": 0.82
+    },
+    {
+      "id": "CRYPTO_BTC",
+      "label": "Bitcoin (BTC)",
+      "ticker": "BTC",
+      "tier": "CRYPTO_ASSET",
+      "sector": "Layer 1 / Macro",
+      "aliases": [
+        "btc",
+        "bitcoin",
+        "биткоин",
+        "биток"
+      ],
+      "systemicWeight": 0.99,
+      "price": 69055.84,
+      "change24hPct": -5.923,
+      "fragilityScore": 58
+    },
+    {
+      "id": "CRYPTO_ETH",
+      "label": "Ethereum (ETH)",
+      "ticker": "ETH",
+      "tier": "CRYPTO_ASSET",
+      "sector": "Layer 1",
+      "aliases": [
+        "eth",
+        "ethereum",
+        "эфир"
+      ],
+      "systemicWeight": 0.92,
+      "price": 1940,
+      "change24hPct": -5.152,
+      "fragilityScore": 57
+    },
+    {
+      "id": "CRYPTO_SOL",
+      "label": "Solana (SOL)",
+      "ticker": "SOL",
+      "tier": "CRYPTO_ASSET",
+      "sector": "Layer 1",
+      "aliases": [
+        "sol",
+        "solana",
+        "солана"
+      ],
+      "systemicWeight": 0.86,
+      "price": 79.92,
+      "change24hPct": -3.769,
+      "fragilityScore": 61
+    },
+    {
+      "id": "CRYPTO_RENDER",
+      "label": "Render (RENDER)",
+      "ticker": "RENDER",
+      "tier": "CRYPTO_ASSET",
+      "sector": "AI Compute",
+      "aliases": [
+        "render",
+        "rndr"
+      ],
+      "systemicWeight": 0.68,
+      "price": 1.505,
+      "change24hPct": -0.66,
+      "fragilityScore": 27
+    },
+    {
+      "id": "CRYPTO_TAO",
+      "label": "Bittensor (TAO)",
+      "ticker": "TAO",
+      "tier": "CRYPTO_ASSET",
+      "sector": "AI Compute",
+      "aliases": [
+        "tao",
+        "bittensor"
+      ],
+      "systemicWeight": 0.72,
+      "price": 210.7,
+      "change24hPct": -1.588,
+      "fragilityScore": 37
+    },
+    {
+      "id": "CRYPTO_FET",
+      "label": "ASI / Fetch (FET)",
+      "ticker": "FET",
+      "tier": "CRYPTO_ASSET",
+      "sector": "AI Agents",
+      "aliases": [
+        "fet",
+        "fetch.ai",
+        "asi"
+      ],
+      "systemicWeight": 0.66,
+      "price": 0.1468,
+      "change24hPct": -0.204
+    },
+    {
+      "id": "CRYPTO_LINK",
+      "label": "Chainlink (LINK)",
+      "ticker": "LINK",
+      "tier": "CRYPTO_ASSET",
+      "sector": "Oracles",
+      "aliases": [
+        "link",
+        "chainlink"
+      ],
+      "systemicWeight": 0.74,
+      "price": 9.916,
+      "change24hPct": -1.763
+    },
+    {
+      "id": "NAR_AI_COMPUTE",
+      "label": "AI Compute Narrative",
+      "tier": "NARRATIVE",
+      "sector": "Thematic",
+      "aliases": [
+        "ai tokens",
+        "ai compute",
+        "gpu",
+        "deepseek",
+        "openai",
+        "ии"
+      ],
+      "systemicWeight": 0.78
+    },
+    {
+      "id": "NAR_SPOT_ETF",
+      "label": "Institutional ETF Flows",
+      "tier": "NARRATIVE",
+      "sector": "Thematic",
+      "aliases": [
+        "spot etf",
+        "etf inflow",
+        "etf outflow"
+      ],
+      "systemicWeight": 0.85
+    },
+    {
+      "id": "PROTO_BINANCE_CEX",
+      "label": "Binance CEX (BNB)",
+      "ticker": "BNB",
+      "tier": "INFRA_STABLE",
+      "sector": "CEX",
+      "aliases": [
+        "binance cex",
+        "bnb"
+      ],
+      "systemicWeight": 0.86,
+      "description": "DeFiLlama TVL: $118.51B (CEX)"
+    },
+    {
+      "id": "PROTO_OKX",
+      "label": "OKX (OKB)",
+      "ticker": "OKB",
+      "tier": "INFRA_STABLE",
+      "sector": "CEX",
+      "aliases": [
+        "okx",
+        "okb"
+      ],
+      "systemicWeight": 0.76,
+      "description": "DeFiLlama TVL: $26.38B (CEX)"
+    },
+    {
+      "id": "PROTO_LIDO",
+      "label": "Lido (LDO)",
+      "ticker": "LDO",
+      "tier": "INFRA_STABLE",
+      "sector": "Liquid Staking",
+      "aliases": [
+        "lido",
+        "ldo"
+      ],
+      "systemicWeight": 0.74,
+      "description": "DeFiLlama TVL: $18.98B (Liquid Staking)"
+    },
+    {
+      "id": "PROTO_LAYERZERO_V2",
+      "label": "LayerZero V2 (ZRO)",
+      "ticker": "ZRO",
+      "tier": "INFRA_STABLE",
+      "sector": "Bridge",
+      "aliases": [
+        "layerzero v2",
+        "zro"
+      ],
+      "systemicWeight": 0.73,
+      "description": "DeFiLlama TVL: $17.11B (Bridge)"
+    },
+    {
+      "id": "PROTO_BITFINEX",
+      "label": "Bitfinex",
+      "tier": "INFRA_STABLE",
+      "sector": "CEX",
+      "aliases": [
+        "bitfinex"
+      ],
+      "systemicWeight": 0.72,
+      "description": "DeFiLlama TVL: $13.40B (CEX)"
+    },
+    {
+      "id": "PROTO_ROBINHOOD",
+      "label": "Robinhood",
+      "tier": "INFRA_STABLE",
+      "sector": "CEX",
+      "aliases": [
+        "robinhood"
+      ],
+      "systemicWeight": 0.71,
+      "description": "DeFiLlama TVL: $12.30B (CEX)"
+    }
+  ],
+  "edges": [
+    {
+      "id": "ACTOR_HUANG__KEY_PERSON__EQ_NVDA",
+      "source": "ACTOR_HUANG",
+      "target": "EQ_NVDA",
+      "relation": "KEY_PERSON",
+      "weight": 0.92,
+      "stressWeight": 0.98,
+      "lagMinutes": 2,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "CEO guidance & keynote remarks"
+    },
+    {
+      "id": "EQ_TSMC__SUPPLY_CHAIN__EQ_NVDA",
+      "source": "EQ_TSMC",
+      "target": "EQ_NVDA",
+      "relation": "SUPPLY_CHAIN",
+      "weight": 0.7,
+      "stressWeight": 0.88,
+      "lagMinutes": 15,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "CoWoS / wafer capacity bottleneck"
+    },
+    {
+      "id": "EQ_NVDA__SUPPLY_CHAIN__EQ_TSMC",
+      "source": "EQ_NVDA",
+      "target": "EQ_TSMC",
+      "relation": "SUPPLY_CHAIN",
+      "weight": 0.68,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Demand read-through"
+    },
+    {
+      "id": "EQ_NVDA__MACRO_BETA__EQ_AMD",
+      "source": "EQ_NVDA",
+      "target": "EQ_AMD",
+      "relation": "MACRO_BETA",
+      "weight": 0.78,
+      "stressWeight": 0.92,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "AI GPU sector sympathy"
+    },
+    {
+      "id": "EQ_NVDA__MACRO_BETA__EQ_QQQ",
+      "source": "EQ_NVDA",
+      "target": "EQ_QQQ",
+      "relation": "MACRO_BETA",
+      "weight": 0.55,
+      "stressWeight": 0.82,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Top index weight & AI sentiment"
+    },
+    {
+      "id": "EQ_NVDA__NARRATIVE_PROXY__NAR_AI_COMPUTE",
+      "source": "EQ_NVDA",
+      "target": "NAR_AI_COMPUTE",
+      "relation": "NARRATIVE_PROXY",
+      "weight": 0.85,
+      "stressWeight": 0.96,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Direct AI valuation anchor"
+    },
+    {
+      "id": "NAR_AI_COMPUTE__NARRATIVE_PROXY__CRYPTO_RENDER",
+      "source": "NAR_AI_COMPUTE",
+      "target": "CRYPTO_RENDER",
+      "relation": "NARRATIVE_PROXY",
+      "weight": 0.82,
+      "stressWeight": 0.95,
+      "lagMinutes": 15,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Decentralized GPU proxy"
+    },
+    {
+      "id": "NAR_AI_COMPUTE__NARRATIVE_PROXY__CRYPTO_TAO",
+      "source": "NAR_AI_COMPUTE",
+      "target": "CRYPTO_TAO",
+      "relation": "NARRATIVE_PROXY",
+      "weight": 0.8,
+      "stressWeight": 0.94,
+      "lagMinutes": 15,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Decentralized AI network"
+    },
+    {
+      "id": "NAR_AI_COMPUTE__NARRATIVE_PROXY__CRYPTO_FET",
+      "source": "NAR_AI_COMPUTE",
+      "target": "CRYPTO_FET",
+      "relation": "NARRATIVE_PROXY",
+      "weight": 0.78,
+      "stressWeight": 0.92,
+      "lagMinutes": 15,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "AI agent narrative beta"
+    },
+    {
+      "id": "ACTOR_POWELL__REGULATES__MACRO_US10Y",
+      "source": "ACTOR_POWELL",
+      "target": "MACRO_US10Y",
+      "relation": "REGULATES",
+      "weight": 0.9,
+      "stressWeight": 0.96,
+      "lagMinutes": 2,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "FOMC rate path & dot plot"
+    },
+    {
+      "id": "ACTOR_POWELL__REGULATES__MACRO_DXY",
+      "source": "ACTOR_POWELL",
+      "target": "MACRO_DXY",
+      "relation": "REGULATES",
+      "weight": 0.84,
+      "stressWeight": 0.92,
+      "lagMinutes": 3,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Hawkishness strengthens USD"
+    },
+    {
+      "id": "MACRO_US10Y__MACRO_BETA__EQ_QQQ",
+      "source": "MACRO_US10Y",
+      "target": "EQ_QQQ",
+      "relation": "MACRO_BETA",
+      "weight": 0.68,
+      "stressWeight": 0.86,
+      "lagMinutes": 10,
+      "polarity": -1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Higher discount rate compresses tech multiples"
+    },
+    {
+      "id": "MACRO_DXY__MACRO_BETA__CRYPTO_BTC",
+      "source": "MACRO_DXY",
+      "target": "CRYPTO_BTC",
+      "relation": "MACRO_BETA",
+      "weight": 0.62,
+      "stressWeight": 0.85,
+      "lagMinutes": 20,
+      "polarity": -1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Global dollar liquidity inverse beta"
+    },
+    {
+      "id": "MACRO_VIX__MACRO_BETA__EQ_QQQ",
+      "source": "MACRO_VIX",
+      "target": "EQ_QQQ",
+      "relation": "MACRO_BETA",
+      "weight": 0.75,
+      "stressWeight": 0.92,
+      "lagMinutes": 5,
+      "polarity": -1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Volatility spike triggers systematic de-risking"
+    },
+    {
+      "id": "MACRO_VIX__MACRO_BETA__CRYPTO_BTC",
+      "source": "MACRO_VIX",
+      "target": "CRYPTO_BTC",
+      "relation": "MACRO_BETA",
+      "weight": 0.58,
+      "stressWeight": 0.86,
+      "lagMinutes": 15,
+      "polarity": -1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Risk-off margin calls"
+    },
+    {
+      "id": "EQ_QQQ__MACRO_BETA__CRYPTO_BTC",
+      "source": "EQ_QQQ",
+      "target": "CRYPTO_BTC",
+      "relation": "MACRO_BETA",
+      "weight": 0.58,
+      "stressWeight": 0.88,
+      "lagMinutes": 15,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "High-beta tech liquidity correlation"
+    },
+    {
+      "id": "ACTOR_BLACKROCK__LIQUIDITY_BACKBONE__NAR_SPOT_ETF",
+      "source": "ACTOR_BLACKROCK",
+      "target": "NAR_SPOT_ETF",
+      "relation": "LIQUIDITY_BACKBONE",
+      "weight": 0.9,
+      "stressWeight": 0.95,
+      "lagMinutes": 30,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "IBIT primary flow driver"
+    },
+    {
+      "id": "NAR_SPOT_ETF__LIQUIDITY_BACKBONE__CRYPTO_BTC",
+      "source": "NAR_SPOT_ETF",
+      "target": "CRYPTO_BTC",
+      "relation": "LIQUIDITY_BACKBONE",
+      "weight": 0.78,
+      "stressWeight": 0.9,
+      "lagMinutes": 30,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Daily spot absorption / outflow"
+    },
+    {
+      "id": "ACTOR_SAYLOR__KEY_PERSON__EQ_MSTR",
+      "source": "ACTOR_SAYLOR",
+      "target": "EQ_MSTR",
+      "relation": "KEY_PERSON",
+      "weight": 0.92,
+      "stressWeight": 0.96,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "ATM equity & convertible issuance"
+    },
+    {
+      "id": "EQ_MSTR__NARRATIVE_PROXY__CRYPTO_BTC",
+      "source": "EQ_MSTR",
+      "target": "CRYPTO_BTC",
+      "relation": "NARRATIVE_PROXY",
+      "weight": 0.52,
+      "stressWeight": 0.78,
+      "lagMinutes": 15,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Leveraged BTC proxy sentiment"
+    },
+    {
+      "id": "CRYPTO_BTC__MACRO_BETA__EQ_MSTR",
+      "source": "CRYPTO_BTC",
+      "target": "EQ_MSTR",
+      "relation": "MACRO_BETA",
+      "weight": 0.88,
+      "stressWeight": 0.96,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "NAV reflexivity"
+    },
+    {
+      "id": "CRYPTO_BTC__MACRO_BETA__EQ_COIN",
+      "source": "CRYPTO_BTC",
+      "target": "EQ_COIN",
+      "relation": "MACRO_BETA",
+      "weight": 0.78,
+      "stressWeight": 0.9,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Trading volume & custody beta"
+    },
+    {
+      "id": "ACTOR_SEC__REGULATES__EQ_COIN",
+      "source": "ACTOR_SEC",
+      "target": "EQ_COIN",
+      "relation": "REGULATES",
+      "weight": 0.85,
+      "stressWeight": 0.95,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Enforcement / ETF rulings"
+    },
+    {
+      "id": "ACTOR_SEC__REGULATES__INFRA_BINANCE",
+      "source": "ACTOR_SEC",
+      "target": "INFRA_BINANCE",
+      "relation": "REGULATES",
+      "weight": 0.74,
+      "stressWeight": 0.88,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "US regulatory overhang"
+    },
+    {
+      "id": "ACTOR_SEC__REGULATES__NAR_SPOT_ETF",
+      "source": "ACTOR_SEC",
+      "target": "NAR_SPOT_ETF",
+      "relation": "REGULATES",
+      "weight": 0.88,
+      "stressWeight": 0.94,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "ETF approval/delay authority"
+    },
+    {
+      "id": "ACTOR_TETHER__CUSTODY_RESERVE__INFRA_USDT",
+      "source": "ACTOR_TETHER",
+      "target": "INFRA_USDT",
+      "relation": "CUSTODY_RESERVE",
+      "weight": 0.95,
+      "stressWeight": 0.99,
+      "lagMinutes": 2,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Peg & reserve backing"
+    },
+    {
+      "id": "INFRA_USDT__LIQUIDITY_BACKBONE__INFRA_BINANCE",
+      "source": "INFRA_USDT",
+      "target": "INFRA_BINANCE",
+      "relation": "LIQUIDITY_BACKBONE",
+      "weight": 0.86,
+      "stressWeight": 0.96,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Primary quote currency"
+    },
+    {
+      "id": "INFRA_USDT__LIQUIDITY_BACKBONE__CRYPTO_BTC",
+      "source": "INFRA_USDT",
+      "target": "CRYPTO_BTC",
+      "relation": "LIQUIDITY_BACKBONE",
+      "weight": 0.76,
+      "stressWeight": 0.95,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Depeg or mint impulse"
+    },
+    {
+      "id": "INFRA_USDC__COLLATERAL_LINK__INFRA_AAVE",
+      "source": "INFRA_USDC",
+      "target": "INFRA_AAVE",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.82,
+      "stressWeight": 0.94,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Core DeFi lending collateral"
+    },
+    {
+      "id": "INFRA_BINANCE__LIQUIDITY_BACKBONE__CRYPTO_BTC",
+      "source": "INFRA_BINANCE",
+      "target": "CRYPTO_BTC",
+      "relation": "LIQUIDITY_BACKBONE",
+      "weight": 0.8,
+      "stressWeight": 0.94,
+      "lagMinutes": 2,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Largest perp & spot price discovery"
+    },
+    {
+      "id": "INFRA_BYBIT__LIQUIDITY_BACKBONE__CRYPTO_BTC",
+      "source": "INFRA_BYBIT",
+      "target": "CRYPTO_BTC",
+      "relation": "LIQUIDITY_BACKBONE",
+      "weight": 0.68,
+      "stressWeight": 0.86,
+      "lagMinutes": 2,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Major perp OI venue"
+    },
+    {
+      "id": "ACTOR_WINTERMUTE__MARKET_MAKER__INFRA_BINANCE",
+      "source": "ACTOR_WINTERMUTE",
+      "target": "INFRA_BINANCE",
+      "relation": "MARKET_MAKER",
+      "weight": 0.66,
+      "stressWeight": 0.88,
+      "lagMinutes": 2,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Depth & spread stability"
+    },
+    {
+      "id": "ACTOR_WINTERMUTE__MARKET_MAKER__CRYPTO_SOL",
+      "source": "ACTOR_WINTERMUTE",
+      "target": "CRYPTO_SOL",
+      "relation": "MARKET_MAKER",
+      "weight": 0.64,
+      "stressWeight": 0.86,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Altcoin liquidity depth"
+    },
+    {
+      "id": "CRYPTO_BTC__MACRO_BETA__CRYPTO_ETH",
+      "source": "CRYPTO_BTC",
+      "target": "CRYPTO_ETH",
+      "relation": "MACRO_BETA",
+      "weight": 0.86,
+      "stressWeight": 0.96,
+      "lagMinutes": 3,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Dominant crypto beta"
+    },
+    {
+      "id": "CRYPTO_BTC__MACRO_BETA__CRYPTO_SOL",
+      "source": "CRYPTO_BTC",
+      "target": "CRYPTO_SOL",
+      "relation": "MACRO_BETA",
+      "weight": 0.82,
+      "stressWeight": 0.95,
+      "lagMinutes": 3,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "High-beta L1"
+    },
+    {
+      "id": "CRYPTO_BTC__MACRO_BETA__CRYPTO_RENDER",
+      "source": "CRYPTO_BTC",
+      "target": "CRYPTO_RENDER",
+      "relation": "MACRO_BETA",
+      "weight": 0.74,
+      "stressWeight": 0.92,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Altcoin liquidity beta"
+    },
+    {
+      "id": "CRYPTO_BTC__MACRO_BETA__CRYPTO_TAO",
+      "source": "CRYPTO_BTC",
+      "target": "CRYPTO_TAO",
+      "relation": "MACRO_BETA",
+      "weight": 0.74,
+      "stressWeight": 0.92,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Altcoin liquidity beta"
+    },
+    {
+      "id": "CRYPTO_BTC__MACRO_BETA__CRYPTO_FET",
+      "source": "CRYPTO_BTC",
+      "target": "CRYPTO_FET",
+      "relation": "MACRO_BETA",
+      "weight": 0.75,
+      "stressWeight": 0.92,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "Altcoin liquidity beta"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__INFRA_AAVE",
+      "source": "CRYPTO_ETH",
+      "target": "INFRA_AAVE",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.84,
+      "stressWeight": 0.95,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "ETH collateral health factor"
+    },
+    {
+      "id": "CRYPTO_ETH__MACRO_BETA__CRYPTO_LINK",
+      "source": "CRYPTO_ETH",
+      "target": "CRYPTO_LINK",
+      "relation": "MACRO_BETA",
+      "weight": 0.78,
+      "stressWeight": 0.9,
+      "lagMinutes": 5,
+      "polarity": 1,
+      "confidence": 0.88,
+      "origin": "SKELETON",
+      "validFrom": 1704067200000,
+      "validTo": null,
+      "evidence": "DeFi ecosystem beta"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_BINANCE_CEX",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_BINANCE_CEX",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563112820,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $118.51B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_OKX",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_OKX",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563112820,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $26.38B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_LIDO",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_LIDO",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563112820,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $18.98B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_LAYERZERO_V2",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_LAYERZERO_V2",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563112820,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $17.11B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_BITFINEX",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_BITFINEX",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563112820,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $13.40B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_ROBINHOOD",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_ROBINHOOD",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563112820,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $12.30B"
+    }
+  ]
+}
