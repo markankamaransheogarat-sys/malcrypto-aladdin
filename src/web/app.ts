@@ -805,9 +805,9 @@ class MalCryptoApp {
       <div class="scen-card">
         <div class="scen-head"><span>${h.horizonLabel}</span><b class="${h.expectedMovePct >= 0 ? "pos" : "neg"}">${h.expectedMovePct >= 0 ? "+" : ""}${h.expectedMovePct}%</b></div>
         <div style="font-family:monospace; font-size:12px; margin:6px 0;">
-          <span class="pos">Рост: ${h.probUpPct}%</span> •
-          <span class="muted">Флэт: ${h.probRangePct}%</span> •
-          <span class="neg">Падение: ${h.probDownPct}%</span>
+          <span class="pos">Рост (&gt;+2.5%): ${h.probUpPct}%</span> •
+          <span class="muted">Флэт (±2.5%): ${h.probRangePct}%</span> •
+          <span class="neg">Падение (&lt;-2.5%): ${h.probDownPct}%</span>
         </div>
         <div class="scen-cond">Диапазон (P10..P90): <b>$${h.p10Price.toLocaleString()} — $${h.p90Price.toLocaleString()}</b> (Медиана: $${h.p50Price.toLocaleString()})</div>
       </div>`,

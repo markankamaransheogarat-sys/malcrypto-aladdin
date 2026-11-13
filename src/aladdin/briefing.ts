@@ -254,7 +254,7 @@ export class ExecutiveBriefingEngine {
     compositeScore: number,
   ): HorizonForecast {
     const tYears = hours / (365 * 24);
-    const sigmaT = (dvolPct / 100) * Math.sqrt(tYears); // e.g. 0.025 for 24h
+    const sigmaT = (dvolPct / 100) * Math.sqrt(tYears); // e.g. ~2.1% for 24h, ~3.6% for 3d, ~5.5% for 7d
     // Drift tilted by composite score
     const drift = (compositeScore / 100) * sigmaT * 0.65;
 
@@ -262,22 +262,25 @@ export class ExecutiveBriefingEngine {
     const p10Price = Math.round(price * (1 + drift - 1.2816 * sigmaT));
     const p90Price = Math.round(price * (1 + drift + 1.2816 * sigmaT));
 
-    // Probability of > +2.5% / < -2.5% move (scaled gently by horizon)
-    const moveThresh = 0.02 * Math.sqrt(hours / 24);
+    // Fixed ±2.5% directional breakout threshold so probabilities expand realistically with horizon
+    const moveThresh = 0.025;
     const zUp = (moveThresh - drift) / Math.max(0.005, sigmaT);
     const zDown = (-moveThresh - drift) / Math.max(0.005, sigmaT);
 
-    const probUp = clamp(1 - normalCdf(zUp), 0.08, 0.78);
-    const probDown = clamp(normalCdf(zDown), 0.08, 0.78);
-    const probRange = clamp(1 - probUp - probDown, 0.1, 0.75);
+    const probUp = clamp(1 - normalCdf(zUp), 0.05, 0.85);
+    const probDown = clamp(normalCdf(zDown), 0.05, 0.85);
+    const probRange = clamp(1 - probUp - probDown, 0.08, 0.85);
 
     const sum = probUp + probDown + probRange;
+    const probUpPct = Math.round((probUp / sum) * 100);
+    const probDownPct = Math.round((probDown / sum) * 100);
+    const probRangePct = 100 - probUpPct - probDownPct;
     return {
       horizonLabel,
       hours,
-      probUpPct: Math.round((probUp / sum) * 100),
-      probRangePct: Math.round((probRange / sum) * 100),
-      probDownPct: Math.round((probDown / sum) * 100),
+      probUpPct,
+      probRangePct,
+      probDownPct,
       p10Price,
       p50Price,
       p90Price,

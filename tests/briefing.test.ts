@@ -53,5 +53,7 @@ describe("Executive Briefing & Extended Players DB", () => {
       assert.equal(h.probUpPct + h.probRangePct + h.probDownPct, 100);
       assert.ok(h.p10Price < h.p50Price && h.p50Price < h.p90Price);
     }
+    // 7d breakout probability must exceed 24h breakout probability
+    assert.ok(b.horizons[2].probDownPct > b.horizons[0].probDownPct);
   });
 });
