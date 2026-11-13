@@ -1,5 +1,90 @@
 [
   {
+    "id": "rss_Federal Reserve_672757518",
+    "timestamp": 1794610429143,
+    "title": "Agencies extend comment period for proposed third-party risk management guidance",
+    "source": "Federal Reserve",
+    "category": "MACRO",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/bcreg20261113a.htm",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1001449661",
+    "timestamp": 1794607263000,
+    "title": "OpenAI launches AI payments in ChatGPT with Visa, Mastercard and Amex",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/openai-ai-payments-chatgpt-wallet-visa-mastercard-amex?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "NAR_AI_COMPUTE"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_237162042",
+    "timestamp": 1794606567000,
+    "title": "Adam Back makes case for simpler security as Blockstream launches Bitcoin custody system",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/adam-back-simpler-security-blockstream-bitcoin-custody-system?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_249571535",
+    "timestamp": 1794603699000,
+    "title": "Kraken parent Payward gains market share as slower trading weighs on earnings",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/kraken-parent-payward-gains-market-share-slower-trading-earnings?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1423210879",
+    "timestamp": 1794603200000,
+    "title": "US regulators move ahead on crypto trust charters as Senate scrutiny grows",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/us-regulators-crypto-trust-charters-senate-scrutiny-grows?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1632189605",
+    "timestamp": 1794595198000,
+    "title": "Bitcoin plunges to $68,000 as Anthropic IPO frenzy adds to market jitters",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/13/bitcoin-slides-to-usd68k-as-nvidia-turmoil-anthropic-ipo-fuel-broader-market-sell-off",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1705315143",
+    "timestamp": 1794594509000,
+    "title": "Metaplanet swings to $170M loss as Bitcoin sale hits earnings",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/metaplanet-swings-170m-loss-bitcoin-sale-earnings?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_CoinDesk_37081723",
     "timestamp": 1794589543000,
     "title": "U.S. Senate Banking Committee races toward hearing on new SEC nominations",
@@ -311,6 +396,19 @@
     ],
     "surpriseScore": -0.07,
     "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_260462387",
+    "timestamp": 1794561418000,
+    "title": "Live updates: Bitcoin eyes bear market lows as late summer rally mostly wiped out",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/13/live-news-bitcoin-drops-below-200-week-moving-average-as-dollar-strength-pressures-risk-assets",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0.58,
+    "impact": "CRITICAL"
   },
   {
     "id": "rss_Cointelegraph_1936751710",
