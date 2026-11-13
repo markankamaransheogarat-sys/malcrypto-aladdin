@@ -21,6 +21,7 @@ Institutional **Bi-Temporal Knowledge Graph (Maltego-style)** + **BlackRock Alad
 | **`⚡ CASCADE <GO>`** `[F5]` | **Interactive Stress-Test Simulator**: Simulate any trigger (e.g. `Jensen Huang / NVDA -9.5%`, `Fed`, `SEC`, `USDT depeg`) across regimes (`STRESS_CORRELATION_ONE`, `EUPHORIA_OVERLEVERAGED`, `RISK_ON_CALM`) with `P10 / P50 / P90` quantiles + Telegram Webhook Bridge. |
 | **`📊 CALIB <GO>`** `[F6]` | **Bi-Temporal Audit & Brier Calibration**: Tracks prediction accuracy via Brier Score, prunes weak news hypotheses, and exports/imports full graph snapshots. |
 | **`⏪ BACKTEST <GO>`** `[F7]` | **Bi-Temporal Historical Shock Replay**: Replays major historical crashes (`DeepSeek/NVDA`, `Yen Carry Unwind`, `SVB/USDC`, `Hawkish Fed`) with zero look-ahead bias, measuring Directional Accuracy, `P10..P90` Coverage, and Brier Score. |
+| **`💼 PORTFOLIO <GO>`** `[F8]` | **Portfolio Risk Overlay & DVOL VaR**: Maps any Aladdin contagion shock onto your custom holdings, computing `P10..P90` P&L bands, 1D Parametric `VaR 95%/99%` scaled by live **Deribit DVOL**, and actionable hedge sizing. |
 
 ---
 

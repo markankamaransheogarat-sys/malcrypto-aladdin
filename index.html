@@ -358,6 +358,9 @@
         <button class="tab-btn" data-tab="BACKTEST">
           ⏪ BACKTEST &lt;GO&gt; [F7]
         </button>
+        <button class="tab-btn" data-tab="PORTFOLIO">
+          💼 PORTFOLIO &lt;GO&gt; [F8]
+        </button>
       </div>
       <div>
         <button id="btn-refresh" class="btn-primary">⟳ Sync Live Feeds</button>
@@ -490,6 +493,33 @@
       <section id="panel-BACKTEST" class="tab-panel hidden">
         <h3>Bi-Temporal Historical Shock Replay (Zero Look-Ahead Bias)</h3>
         <div id="backtest-content"></div>
+      </section>
+
+      <section id="panel-PORTFOLIO" class="tab-panel hidden">
+        <div class="controls-row">
+          <select id="port-node">
+            <option value="CRYPTO_BTC">Bitcoin (BTC)</option>
+            <option value="CRYPTO_ETH">Ethereum (ETH)</option>
+            <option value="CRYPTO_SOL">Solana (SOL)</option>
+            <option value="CRYPTO_RENDER">Render (RENDER)</option>
+            <option value="CRYPTO_TAO">Bittensor (TAO)</option>
+            <option value="EQ_NVDA">NVIDIA (NVDA)</option>
+            <option value="EQ_MSTR">MSTR Equity</option>
+          </select>
+          <input
+            id="port-usd"
+            type="number"
+            step="1000"
+            value="10000"
+            style="width: 120px"
+            placeholder="USD"
+          />
+          <button id="btn-port-add" class="btn-primary">
+            Add / Update Position
+          </button>
+          <button id="btn-port-reset" class="btn-sec">Reset Default</button>
+        </div>
+        <div id="portfolio-content"></div>
       </section>
     </main>
 

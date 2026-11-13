@@ -385,3 +385,80 @@ export async function fetchDefiLlamaTopProtocols(
     return [];
   }
 }
+
+export async function fetchDeribitDvol(
+  currency: "BTC" | "ETH" = "BTC",
+): Promise<{ currency: "BTC" | "ETH"; dvolPct: number } | null> {
+  try {
+    const now = Date.now();
+    const url = `https://www.deribit.com/api/v2/public/get_volatility_index_data?currency=${currency}&start_timestamp=${now - 7200_000}&end_timestamp=${now}&resolution=3600`;
+    const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+    if (!res.ok) return null;
+    const json = (await res.json()) as {
+      result?: { data?: Array<[number, number, number, number, number]> };
+    };
+    const rows = json.result?.data ?? [];
+    if (rows.length === 0) return null;
+    const latestClose = rows[rows.length - 1][4];
+    if (!Number.isFinite(latestClose)) return null;
+    return { currency, dvolPct: Number(latestClose.toFixed(2)) };
+  } catch {
+    return null;
+  }
+}
+
+export interface SecFilingSummary {
+  nodeId: string;
+  ticker: string;
+  recentForm4Count30d: number;
+  latestFiling: string;
+}
+
+export async function fetchSecRecentFilings(
+  nodeId: string,
+  ticker: string,
+  cik10: string,
+): Promise<SecFilingSummary | null> {
+  try {
+    const res = await fetch(
+      `https://data.sec.gov/submissions/CIK${cik10}.json`,
+      {
+        headers: {
+          "User-Agent": "MalCryptoAladdin/1.0 (research@malcrypto.local)",
+        },
+        signal: AbortSignal.timeout(6000),
+      },
+    );
+    if (!res.ok) return null;
+    const json = (await res.json()) as {
+      filings?: {
+        recent?: {
+          form?: string[];
+          filingDate?: string[];
+        };
+      };
+    };
+    const forms = json.filings?.recent?.form ?? [];
+    const dates = json.filings?.recent?.filingDate ?? [];
+    if (forms.length === 0) return null;
+
+    const cutoffMs = Date.now() - 30 * 86400_000;
+    let form4Count = 0;
+    for (let i = 0; i < Math.min(forms.length, 40); i++) {
+      const f = forms[i];
+      const dMs = Date.parse(dates[i] ?? "");
+      if (dMs >= cutoffMs && (f === "4" || f === "4/A" || f === "144")) {
+        form4Count++;
+      }
+    }
+
+    return {
+      nodeId,
+      ticker,
+      recentForm4Count30d: form4Count,
+      latestFiling: `${forms[0]}@${dates[0]}`,
+    };
+  } catch {
+    return null;
+  }
+}

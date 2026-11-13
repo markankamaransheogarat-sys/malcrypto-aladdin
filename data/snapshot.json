@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1794563113154,
+  "exportedAt": 1794563526032,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -122,8 +122,8 @@
       ],
       "systemicWeight": 0.96,
       "description": "Bellwether of global AI capex cycle and risk-on equity momentum.",
-      "price": 169.39,
-      "change24hPct": 1.93
+      "price": 169.51,
+      "change24hPct": 2
     },
     {
       "id": "EQ_TSMC",
@@ -138,8 +138,8 @@
       ],
       "systemicWeight": 0.85,
       "description": "Sole leading-edge fab for NVIDIA, Apple, and AMD GPUs.",
-      "price": 408.5,
-      "change24hPct": 0.74
+      "price": 408,
+      "change24hPct": 0.62
     },
     {
       "id": "EQ_AMD",
@@ -152,8 +152,8 @@
         "advanced micro devices"
       ],
       "systemicWeight": 0.76,
-      "price": 571.45,
-      "change24hPct": -2.37
+      "price": 568.25,
+      "change24hPct": -2.91
     },
     {
       "id": "EQ_QQQ",
@@ -182,8 +182,8 @@
         "microstrategy stock"
       ],
       "systemicWeight": 0.8,
-      "price": 112.38,
-      "change24hPct": -1.77
+      "price": 112.21,
+      "change24hPct": -1.92
     },
     {
       "id": "EQ_COIN",
@@ -197,8 +197,8 @@
         "brian armstrong"
       ],
       "systemicWeight": 0.82,
-      "price": 127.43,
-      "change24hPct": -2.48
+      "price": 127.15,
+      "change24hPct": -2.69
     },
     {
       "id": "MACRO_DXY",
@@ -320,9 +320,9 @@
         "биток"
       ],
       "systemicWeight": 0.99,
-      "price": 69055.84,
-      "change24hPct": -5.923,
-      "fragilityScore": 58
+      "price": 68993.75,
+      "change24hPct": -6.065,
+      "fragilityScore": 57
     },
     {
       "id": "CRYPTO_ETH",
@@ -336,9 +336,9 @@
         "эфир"
       ],
       "systemicWeight": 0.92,
-      "price": 1940,
-      "change24hPct": -5.152,
-      "fragilityScore": 57
+      "price": 1938.38,
+      "change24hPct": -5.242,
+      "fragilityScore": 58
     },
     {
       "id": "CRYPTO_SOL",
@@ -352,8 +352,8 @@
         "солана"
       ],
       "systemicWeight": 0.86,
-      "price": 79.92,
-      "change24hPct": -3.769,
+      "price": 79.98,
+      "change24hPct": -3.72,
       "fragilityScore": 61
     },
     {
@@ -367,8 +367,8 @@
         "rndr"
       ],
       "systemicWeight": 0.68,
-      "price": 1.505,
-      "change24hPct": -0.66,
+      "price": 1.503,
+      "change24hPct": -0.529,
       "fragilityScore": 27
     },
     {
@@ -382,8 +382,8 @@
         "bittensor"
       ],
       "systemicWeight": 0.72,
-      "price": 210.7,
-      "change24hPct": -1.588,
+      "price": 211,
+      "change24hPct": -1.494,
       "fragilityScore": 37
     },
     {
@@ -398,8 +398,8 @@
         "asi"
       ],
       "systemicWeight": 0.66,
-      "price": 0.1468,
-      "change24hPct": -0.204
+      "price": 0.1467,
+      "change24hPct": -0.34
     },
     {
       "id": "CRYPTO_LINK",
@@ -412,8 +412,8 @@
         "chainlink"
       ],
       "systemicWeight": 0.74,
-      "price": 9.916,
-      "change24hPct": -1.763
+      "price": 9.917,
+      "change24hPct": -1.802
     },
     {
       "id": "NAR_AI_COMPUTE",
@@ -515,6 +515,78 @@
       ],
       "systemicWeight": 0.71,
       "description": "DeFiLlama TVL: $12.30B (CEX)"
+    },
+    {
+      "id": "PROTO_MORPHO_BLUE",
+      "label": "Morpho Blue (MORPHO)",
+      "ticker": "MORPHO",
+      "tier": "INFRA_STABLE",
+      "sector": "Lending",
+      "aliases": [
+        "morpho blue",
+        "morpho"
+      ],
+      "systemicWeight": 0.7,
+      "description": "DeFiLlama TVL: $10.44B (Lending)"
+    },
+    {
+      "id": "PROTO_SSV_NETWORK",
+      "label": "SSV Network (SSV)",
+      "ticker": "SSV",
+      "tier": "INFRA_STABLE",
+      "sector": "Staking Pool",
+      "aliases": [
+        "ssv network",
+        "ssv"
+      ],
+      "systemicWeight": 0.7,
+      "description": "DeFiLlama TVL: $10.17B (Staking Pool)"
+    },
+    {
+      "id": "PROTO_WBTC",
+      "label": "WBTC",
+      "tier": "INFRA_STABLE",
+      "sector": "Bridge",
+      "aliases": [
+        "wbtc"
+      ],
+      "systemicWeight": 0.69,
+      "description": "DeFiLlama TVL: $8.01B (Bridge)"
+    },
+    {
+      "id": "PROTO_BINANCE_STAKED_ETH",
+      "label": "Binance staked ETH",
+      "tier": "INFRA_STABLE",
+      "sector": "Liquid Staking",
+      "aliases": [
+        "binance staked eth"
+      ],
+      "systemicWeight": 0.68,
+      "description": "DeFiLlama TVL: $7.52B (Liquid Staking)"
+    },
+    {
+      "id": "PROTO_COINBASE_BRIDGE",
+      "label": "Coinbase Bridge",
+      "tier": "INFRA_STABLE",
+      "sector": "Bridge",
+      "aliases": [
+        "coinbase bridge"
+      ],
+      "systemicWeight": 0.68,
+      "description": "DeFiLlama TVL: $7.24B (Bridge)"
+    },
+    {
+      "id": "PROTO_HYPERLIQUID_BRIDGE",
+      "label": "Hyperliquid Bridge (HYPE)",
+      "ticker": "HYPE",
+      "tier": "INFRA_STABLE",
+      "sector": "Bridge",
+      "aliases": [
+        "hyperliquid bridge",
+        "hype"
+      ],
+      "systemicWeight": 0.67,
+      "description": "DeFiLlama TVL: $6.03B (Bridge)"
     }
   ],
   "edges": [
@@ -1207,6 +1279,96 @@
       "validFrom": 1794563112820,
       "validTo": null,
       "evidence": "DeFiLlama TVL $12.30B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_MORPHO_BLUE",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_MORPHO_BLUE",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563525712,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $10.44B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_SSV_NETWORK",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_SSV_NETWORK",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563525712,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $10.17B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_WBTC",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_WBTC",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563525712,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $8.01B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_BINANCE_STAKED_ETH",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_BINANCE_STAKED_ETH",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563525712,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $7.52B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_COINBASE_BRIDGE",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_COINBASE_BRIDGE",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563525712,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $7.24B"
+    },
+    {
+      "id": "CRYPTO_ETH__COLLATERAL_LINK__PROTO_HYPERLIQUID_BRIDGE",
+      "source": "CRYPTO_ETH",
+      "target": "PROTO_HYPERLIQUID_BRIDGE",
+      "relation": "COLLATERAL_LINK",
+      "weight": 0.65,
+      "stressWeight": 0.85,
+      "lagMinutes": 10,
+      "polarity": 1,
+      "confidence": 0.72,
+      "origin": "SKELETON",
+      "validFrom": 1794563525712,
+      "validTo": null,
+      "evidence": "DeFiLlama TVL $6.03B"
     }
   ]
 }

@@ -2,6 +2,7 @@
  * Browser IndexedDB Persistence Layer for Bi-Temporal Graph, News & Calibration
  */
 
+import type { PortfolioPosition } from "../aladdin/portfolio.js";
 import type { NewsEvent, PredictionRecord } from "../core/types.js";
 import type { GraphSnapshot } from "../graph/temporal-graph.js";
 
@@ -66,4 +67,6 @@ export const idbStore = {
   savePredictions: (preds: PredictionRecord[]) =>
     putKV("predictions", preds.slice(0, 500)),
   loadPredictions: () => getKV<PredictionRecord[]>("predictions"),
+  savePortfolio: (pos: PortfolioPosition[]) => putKV("portfolio", pos),
+  loadPortfolio: () => getKV<PortfolioPosition[]>("portfolio"),
 };

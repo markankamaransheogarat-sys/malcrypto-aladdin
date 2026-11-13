@@ -17,9 +17,11 @@ import {
   fetchBinancePerpFragilityInputs,
   fetchBinanceSpotQuotes,
   fetchDefiLlamaTopProtocols,
+  fetchDeribitDvol,
   fetchGdeltNews,
   fetchMacroFxProxy,
   fetchNasdaqEquityQuote,
+  fetchSecRecentFilings,
   fetchStablecoinPegs,
 } from "./feeds/live-feeds.js";
 import { sendTelegramCascadeAlert } from "./feeds/telegram.js";
@@ -67,21 +69,36 @@ async function runWatchdog(): Promise<void> {
     "TAOUSDT",
   ];
 
-  const [quotes, eqResults, perpResults, pegs, fx, gdelt, protocols] =
-    await Promise.all([
-      fetchBinanceSpotQuotes(),
-      Promise.all(
-        equityPairs.map(async ([id, sym]) => ({
-          id,
-          q: await fetchNasdaqEquityQuote(sym),
-        })),
-      ),
-      Promise.all(perpSymbols.map((s) => fetchBinancePerpFragilityInputs(s))),
-      fetchStablecoinPegs(),
-      fetchMacroFxProxy(),
-      fetchGdeltNews(),
-      fetchDefiLlamaTopProtocols(15),
-    ]);
+  const [
+    quotes,
+    eqResults,
+    perpResults,
+    pegs,
+    fx,
+    gdelt,
+    protocols,
+    dvolBtc,
+    secFilings,
+  ] = await Promise.all([
+    fetchBinanceSpotQuotes(),
+    Promise.all(
+      equityPairs.map(async ([id, sym]) => ({
+        id,
+        q: await fetchNasdaqEquityQuote(sym),
+      })),
+    ),
+    Promise.all(perpSymbols.map((s) => fetchBinancePerpFragilityInputs(s))),
+    fetchStablecoinPegs(),
+    fetchMacroFxProxy(),
+    fetchGdeltNews(),
+    fetchDefiLlamaTopProtocols(15),
+    fetchDeribitDvol("BTC"),
+    Promise.all([
+      fetchSecRecentFilings("EQ_NVDA", "NVDA", "0001045810"),
+      fetchSecRecentFilings("EQ_MSTR", "MSTR", "0001050446"),
+      fetchSecRecentFilings("EQ_COIN", "COIN", "0001679788"),
+    ]),
+  ]);
 
   for (const q of quotes) {
     graph.updateNodeMarketData(q.nodeId, {
@@ -209,10 +226,15 @@ async function runWatchdog(): Promise<void> {
   mkdirSync(dirname(SNAPSHOT_PATH), { recursive: true });
   writeFileSync(SNAPSHOT_PATH, JSON.stringify(graph.exportSnapshot(), null, 2));
 
+  const secSummary = secFilings
+    .filter((s): s is NonNullable<typeof s> => s !== null)
+    .map((s) => `${s.ticker}:Form4(30d)=${s.recentForm4Count30d}`)
+    .join(", ");
+
   console.log(
     `[Watchdog] Nodes=${graph.getAllNodes().length} (+${addedProtocols} proto, +${addedNewsNodes} news) | ` +
       `ActiveEdges=${graph.getActiveEdges().length} (+${syncedEdges} causal, -${pruned} pruned) | ` +
-      `Regime=${regime} | HighRiskAlerts=${highImpactSims.length}`,
+      `Regime=${regime} | DVOL=${dvolBtc?.dvolPct ?? "N/A"}% | SEC=[${secSummary || "N/A"}] | HighRiskAlerts=${highImpactSims.length}`,
   );
 }
 

@@ -4,6 +4,11 @@
 
 import { BacktestEngine, type BacktestSummary } from "../aladdin/backtest.js";
 import { computeFragilityMetrics } from "../aladdin/fragility.js";
+import {
+  DEFAULT_PORTFOLIO,
+  PortfolioRiskEngine,
+  type PortfolioPosition,
+} from "../aladdin/portfolio.js";
 import { AladdinSimulator, CalibrationTracker } from "../aladdin/simulator.js";
 import {
   analyzeWithOpenAICompatible,
@@ -25,6 +30,7 @@ import {
   fetchBinanceSpotQuotes,
   fetchDefiLlamaGlobalTvl,
   fetchDefiLlamaTopProtocols,
+  fetchDeribitDvol,
   fetchFearAndGreed,
   fetchGdeltNews,
   fetchMacroFxProxy,
@@ -46,7 +52,14 @@ import {
 import { MaltegoGraphCanvas } from "./graph-canvas.js";
 
 type TabId =
-  "GRAPH" | "RADAR" | "CAUSAL" | "WIRE" | "CASCADE" | "CALIB" | "BACKTEST";
+  | "GRAPH"
+  | "RADAR"
+  | "CAUSAL"
+  | "WIRE"
+  | "CASCADE"
+  | "CALIB"
+  | "BACKTEST"
+  | "PORTFOLIO";
 
 const SYMBOL_TO_NODE: Record<string, string> = {
   BTCUSDT: "CRYPTO_BTC",
@@ -66,6 +79,9 @@ class MalCryptoApp {
   private simulator = new AladdinSimulator();
   private calibration = new CalibrationTracker();
   private backtest = new BacktestEngine();
+  private portfolioEngine = new PortfolioRiskEngine();
+  private portfolio: PortfolioPosition[] = [...DEFAULT_PORTFOLIO];
+  private dvolBtcPct = 45;
   private backtestSummary: BacktestSummary | null = null;
   private aiWorker: Worker | null = null;
   private aiMode: AiEngineMode = "ALGORITHMIC";
@@ -117,6 +133,8 @@ class MalCryptoApp {
     if (savedPreds) {
       for (const p of savedPreds) this.calibration.recordPrediction(p);
     }
+    const savedPort = await idbStore.loadPortfolio();
+    if (savedPort && savedPort.length > 0) this.portfolio = savedPort;
 
     const canvasEl = document.getElementById(
       "graph-canvas",
@@ -298,11 +316,15 @@ class MalCryptoApp {
       await idbStore.saveNews(this.newsFeed);
     }
 
-    // Autonomous DeFiLlama top protocol discovery
-    const topProtos = await fetchDefiLlamaTopProtocols(12);
+    // Autonomous DeFiLlama top protocol discovery & Deribit DVOL
+    const [topProtos, dvol] = await Promise.all([
+      fetchDefiLlamaTopProtocols(12),
+      fetchDeribitDvol("BTC"),
+    ]);
     if (topProtos.length > 0) {
       this.expander.ingestTopProtocols(this.graph, topProtos);
     }
+    if (dvol) this.dvolBtcPct = dvol.dvolPct;
 
     await this.runOnlineCausalScan();
     this.calibration.autoResolveDuePredictions(this.graph);
@@ -438,6 +460,7 @@ class MalCryptoApp {
         F5: "CASCADE",
         F6: "CALIB",
         F7: "BACKTEST",
+        F8: "PORTFOLIO",
       };
       if (map[e.key]) {
         e.preventDefault();
@@ -631,6 +654,30 @@ class MalCryptoApp {
         a.click();
         URL.revokeObjectURL(url);
       });
+
+    document.getElementById("btn-port-add")?.addEventListener("click", () => {
+      const nodeEl = document.getElementById("port-node") as HTMLSelectElement;
+      const usdEl = document.getElementById("port-usd") as HTMLInputElement;
+      const nodeId = nodeEl.value;
+      const usd = Math.max(0, Number(usdEl.value || 0));
+      const label = nodeEl.options[nodeEl.selectedIndex]?.text ?? nodeId;
+      const idx = this.portfolio.findIndex((p) => p.nodeId === nodeId);
+      if (usd === 0 && idx >= 0) {
+        this.portfolio.splice(idx, 1);
+      } else if (idx >= 0) {
+        this.portfolio[idx] = { nodeId, label, allocationUsd: usd };
+      } else if (usd > 0) {
+        this.portfolio.push({ nodeId, label, allocationUsd: usd });
+      }
+      void idbStore.savePortfolio(this.portfolio);
+      this.renderPortfolio();
+    });
+
+    document.getElementById("btn-port-reset")?.addEventListener("click", () => {
+      this.portfolio = [...DEFAULT_PORTFOLIO];
+      void idbStore.savePortfolio(this.portfolio);
+      this.renderPortfolio();
+    });
   }
 
   private analyzeWithBrowserWorker(
@@ -713,6 +760,7 @@ class MalCryptoApp {
     this.renderCascade();
     this.renderCalib();
     this.renderBacktest();
+    this.renderPortfolio();
   }
 
   private renderHeaderMetrics(): void {
@@ -724,6 +772,7 @@ class MalCryptoApp {
     el.innerHTML = `
       <span>${this.wsConnected ? '<b class="pos">● WS</b>' : '<b class="muted">○ WS</b>'}</span>
       <span>BTC: <b>${btc?.price ? "$" + btc.price.toLocaleString(undefined, { maximumFractionDigits: 0 }) : "Syncing"}</b></span>
+      <span>DVOL: <b class="gold">${this.dvolBtcPct}%</b></span>
       <span>FRAGILITY: <b class="${btcFrag?.status === "TINDERBOX" ? "neg" : "gold"}">${btcFrag?.fragilityScore ?? "—"}/100</b></span>
       <span>5m LIQS: <b class="neg">${liqStats ? "$" + (liqStats.totalUsd / 1e3).toFixed(0) + "K" : "$0"}</b></span>
       <span>F&amp;G: <b class="cyan">${this.fearGreed ? `${this.fearGreed.value} (${this.fearGreed.classification})` : "—"}</b></span>
@@ -973,6 +1022,43 @@ class MalCryptoApp {
       </div>
       <table class="data-table">
         <thead><tr><th>Historical Shock Event</th><th>Pred BTC</th><th>Actual BTC</th><th>Crash Prob</th><th>Dir Hits</th><th>In P10..P90</th><th>MAE</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  private renderPortfolio(): void {
+    const el = document.getElementById("portfolio-content");
+    if (!el) return;
+    const rep = this.portfolioEngine.evaluateImpact(
+      this.portfolio,
+      this.activeSim,
+      this.dvolBtcPct,
+    );
+
+    const rows = rep.positions
+      .map(
+        (p) => `
+      <tr>
+        <td><b>${p.label}</b></td>
+        <td>$${p.allocationUsd.toLocaleString()}</td>
+        <td class="${p.expectedMovePct < 0 ? "neg" : "pos"}">${p.expectedMovePct > 0 ? "+" : ""}${p.expectedMovePct}%</td>
+        <td class="${p.expectedPnlUsd < 0 ? "neg" : "pos"}"><b>${p.expectedPnlUsd >= 0 ? "+" : ""}$${p.expectedPnlUsd.toLocaleString()}</b></td>
+        <td class="muted">$${p.p10PnlUsd.toLocaleString()} .. $${p.p90PnlUsd.toLocaleString()}</td>
+      </tr>`,
+      )
+      .join("");
+
+    el.innerHTML = `
+      <div class="calib-cards" style="margin-bottom:14px;">
+        <div class="c-card"><span>Total Portfolio</span><b>$${rep.totalUsd.toLocaleString()}</b></div>
+        <div class="c-card"><span>Shock Expected P&amp;L</span><b class="${rep.expectedPnlUsd < 0 ? "neg" : "pos"}">${rep.expectedPnlUsd >= 0 ? "+" : ""}$${rep.expectedPnlUsd.toLocaleString()} (${rep.expectedPnlPct}%)</b></div>
+        <div class="c-card"><span>1D VaR 95% (DVOL ${rep.dvolPctUsed}%)</span><b class="gold">-$${rep.var95DailyUsd.toLocaleString()}</b></div>
+        <div class="c-card"><span>1D VaR 99% (Tail)</span><b class="neg">-$${rep.var99DailyUsd.toLocaleString()}</b></div>
+      </div>
+      <div class="insp-impact" style="margin-bottom:14px;"><b>Aladdin Hedge Desk:</b> ${rep.hedgeRecommendation}</div>
+      <table class="data-table">
+        <thead><tr><th>Asset</th><th>Allocation</th><th>Shock Move</th><th>Expected P&amp;L</th><th>P10..P90 P&amp;L Band</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
     `;
