@@ -1,5 +1,31 @@
 [
   {
+    "id": "rss_CoinDesk_2106946812",
+    "timestamp": 1794674009000,
+    "title": "Bitcoin slides to 3-month low of $65,000 as analyst flags fourth capitulation wave",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/14/bitcoin-drifts-back-to-usd65-000-deep-value-zone-says-analyst",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_236761251",
+    "timestamp": 1794674003000,
+    "title": "Ethereum scaling project MegaETH slashes staff by 20% as it pursues AI business",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/14/ethereum-scaling-project-megaeth-slashes-staff-by-20-as-it-pursues-ai-business",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_CoinDesk_883738204",
     "timestamp": 1794670707000,
     "title": "Kazakhstan plans tokenized government bonds in first quarter after $22 million note sale",
