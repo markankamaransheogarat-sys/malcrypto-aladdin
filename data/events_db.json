@@ -1,5 +1,18 @@
 [
   {
+    "id": "rss_CoinDesk_1246669057",
+    "timestamp": 1794612600000,
+    "title": "Bitcoin miners pay Paraguay $350 million a year, but AI is pushing them out",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/13/bitcoin-miners-pay-paraguay-usd350-million-a-year-but-ai-is-pushing-them-out",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_Federal Reserve_672757518",
     "timestamp": 1794610429143,
     "title": "Agencies extend comment period for proposed third-party risk management guidance",
