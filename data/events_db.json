@@ -1,5 +1,51 @@
 [
   {
+    "id": "rss_Cointelegraph_2064236618",
+    "timestamp": 1794753000000,
+    "title": "Enterprise blockchain is going to come back from the dead",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/opinion/enterprise-blockchain-come-back-from-dead?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_2050542836",
+    "timestamp": 1794751200000,
+    "title": "Crypto insiders aren't counting on silver linings in Congress' 'lame duck' session",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/news-analysis/2026/11/13/crypto-insiders-aren-t-counting-on-silver-linings-in-congress-lame-duck-session",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_631392021",
+    "timestamp": 1794738197000,
+    "title": "Bitcoin falls to four-month low near $62K as crypto selloff deepens",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-four-month-low-62k-crypto-market-selloff?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_2072590097",
+    "timestamp": 1794730078000,
+    "title": "Coinone warns of phishing, identity theft after customer data breach",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/coinone-data-breach-phishing-identity-theft-customer-information?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
     "id": "rss_Cointelegraph_296142414",
     "timestamp": 1794724046000,
     "title": "RWA protocol stUSDT winds down three years after $2.3B TVL peak",
