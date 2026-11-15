@@ -1,5 +1,16 @@
 [
   {
+    "id": "rss_CoinDesk_1780420367",
+    "timestamp": 1794771000000,
+    "title": "Did prediction markets call the U.S. midterm election?: State of Crypto",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/15/did-prediction-markets-call-the-u-s-midterm-election-state-of-crypto",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
     "id": "rss_Cointelegraph_2064236618",
     "timestamp": 1794753000000,
     "title": "Enterprise blockchain is going to come back from the dead",
