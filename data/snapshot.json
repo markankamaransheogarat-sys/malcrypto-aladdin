@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1794703764934,
+  "exportedAt": 1794728140210,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -255,7 +255,7 @@
         "tether"
       ],
       "systemicWeight": 0.96,
-      "price": 0.99937
+      "price": 0.99951
     },
     {
       "id": "INFRA_USDC",
@@ -268,7 +268,7 @@
         "circle"
       ],
       "systemicWeight": 0.89,
-      "price": 0.9998097639999999
+      "price": 0.99976487875
     },
     {
       "id": "INFRA_BINANCE",

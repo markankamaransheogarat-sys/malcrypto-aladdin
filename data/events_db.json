@@ -1,5 +1,27 @@
 [
   {
+    "id": "rss_Cointelegraph_296142414",
+    "timestamp": 1794724046000,
+    "title": "RWA protocol stUSDT winds down three years after $2.3B TVL peak",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/rwa-protocol-stusdt-winds-down-three-years-after-23b-tvl-peak?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1068848587",
+    "timestamp": 1794711057000,
+    "title": "XRP crashes to its lowest since November 2024 as money leaves crypto",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/15/xrp-crashes-to-its-lowest-since-november-2024-as-money-leaves-crypto",
+    "matchedNodes": [],
+    "surpriseScore": -0.64,
+    "impact": "CRITICAL"
+  },
+  {
     "id": "rss_CoinDesk_2106946812",
     "timestamp": 1794674009000,
     "title": "Bitcoin slides to 3-month low of $65,000 as analyst flags fourth capitulation wave",
@@ -16,6 +38,19 @@
     "id": "rss_CoinDesk_142250416",
     "timestamp": 1794674009000,
     "title": "Bitcoin crashes to 3-month low below $64,000 as analyst flags fourth capitulation wave",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/14/bitcoin-drifts-back-to-usd65-000-deep-value-zone-says-analyst",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.64,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_2113189873",
+    "timestamp": 1794674009000,
+    "title": "Bitcoin crashes to 3-month low below $63,000 as analyst flags fourth capitulation wave",
     "source": "CoinDesk",
     "category": "CRYPTO",
     "url": "https://www.coindesk.com/markets/2026/11/14/bitcoin-drifts-back-to-usd65-000-deep-value-zone-says-analyst",
