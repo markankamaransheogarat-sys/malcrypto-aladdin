@@ -13,6 +13,19 @@
     "impact": "HIGH"
   },
   {
+    "id": "rss_CoinDesk_142250416",
+    "timestamp": 1794674009000,
+    "title": "Bitcoin crashes to 3-month low below $64,000 as analyst flags fourth capitulation wave",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/14/bitcoin-drifts-back-to-usd65-000-deep-value-zone-says-analyst",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.64,
+    "impact": "CRITICAL"
+  },
+  {
     "id": "rss_CoinDesk_236761251",
     "timestamp": 1794674003000,
     "title": "Ethereum scaling project MegaETH slashes staff by 20% as it pursues AI business",
