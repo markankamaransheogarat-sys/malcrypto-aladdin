@@ -1,5 +1,33 @@
 [
   {
+    "id": "rss_Cointelegraph_1357068014",
+    "timestamp": 1794786465000,
+    "title": "Jensen Huang weighs Nvidia comeback days after shock exit: FT",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/jensen-huang-weighs-nvidia-comeback-days-after-shock-exit?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_HUANG",
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1217111192",
+    "timestamp": 1794783059000,
+    "title": "US sellers drive Bitcoin crash, Jensen plots Nvidia comeback: Hodler’s Digest",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/magazine/us-sellers-drive-bitcoin-crash-jensen-plots-comeback-hodlers-digest?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.64,
+    "impact": "CRITICAL"
+  },
+  {
     "id": "rss_CoinDesk_1780420367",
     "timestamp": 1794771000000,
     "title": "Did prediction markets call the U.S. midterm election?: State of Crypto",
