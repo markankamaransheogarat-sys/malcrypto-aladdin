@@ -1,5 +1,182 @@
 [
   {
+    "id": "rss_Cointelegraph_1776853401",
+    "timestamp": 1794873041000,
+    "title": "Nvidia shares fall 4% as board reportedly rules out Huang return",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/nvidia-shares-fall-4-as-board-reportedly-rules-out-huang-return?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_HUANG",
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1709737420",
+    "timestamp": 1794869697000,
+    "title": "Custodia Bank loses Supreme Court bid for direct Fed payment access",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/custodia-bank-loses-supreme-court-bid-for-direct-fed-payment-access?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_POWELL"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1080201396",
+    "timestamp": 1794869204000,
+    "title": "German lawmakers back crypto freezes outside criminal cases",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/german-lawmakers-back-crypto-freezes-outside-criminal-cases?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1734512310",
+    "timestamp": 1794867581000,
+    "title": "Binance hack may push institutions to outside custody, FalconX exec says",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/binance-hack-institutional-crypto-custody-falconx?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "INFRA_BINANCE"
+    ],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_64453395",
+    "timestamp": 1794865864000,
+    "title": "Former Robinhood engineer pleads guilty to insider trading scheme on Hyperliquid",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/16/former-robinhood-engineer-pleads-guilty-to-insider-trading-scheme-on-hyperliquid",
+    "matchedNodes": [
+      "PROTO_ROBINHOOD"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1107942934",
+    "timestamp": 1794861947000,
+    "title": "Bitmine edges toward 5% of ETH supply as treasuries report buys amid market slump",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitmine-nears-5-eth-supply-treasuries-report-buys-amid-market-slump?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_711686924",
+    "timestamp": 1794861321000,
+    "title": "Bitcoin risks falling below $60,000 as Nvidia earnings threaten to deepen crypto sell-off",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/16/bitcoin-risks-falling-below-usd60-000-as-nvidia-earnings-threaten-to-deepen-crypto-sell-off",
+    "matchedNodes": [
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_983460906",
+    "timestamp": 1794860282000,
+    "title": "Boris Johnson says UK must lead blockchain development despite crypto doubts",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/boris-johnson-uk-must-lead-blockchain-development-despite-crypto-doubts?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_320274051",
+    "timestamp": 1794858978000,
+    "title": "Coinbase and Broadridge propose standard for tokenized stock disclosures",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/coinbase-broadridge-tokenized-stock-shareholder-notices?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_COIN"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1830358881",
+    "timestamp": 1794855259000,
+    "title": "U.S. Senate Democrats tell CFTC to back off its demand prediction markets defy bans",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/16/u-s-senate-democrats-tell-cftc-to-back-off-its-demand-prediction-markets-defy-bans",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_986037114",
+    "timestamp": 1794852469000,
+    "title": "Nvidia turmoil tests Bitcoin miners’ AI funding plans",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/nvidia-turmoil-tests-bitcoin-miners-ai-funding-plans?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1012529295",
+    "timestamp": 1794851353000,
+    "title": "Safe wallet reportedly loses $6.5M as Zodiac suspects key compromise",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/safe-wallet-reportedly-loses-millions-after-key-compromise?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1534948664",
+    "timestamp": 1794847302000,
+    "title": "Lighter suspends all withdrawals after $10.4 million crypto exploit",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/16/lighter-suspends-all-withdrawals-after-usd10-4-million-crypto-exploit",
+    "matchedNodes": [],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1981993994",
+    "timestamp": 1794846412000,
+    "title": "Bitcoin price fails to hold $65K as US stocks drop further on AI nerves",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-price-fails-to-hold-65k-us-stocks-drop-on-ai-nerves?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_CoinDesk_1530647186",
     "timestamp": 1794844451000,
     "title": "Brazil's central bank faces backlash over stablecoin money laundering remarks",
@@ -44,6 +221,17 @@
     "matchedNodes": [],
     "surpriseScore": 0,
     "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1499698435",
+    "timestamp": 1794838790000,
+    "title": "Lighter recovers $5M after $10M exploit linked to compromised API keys",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/lighter-dex-pauses-withdrawals-10m-exploit?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
   },
   {
     "id": "rss_Cointelegraph_987201263",
@@ -188,6 +376,20 @@
     "id": "rss_CoinDesk_1706008213",
     "timestamp": 1794821658000,
     "title": "Live updates: Bitcoin holds near weekend lows as Nasdaq sinks 2%",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/16/live-news-bitcoin-posts-sixth-weekly-loss-as-tech-stocks-and-metals-slide",
+    "matchedNodes": [
+      "EQ_QQQ",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_104554298",
+    "timestamp": 1794821658000,
+    "title": "Live updates: Bitcoin trades near $65,000 as Nasdaq closes with 2.5% loss",
     "source": "CoinDesk",
     "category": "CRYPTO",
     "url": "https://www.coindesk.com/tech/2026/11/16/live-news-bitcoin-posts-sixth-weekly-loss-as-tech-stocks-and-metals-slide",
