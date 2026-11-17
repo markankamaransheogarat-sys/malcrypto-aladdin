@@ -108,5 +108,15 @@
     "p90Price": 70370,
     "probUpPct": 14,
     "probDownPct": 13
+  },
+  {
+    "id": "hz24_1794903554456",
+    "timestamp": 1794903554456,
+    "startPrice": 68340,
+    "p10Price": 66410,
+    "p50Price": 68411,
+    "p90Price": 70413,
+    "probUpPct": 15,
+    "probDownPct": 13
   }
 ]
