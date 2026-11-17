@@ -1,5 +1,350 @@
 [
   {
+    "id": "rss_CoinDesk_834643873",
+    "timestamp": 1794937360000,
+    "title": "Druckenmiller says he is short copper, warns of economic weakness in 2027",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/17/druckenmiller-says-he-is-short-copper-warns-of-economic-weakness-in-2027",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_660103245",
+    "timestamp": 1794937181000,
+    "title": "Fed’s Waller cites Binance hack in warning over tokenized finance",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/feds-waller-cites-binance-hack-in-warning-over-tokenized-finance?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_POWELL",
+      "INFRA_BINANCE"
+    ],
+    "surpriseScore": -0.77,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_407568441",
+    "timestamp": 1794934805000,
+    "title": "U.S. Fed Governor Waller pitches keeping central bank at the center of tokenization",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/17/u-s-fed-governor-waller-pitches-keeping-central-bank-at-the-center-of-tokenization",
+    "matchedNodes": [
+      "ACTOR_POWELL"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_890448829",
+    "timestamp": 1794933583000,
+    "title": "Bitcoin drops 2.5% as Nvidia stock risks new 5-month lows into Q3 earnings",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-drops-25-nvidia-stock-risks-new-5-month-low-q3-earnings?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_520144132",
+    "timestamp": 1794928260000,
+    "title": "Hong Kong, Swift test tokenized deposits as banks chase stablecoin-style speed",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/17/hong-kong-swift-test-tokenized-deposits-as-banks-chase-stablecoin-style-speed",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_503695384",
+    "timestamp": 1794926749000,
+    "title": "Solana Foundation takes majority interest in crypto data firm CoinGecko",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/coingecko-solana-foundation-majority-stake?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1171865420",
+    "timestamp": 1794922200000,
+    "title": "Bitcoin to $1M by 2030? ‘Almost certainly not,’ says Dragonfly’s Qureshi",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/magazine/bitcoin-to-1m-by-2030-almost-certainly-not-says-dragonflys-qureshi?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1856964312",
+    "timestamp": 1794921130000,
+    "title": "ARK sells $85M in Nvidia shares ahead of chipmaker’s Q3 earnings results",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/ark-crypto-stock-purchases-nvidia-staking-etf-sales?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1346475863",
+    "timestamp": 1794920576000,
+    "title": "Ethereum's Glamsterdam upgrade risks breaking up to 15,000 automated apps",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/17/ethereum-s-glamsterdam-upgrade-risks-breaking-up-to-15-000-contracts",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1232974934",
+    "timestamp": 1794920400000,
+    "title": "Decentralized exchange Grvt looks to makes commodity trading more predictable with stable funding perps",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/17/decentralized-exchange-grvt-makes-commodity-trading-more-predictable-with-stable-funding-perps",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1101350779",
+    "timestamp": 1794918260000,
+    "title": "Revolut plans four blockchain-based funds for private markets, chair says",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/revolut-four-blockchain-funds-private-markets?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_957551153",
+    "timestamp": 1794917813000,
+    "title": "Crypto's 'casino-chips' are disappearing, adding to pain from spot ETF outflows",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/daybook-us/2026/11/17/crypto-s-casino-chips-are-disappearing-adding-to-pain-from-spot-etf-outflows",
+    "matchedNodes": [
+      "NAR_SPOT_ETF"
+    ],
+    "surpriseScore": -0.74,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1726844748",
+    "timestamp": 1794916855000,
+    "title": "Ex-OpenAI researcher fund dumps bitcoin miners, cuts IREN 94% after portfolio slump",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/17/ex-openai-researcher-fund-dumps-bitcoin-miners-cuts-iren-94-after-portfolio-slump",
+    "matchedNodes": [
+      "CRYPTO_BTC",
+      "NAR_AI_COMPUTE"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_544724576",
+    "timestamp": 1794915386000,
+    "title": "US senators seek SEC answers on tokenized stock money laundering risks",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/us-senators-sec-tokenized-stock-safeguards?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_2109225315",
+    "timestamp": 1794915367000,
+    "title": "Bitcoin remains penned in near $64,000 even as ETF outflow streak ends",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/17/bitcoin-remains-penned-in-near-usd64-000-even-as-etf-outflow-streak-ends",
+    "matchedNodes": [
+      "CRYPTO_BTC",
+      "NAR_SPOT_ETF"
+    ],
+    "surpriseScore": -0.58,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_2091291663",
+    "timestamp": 1794914991000,
+    "title": "Solana Foundation takes majority stake in crypto data provider CoinGecko",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/17/solana-foundation-takes-majority-stake-in-crypto-data-provider-coingecko",
+    "matchedNodes": [
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1233739215",
+    "timestamp": 1794914758000,
+    "title": "New DeFi-yield generation targets ‘scam-like’ bank accounts that keep all the interest",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/16/new-defi-yield-generation-targets-scam-like-bank-accounts-that-keep-all-the-interest",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1874587973",
+    "timestamp": 1794914298000,
+    "title": "BlackRock’s Bitcoin ETF snaps $2.35B outflow streak amid extreme fear",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/blackrock-ibit-outflow-streak-end-extreme-fear?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_BLACKROCK",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.58,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_650354914",
+    "timestamp": 1794914045000,
+    "title": "Bitcoin realized loss metric beats June high as open interest eyes 2-year low",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-realized-loss-metric-beats-june-high-open-interest-eyes-2-year-low?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0.76,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1278638971",
+    "timestamp": 1794912492000,
+    "title": "Fed Governor Michael Barr warns AI agents could trigger bank runs in minutes",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/17/fed-governor-michael-barr-warns-ai-agents-could-trigger-bank-runs-in-minutes",
+    "matchedNodes": [
+      "ACTOR_POWELL"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_333104267",
+    "timestamp": 1794911606000,
+    "title": "Live updates: Bitcoin and stocks continue slump as Huang signals interest in returning to Nvidia",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/17/live-updates-bitcoin-holds-near-usd64-000-as-tech-slides-ahead-of-nvidia-earnings",
+    "matchedNodes": [
+      "ACTOR_HUANG",
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1706602507",
+    "timestamp": 1794910938000,
+    "title": "Hackers plant crypto-stealing code on 178 major websites, including HSBC and Ledger",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/17/hackers-planted-crypto-stealing-code-on-178-organizations-sites-including-hsbc-bbc-and-ledger",
+    "matchedNodes": [],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1670521740",
+    "timestamp": 1794910621000,
+    "title": "Nvidia faces first earnings test without Jensen Huang as AI stocks slide",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/17/nvidia-faces-first-earnings-test-without-jensen-huang-as-ai-stocks-slide",
+    "matchedNodes": [
+      "ACTOR_HUANG",
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_779291805",
+    "timestamp": 1794909959000,
+    "title": "Google says hackers use AI agents to find and exploit software flaws",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/google-ai-agents-automated-cyberattacks-software-flaws?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.79,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1587321243",
+    "timestamp": 1794907805000,
+    "title": "US judge clears brothers in $25M Ethereum MEV case after mistrial",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/us-judge-acquits-brothers-25m-ethereum-mev-exploit?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1687290716",
+    "timestamp": 1794907279000,
+    "title": "Binance hacker moves $63 million in stolen ether after 2 weeks of silence",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/17/binance-hacker-moves-usd63-million-in-stolen-ether-after-two-weeks-of-silence",
+    "matchedNodes": [
+      "INFRA_BINANCE"
+    ],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_134246242",
+    "timestamp": 1794906512000,
+    "title": "Goldman Sachs reports $1.22B in Ether ETFs as ETHA share count jumps",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/goldman-sachs-reports-122b-ether-etfs-etha-shares-jumps?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_BLACKROCK"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_CoinDesk_2080929815",
     "timestamp": 1794901087000,
     "title": "Bitcoin could slide into the $50,000s as Fed rate hike bets build, Wintermute says",

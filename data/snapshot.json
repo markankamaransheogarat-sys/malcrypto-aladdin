@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1794903554451,
+  "exportedAt": 1794937609662,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -122,8 +122,8 @@
       ],
       "systemicWeight": 0.96,
       "description": "Bellwether of global AI capex cycle and risk-on equity momentum.",
-      "price": 162.85,
-      "change24hPct": -2.01
+      "price": 153.597,
+      "change24hPct": -1.63
     },
     {
       "id": "EQ_TSMC",
@@ -138,8 +138,8 @@
       ],
       "systemicWeight": 0.85,
       "description": "Sole leading-edge fab for NVIDIA, Apple, and AMD GPUs.",
-      "price": 373.455,
-      "change24hPct": -6.34
+      "price": 360.52,
+      "change24hPct": -3.46
     },
     {
       "id": "EQ_AMD",
@@ -152,8 +152,8 @@
         "advanced micro devices"
       ],
       "systemicWeight": 0.76,
-      "price": 534.06,
-      "change24hPct": -8.75
+      "price": 489.38,
+      "change24hPct": -2.95
     },
     {
       "id": "EQ_QQQ",
@@ -182,8 +182,8 @@
         "microstrategy stock"
       ],
       "systemicWeight": 0.8,
-      "price": 111.62,
-      "change24hPct": -2.44
+      "price": 98.11,
+      "change24hPct": -4.78
     },
     {
       "id": "EQ_COIN",
@@ -197,8 +197,8 @@
         "brian armstrong"
       ],
       "systemicWeight": 0.82,
-      "price": 127.645,
-      "change24hPct": -2.31
+      "price": 116.491,
+      "change24hPct": -2.79
     },
     {
       "id": "MACRO_DXY",
@@ -213,7 +213,7 @@
       ],
       "systemicWeight": 0.93,
       "description": "Inverse liquidity gauge: sharp DXY spikes compress global risk assets.",
-      "price": 91.48
+      "price": 91.58
     },
     {
       "id": "MACRO_US10Y",
@@ -255,7 +255,7 @@
         "tether"
       ],
       "systemicWeight": 0.96,
-      "price": 0.99909
+      "price": 0.99906
     },
     {
       "id": "INFRA_USDC",
@@ -268,7 +268,7 @@
         "circle"
       ],
       "systemicWeight": 0.89,
-      "price": 0.9997843594999999
+      "price": 0.9998891473999999
     },
     {
       "id": "INFRA_BINANCE",
