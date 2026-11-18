@@ -1,5 +1,292 @@
 [
   {
+    "id": "rss_Cointelegraph_155300219",
+    "timestamp": 1795021200000,
+    "title": "Polymarket US takes rapid-fire crypto trading format to oil, natural gas",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/polymarket-us-takes-rapid-fire-crypto-trading-format-oil-natural-gas?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_307244354",
+    "timestamp": 1795019660000,
+    "title": "Bitcoin, stocks wobble as Fed’s Waller talks of ‘shock’ 50-point rate hike",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-stocks-wobble-waller-talks-shock-50-point-rate-hike?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_POWELL",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_286515666",
+    "timestamp": 1795017774000,
+    "title": "Crypto Long & Short: Crypto exchanges shouldn’t double as the vault",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/coindesk-indices/2026/11/18/crypto-long-and-short-crypto-exchanges-shouldn-t-double-as-the-vault",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_579112490",
+    "timestamp": 1795016318000,
+    "title": "German judge proposes dropping Movie2k case if operator hands over $2.56 billion in bitcoin",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/18/german-judge-proposes-dropping-movie2k-case-if-operator-hands-over-usd2-56-billion-in-bitcoin",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1560093707",
+    "timestamp": 1795015398000,
+    "title": "Hong Kong wants banks to use AI to catch crypto crime before money disappears",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/18/hong-kong-wants-banks-to-use-ai-to-catch-crypto-crime-before-money-disappears",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_619743770",
+    "timestamp": 1795010690000,
+    "title": "Bitcoin Covenants Part 6: FE Covenants — Enforcing covenants through cryptographically restricted signing keys",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/research/bitcoin-covenants-part-6-fe-covenants-enforcing-covenants-through-cryptographically-restricted-signing-keys?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_423786729",
+    "timestamp": 1795009357000,
+    "title": "CoinShares sells all treasury ETH, halves SOL holdings for buybacks",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/coinshares-sells-eth-treasury-holdings-halves-sol-share-buybacks?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_ETH",
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_495587919",
+    "timestamp": 1795008739000,
+    "title": "Sanctions fears loom over Russia’s regulated crypto trading launch",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/sanctions-fears-russia-crypto-launch?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_2143794736",
+    "timestamp": 1795008600000,
+    "title": "How to preserve wealth and access funds during a national emergency",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/magazine/how-to-preserve-wealth-and-access-it-during-a-national-emergency?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1729585699",
+    "timestamp": 1795006414000,
+    "title": "Bitcoin miner MARA raises $185 million in debt after selling $1 billion BTC to repay loans",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/18/bitcoin-miner-mara-raises-usd185-million-in-debt-after-selling-usd1-billion-btc-to-repay-loans",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_13266546",
+    "timestamp": 1795006392000,
+    "title": "Tokenized Nvidia market cap surges 159% amid Jensen Huang’s exit",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/tokenized-nvidia-cap-rises-158-stock-loses-750b?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_HUANG",
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0.58,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1738279521",
+    "timestamp": 1795005669000,
+    "title": "Bullish beats revenue estimates as institutional services offset sluggish spot crypto volumes",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/18/bullish-beats-revenue-estimates-as-institutional-services-offset-sluggish-spot-crypto-volumes",
+    "matchedNodes": [],
+    "surpriseScore": 0.76,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_714634204",
+    "timestamp": 1795004714000,
+    "title": "Circle turns to DBS as banks build rival digital payment systems across Asia",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/18/circle-turns-to-dbs-as-banks-build-rival-digital-payment-systems-across-asia",
+    "matchedNodes": [
+      "INFRA_USDC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_229547993",
+    "timestamp": 1795004100000,
+    "title": "Blaming Anthropic’s IPO for bitcoin’s slide is 'easy to believe,' but flawed, analysts say",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/daybook-us/2026/11/18/blaming-anthropic-s-ipo-for-bitcoin-s-slide-is-easy-to-believe-but-flawed-analysts-say",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_526853116",
+    "timestamp": 1795002172000,
+    "title": "Bitcoin drops as Nvidia earnings report drives stock index futures higher",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/18/bitcoin-drops-as-nvidia-earnings-report-drives-stock-index-futures-higher",
+    "matchedNodes": [
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1956739894",
+    "timestamp": 1794999516000,
+    "title": "Bitcoin outpaces gold even as both assets tumble ahead of a likely Fed rate hike",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/18/bitcoin-outpaces-gold-even-as-both-assets-tumble-ahead-of-a-likely-fed-rate-hike",
+    "matchedNodes": [
+      "ACTOR_POWELL",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_170373433",
+    "timestamp": 1794997987000,
+    "title": "Bitwise seeks Texas Stock Exchange listing for Zcash ETF",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/bitwise-zcash-etf-texas-stock-exchange-listing?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1950218901",
+    "timestamp": 1794997880000,
+    "title": "Bitcoin steadies after Nvidia’s earnings beat as $60K bids stand out",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-60k-liquidity-stocks-gain-nvidia-1158b-earnings-beat?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0.62,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1997219736",
+    "timestamp": 1794994301000,
+    "title": "Strategy stock could plunge 76% to $23, chart analyst warns",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/18/strategy-stock-could-crash-76-to-usd23-chart-analyst-warns",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_195958359",
+    "timestamp": 1794993438000,
+    "title": "World Bank partners with Circle, Citi to explore stablecoins for payments",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/world-bank-circle-citi-explore-stablecoins-payments?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "INFRA_USDC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_2025977953",
+    "timestamp": 1794993255000,
+    "title": "Hyundai tests AI agent commerce on JPMorgan’s Kinexys blockchain",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/18/hyundai-tests-ai-agent-commerce-on-jpmorgan-s-kinexys-blockchain",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_319941505",
+    "timestamp": 1794991276000,
+    "title": "SOL comes out of Breakpoint 7% higher as Solana exits beta",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/solana-sol-gains-7-percent-breakpoint-beta-tokenization?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_999921524",
+    "timestamp": 1794989363000,
+    "title": "Bitcoin ETFs lose $240M as CryptoQuant flags bearish market phase",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-etf-240-million-outflow-bearish-phase?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_CoinDesk_568918129",
     "timestamp": 1794987479000,
     "title": "Google finds self-running AI hacking tool with Russian comments in its files",
@@ -14,6 +301,19 @@
     "id": "rss_CoinDesk_47343079",
     "timestamp": 1794986868000,
     "title": "Live updates: Bitcoin stuck near $65,000 as popular 'basis trade' returns dry up",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/18/live-updates-bitcoin-stuck-near-usd65-000-as-popular-basis-trade-returns-dry-up",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1977146311",
+    "timestamp": 1794986868000,
+    "title": "Live updates: Bitcoin falls below $63,000, with Strategy’s STRC hitting lowest since August",
     "source": "CoinDesk",
     "category": "CRYPTO",
     "url": "https://www.coindesk.com/business/2026/11/18/live-updates-bitcoin-stuck-near-usd65-000-as-popular-basis-trade-returns-dry-up",
