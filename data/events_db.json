@@ -1,5 +1,114 @@
 [
   {
+    "id": "sec_COIN_4@2026-11-17",
+    "timestamp": 1794962183825,
+    "title": "SEC EDGAR: COIN — 1 инсайдерских форм Form 4/144 за 30д (последняя: 4@2026-11-17)",
+    "source": "SEC EDGAR",
+    "category": "INSIDER",
+    "matchedNodes": [
+      "EQ_COIN"
+    ],
+    "surpriseScore": 0.1,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_2041760248",
+    "timestamp": 1794961003000,
+    "title": "Nvidia board rejects Huang comeback despite record $116B quarter",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/nvidia-board-rejects-huang-comeback-amid-record-116b-quarter?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_HUANG",
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_763154017",
+    "timestamp": 1794954004000,
+    "title": "CFTC halts some Kalshi Trump mention markets over manipulation concerns",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/cftc-kalshi-trump-mention-markets-review?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_453590283",
+    "timestamp": 1794952595000,
+    "title": "Maple Finance CEO targets up to $15B in assets by the end of 2027",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/maple-finance-15b-assets-target-2027?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1921427987",
+    "timestamp": 1794950750000,
+    "title": "Nvidia tops estimates, issues strong guidance; shares rise",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/17/nvidia-tops-estimates-issues-strong-guidance-adds-usd150-billion-to-buyback-authorization",
+    "matchedNodes": [
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1528954939",
+    "timestamp": 1794945904000,
+    "title": "Eastern Europe crypto flows fall 7.9% as Ukraine draws $12B in stablecoins",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/eastern-europe-crypto-activity-decline-chainalysis?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1502395025",
+    "timestamp": 1794944757000,
+    "title": "Coinbase CEO says AI agents will account for '99.9%' of transactions within a decade",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/17/coinbase-ceo-says-ai-agents-will-account-for-99-9-of-transactions-within-a-decade",
+    "matchedNodes": [
+      "EQ_COIN"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1638936940",
+    "timestamp": 1794942960000,
+    "title": "Predictions platform Kalshi complies with order to halt Trump mention contracts",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/17/predictions-platform-kalshi-complies-with-order-to-halt-trump-mention-contracts",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1292469778",
+    "timestamp": 1794937913000,
+    "title": "Lighter incident exposes risks beyond withdrawal controls",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/lighter-incident-exposes-risks-beyond-withdrawal-controls?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
     "id": "rss_CoinDesk_834643873",
     "timestamp": 1794937360000,
     "title": "Druckenmiller says he is short copper, warns of economic weakness in 2027",
