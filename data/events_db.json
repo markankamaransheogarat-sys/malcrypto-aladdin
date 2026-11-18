@@ -1,5 +1,90 @@
 [
   {
+    "id": "rss_CoinDesk_568918129",
+    "timestamp": 1794987479000,
+    "title": "Google finds self-running AI hacking tool with Russian comments in its files",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/18/google-finds-self-running-ai-hacking-tool-with-russian-comments-in-its-files",
+    "matchedNodes": [],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_47343079",
+    "timestamp": 1794986868000,
+    "title": "Live updates: Bitcoin stuck near $65,000 as popular 'basis trade' returns dry up",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/18/live-updates-bitcoin-stuck-near-usd65-000-as-popular-basis-trade-returns-dry-up",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_2127370786",
+    "timestamp": 1794979810000,
+    "title": "U.S. judge says Ethereum has ‘no terms of use,’ clears MIT brothers of $25 million fraud",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/18/u-s-judge-says-ethereum-has-no-terms-of-use-clears-mit-brothers-of-usd25-million-fraud",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_733640115",
+    "timestamp": 1794976461000,
+    "title": "Bitcoin's 12% slide through key support looks scary, but history says give it 3 months.",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/18/bitcoin-s-rare-12-crash-through-its-200-week-average-has-a-bullish-track-record",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_392888145",
+    "timestamp": 1794976117000,
+    "title": "XRP whales moved $270 million during the selloff. The coins didn’t go to exchanges",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/18/xrp-whales-moved-usd270-million-during-the-selloff-the-coins-didn-t-go-to-exchanges",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_89055706",
+    "timestamp": 1794969592000,
+    "title": "Ledger hardware implant saga reaches Dubai’s Virgin Megastore",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/ledger-hardware-implant-saga-reaches-dubais-virgin-megastore?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1485639268",
+    "timestamp": 1794962785000,
+    "title": "CFTC nominee questions public benefit of prediction markets as legal fight grows",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/17/nominee-says-u-s-cftc-must-think-hard-about-public-benefit-of-prediction-markets",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "sec_COIN_4@2026-11-17",
     "timestamp": 1794962183825,
     "title": "SEC EDGAR: COIN — 1 инсайдерских форм Form 4/144 за 30д (последняя: 4@2026-11-17)",
@@ -61,6 +146,19 @@
     ],
     "surpriseScore": 0,
     "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1268717122",
+    "timestamp": 1794950750000,
+    "title": "Nvidia shares rise on earnings beat, raised outlook despite leadership uncertainty",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/17/nvidia-tops-estimates-issues-strong-guidance-adds-usd150-billion-to-buyback-authorization",
+    "matchedNodes": [
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0.62,
+    "impact": "CRITICAL"
   },
   {
     "id": "rss_Cointelegraph_1528954939",
