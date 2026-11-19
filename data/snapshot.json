@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1795044235283,
+  "exportedAt": 1795062250287,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -122,8 +122,8 @@
       ],
       "systemicWeight": 0.96,
       "description": "Bellwether of global AI capex cycle and risk-on equity momentum.",
-      "price": 151.89,
-      "change24hPct": 0.62
+      "price": 155.46,
+      "change24hPct": -0.44
     },
     {
       "id": "EQ_TSMC",
@@ -138,8 +138,8 @@
       ],
       "systemicWeight": 0.85,
       "description": "Sole leading-edge fab for NVIDIA, Apple, and AMD GPUs.",
-      "price": 365.655,
-      "change24hPct": 0.86
+      "price": 359.637,
+      "change24hPct": -3.7
     },
     {
       "id": "EQ_AMD",
@@ -152,8 +152,8 @@
         "advanced micro devices"
       ],
       "systemicWeight": 0.76,
-      "price": 532.3,
-      "change24hPct": 0.41
+      "price": 503.41,
+      "change24hPct": -0.17
     },
     {
       "id": "EQ_QQQ",
@@ -182,8 +182,8 @@
         "microstrategy stock"
       ],
       "systemicWeight": 0.8,
-      "price": 90.98,
-      "change24hPct": 0.73
+      "price": 96.5,
+      "change24hPct": -6.34
     },
     {
       "id": "EQ_COIN",
@@ -197,8 +197,8 @@
         "brian armstrong"
       ],
       "systemicWeight": 0.82,
-      "price": 111.2,
-      "change24hPct": 0.62
+      "price": 115.02,
+      "change24hPct": -4.02
     },
     {
       "id": "MACRO_DXY",
@@ -255,7 +255,7 @@
         "tether"
       ],
       "systemicWeight": 0.96,
-      "price": 0.99877
+      "price": 0.99889
     },
     {
       "id": "INFRA_USDC",
@@ -268,7 +268,7 @@
         "circle"
       ],
       "systemicWeight": 0.89,
-      "price": 0.99987
+      "price": 0.9998689226249999
     },
     {
       "id": "INFRA_BINANCE",

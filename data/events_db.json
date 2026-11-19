@@ -1,5 +1,54 @@
 [
   {
+    "id": "rss_CoinDesk_1657475314",
+    "timestamp": 1795059648000,
+    "title": "CZ says tokenized Anthropic is coming to BNB Chain on IPO day",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/cz-says-tokenized-anthropic-is-coming-to-bnb-chain-on-ipo-day",
+    "matchedNodes": [
+      "INFRA_BINANCE",
+      "PROTO_BINANCE_CEX"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_512019082",
+    "timestamp": 1795052733000,
+    "title": "Trump administration unveils new center to choke off scam payments",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/trump-administration-unveils-new-center-choke-off-scam-payments?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1291397749",
+    "timestamp": 1795048549000,
+    "title": "Fed officials saw October rate hold as a ‘close call,’ minutes show",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/fed-officials-saw-october-rate-hold-as-close-call-minutes-show?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_POWELL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_2091252420",
+    "timestamp": 1795048426000,
+    "title": "Another U.S. appellate court goes against Kalshi, building the industry's legal headwinds",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/18/another-u-s-appellate-court-goes-against-kalshi-building-the-industry-s-legal-headwinds",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
     "id": "rss_Federal Reserve_764968165",
     "timestamp": 1795044230003,
     "title": "Minutes of the Federal Open Market Committee, October 27-28, 2026",
