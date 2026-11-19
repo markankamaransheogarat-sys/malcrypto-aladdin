@@ -1,5 +1,163 @@
 [
   {
+    "id": "sec_NVDA_144@2026-11-19",
+    "timestamp": 1795125053141,
+    "title": "SEC EDGAR: NVDA — 2 инсайдерских форм Form 4/144 за 30д (последняя: 144@2026-11-19)",
+    "source": "SEC EDGAR",
+    "category": "INSIDER",
+    "matchedNodes": [
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0.1,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1739434215",
+    "timestamp": 1795122102000,
+    "title": "MoonPay seeks US bank charter for stablecoin, custody services",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/moonpay-seeks-us-bank-charter-for-stablecoin-custody-services?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_508683454",
+    "timestamp": 1795120404000,
+    "title": "Hyperliquid Anthropic futures priced within 1% of Nasdaq opening price",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/hyperliquid-anthropic-futures-nasdaq-opening-price?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_QQQ"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1598291594",
+    "timestamp": 1795118794000,
+    "title": "Trump’s SEC nominee Johnson backs formal rulemaking for tokenized stock trading",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/sec-nominees-johnson-levine-tokenized-stocks?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_140069495",
+    "timestamp": 1795118022000,
+    "title": "Sky's USDS stablecoin shrinks 35% as $1.5 billion exits reserves after illicit-finance report",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/19/sky-s-usds-stablecoin-shrinks-35-as-usd1-5-billion-exits-reserves-after-illicit-finance-report",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_48083987",
+    "timestamp": 1795112449000,
+    "title": "Ethereum’s Glamsterdam upgrade could slip to May 2027 over compatibility concerns",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/ethereum-glamsterdam-could-slip-to-may-2027?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_401839326",
+    "timestamp": 1795112156000,
+    "title": "Trump's Democratic SEC pick suggests tokenization policy deserves full rule process",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/19/trump-s-democratic-sec-pick-suggests-tokenization-policy-deserves-full-rule-process",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_618569149",
+    "timestamp": 1795111772000,
+    "title": "Why higher rates could slow Bitcoin buying at treasury firms",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/why-higher-rates-could-slow-bitcoin-buying-at-treasury-firms?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_691466337",
+    "timestamp": 1795111610000,
+    "title": "Bitcoin price ignores Anthropic debut as ANT share price dips below $100",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-price-ignores-anthropic-debut-ant-share-price-dips-below-100?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1021167195",
+    "timestamp": 1795107707000,
+    "title": "Anthropic gains after IPO, but pulls off highest levels",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/anthropic-opens-for-trade-at-usd11-50-up-34-from-ipo-price",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_99651265",
+    "timestamp": 1795104568000,
+    "title": "Crypto for Advisors: Falling prices drove October’s 10% drop in institutional crypto exposure",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/coindesk-indices/2026/11/19/crypto-for-advisors-falling-prices-drove-october-s-10-drop-in-institutional-crypto-exposure",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_851597717",
+    "timestamp": 1795104471000,
+    "title": "Anthropic shares open at $111.50, 34.3% above $83 IPO price",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/anthropic-shares-expected-to-open-above-83-ipo-price?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1446756169",
+    "timestamp": 1795101638000,
+    "title": "Binance wins $6.5 billion feezing order against hackers behind crypto's largest theft",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/19/binance-wins-usd6-5-billion-feezing-order-against-hackers-behind-crypto-s-largest-theft",
+    "matchedNodes": [
+      "INFRA_BINANCE"
+    ],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
     "id": "rss_Cointelegraph_1730615131",
     "timestamp": 1795095000000,
     "title": "Ethereum’s new DeFi security tool raises questions over censorship",
@@ -149,6 +307,19 @@
     ],
     "surpriseScore": 0,
     "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_356998519",
+    "timestamp": 1795085306000,
+    "title": "Live updates: Bitcoin plunges to lowest since July as Anthropic gains, but broader markets tumble",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/live-updates-bitcoin-nears-usd64-000-as-anthropic-s-record-ipo-lifts-tech",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
   },
   {
     "id": "rss_CoinDesk_1258918246",
