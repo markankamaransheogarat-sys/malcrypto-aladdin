@@ -1,5 +1,316 @@
 [
   {
+    "id": "rss_Cointelegraph_1730615131",
+    "timestamp": 1795095000000,
+    "title": "Ethereum’s new DeFi security tool raises questions over censorship",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/magazine/ethereums-new-defi-security-tool-raises-questions-over-censorship?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_877125574",
+    "timestamp": 1795093891000,
+    "title": "Crypto traders vs. Wall Street: OKX’s Anthropic markets put IPO pricing to the test",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/crypto-traders-vs-wall-street-okx-s-anthropic-markets-put-ipo-pricing-to-the-test",
+    "matchedNodes": [
+      "PROTO_OKX"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1012963028",
+    "timestamp": 1795092246000,
+    "title": "Hong Kong adds Hyperliquid to list of ‘suspicious’ crypto platforms",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/hyperliquid-hong-kong-regulators-alert-list?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1628593137",
+    "timestamp": 1795092012000,
+    "title": "Trump Media wants to clear $884 million of debt without selling its bitcoin",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/trump-media-wants-to-clear-usd884-million-of-debt-without-selling-its-bitcoin",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1113930246",
+    "timestamp": 1795091626000,
+    "title": "GTA VI publisher racks up nearly 3x Nvidia’s tokenized stock volume",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/gta-vi-launch-tokenized-ttwo-trade-triple-nvidia?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1416477742",
+    "timestamp": 1795090839000,
+    "title": "Bitcoin ETF outflows show waning crypto appetite ahead of Anthropic's Nasdaq debut",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/daybook-us/2026/11/19/bitcoin-etf-outflows-show-waning-crypto-appetite-ahead-of-anthropic-s-nasdaq-debut",
+    "matchedNodes": [
+      "EQ_QQQ",
+      "CRYPTO_BTC",
+      "NAR_SPOT_ETF"
+    ],
+    "surpriseScore": -0.74,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_160676095",
+    "timestamp": 1795090086000,
+    "title": "Bitcoin holds above $63,750 but Fed rate-hike threats loom large",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/bitcoin-holds-above-usd63-750-but-fed-rate-hike-threats-loom-large",
+    "matchedNodes": [
+      "ACTOR_POWELL",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_383215943",
+    "timestamp": 1795087800000,
+    "title": "North Korean hackers used Sky's stablecoin system, putting billions at freeze risk",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/19/north-korean-hackers-used-sky-s-stablecoin-system-putting-billions-at-freeze-risk",
+    "matchedNodes": [],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_803405191",
+    "timestamp": 1795087198000,
+    "title": "Sweden’s H100 could tap Bitcoin trading pool to fund share buybacks",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/swedens-h100-13m-q3-loss-share-buyback-approval?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1757870005",
+    "timestamp": 1795086373000,
+    "title": "Anthropic’s $107 billion sale set to top SpaceX’s IPO as tokenized stocks gain traction",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/anthropic-s-usd107-billion-raise-set-to-surpass-spacex-s-ipo-haul",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_367978931",
+    "timestamp": 1795085729000,
+    "title": "Financial firms must act now as quantum computers grow ‘highly advanced,’ IOSCO warns",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/19/banks-and-blockchains-lag-on-quantum-defense-as-encryption-risks-loom-watchdog-warns",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_761523802",
+    "timestamp": 1795085306000,
+    "title": "Live updates: Bitcoin nears $64,000 as Anthropic’s record IPO lifts tech",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/live-updates-bitcoin-nears-usd64-000-as-anthropic-s-record-ipo-lifts-tech",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1258918246",
+    "timestamp": 1795084776000,
+    "title": "Singapore settles $77.5 million tokenized bill sale in local CBDC",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/19/singapore-settles-usd77-5-million-tokenized-bill-sale-in-local-cbdc",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_752447337",
+    "timestamp": 1795084325000,
+    "title": "IOSCO warns quantum upgrades could slow blockchains, leave security gaps",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/iosco-quantum-blockchain-upgrades-security-risks?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1664318281",
+    "timestamp": 1795083732000,
+    "title": "Roundhill scraps Solana and XRP income ETFs as rival funds indicate low demand",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/roundhill-scraps-solana-and-xrp-income-etfs-as-rival-funds-attract-just-usd12-million",
+    "matchedNodes": [
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1438066215",
+    "timestamp": 1795078498000,
+    "title": "Singapore settles $77.5M tokenized bill sale with wholesale CBDC",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/mas-issues-77m-tokenized-bills-singapore-dollar-test-network?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_187003961",
+    "timestamp": 1795076779000,
+    "title": "Bitcoin ETF assets fall to three-month low as 2026 net outflows top $2.5B",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-etf-assets-three-month-low-78-billion?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.74,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1033990641",
+    "timestamp": 1795075477000,
+    "title": "BTCPay Server issues emergency update for 5 security flaws",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/btcpay-server-emergency-update-nginx-security-flaws?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_473030474",
+    "timestamp": 1795074956000,
+    "title": "Bitcoin retests $62K as Nasdaq futures rise ahead of Anthropic debut",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-retests-62k-nasdaq-futures-anthropic-debut?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_QQQ",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_113709029",
+    "timestamp": 1795069399000,
+    "title": "Fed's rate hike push may be a mistake. Here's why",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/fed-s-push-for-more-rate-hikes-leans-on-backward-looking-data-as-gas-prices-slide-analysts-argue",
+    "matchedNodes": [
+      "ACTOR_POWELL"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_2077033971",
+    "timestamp": 1795068000000,
+    "title": "Bitcoin carry trades could beat Treasury bills in 2027, Sygnum predicts",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/sygnum-bitcoin-carry-trades-2027?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0.62,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_641051555",
+    "timestamp": 1795066746000,
+    "title": "Ethereum block builders received the most in a $3.4 million vault hack, data shows",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/19/ethereum-block-builders-received-the-most-in-a-usd3-4-million-vault-hack-data-shows",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1561976570",
+    "timestamp": 1795066065000,
+    "title": "Senators warn GENIUS Act rules could push stablecoin firms toward federal oversight",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/us-senators-genius-act-rules-favor-federal-stablecoin-issuers?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1270385085",
+    "timestamp": 1795064985000,
+    "title": "Binance hackers stole 192 tokens across 11 networks, court docs show",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/binance-hackers-stole-192-tokens-across-11-networks?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "INFRA_BINANCE"
+    ],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_134103708",
+    "timestamp": 1795063570000,
+    "title": "Bitcoin miner that sold its last BTC warns it may run short of cash for $1.2 billion AI deal",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/19/bitcoin-miner-that-sold-its-last-btc-warns-it-may-run-short-of-cash-for-usd1-2-billion-ai-deal",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_CoinDesk_1657475314",
     "timestamp": 1795059648000,
     "title": "CZ says tokenized Anthropic is coming to BNB Chain on IPO day",
