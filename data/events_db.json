@@ -1,5 +1,219 @@
 [
   {
+    "id": "rss_Cointelegraph_594783520",
+    "timestamp": 1795172078000,
+    "title": "VanEck to end Gemini ETF custody deals, keeps Coinbase",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/vaneck-gemini-etf-custody-end-keep-coinbase?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_COIN"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_785440732",
+    "timestamp": 1795171684000,
+    "title": "Coinbase targets first-half 2027 for its own prediction market contracts",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/20/coinbase-targets-first-half-2027-for-its-own-prediction-market-contracts",
+    "matchedNodes": [
+      "EQ_COIN"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_2078400432",
+    "timestamp": 1795170550000,
+    "title": "Bitcoin nears repeat of chart pattern that preceded 2023’s $25K retest",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-first-death-cross-repeat-2023-bottom-25k?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_893855438",
+    "timestamp": 1795168923000,
+    "title": "No special rules for Hyperliquid or other onchain trading platforms, CFTC says",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/cftc-tells-hyperliquid-and-crypto-rivals-no-special-rules-for-onchain-trading",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_494997964",
+    "timestamp": 1795168132000,
+    "title": "Cathie Wood's Ark Invest piled into Anthropic IPO, buying $90 million worth of shares",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/cathie-wood-s-ark-invest-piled-into-anthropic-ipo-buying-usd90-million-worth-of-shares",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_377097451",
+    "timestamp": 1795162722000,
+    "title": "BlackRock’s IBIT loses record $541M amid Anthropic market debut",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/blackrock-ibit-record-single-day-outflow?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_BLACKROCK"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_686341341",
+    "timestamp": 1795161880000,
+    "title": "Wrapped Monero token plunges 99% as issuer-linked wallet sells $13.5 million",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/wrapped-monero-token-plunges-99-as-issuer-linked-wallet-sells-usd13-5-million",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1164097994",
+    "timestamp": 1795161814000,
+    "title": "SEC charges eight firms over fake crypto platforms tied to $37M fraud",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/sec-charges-eight-fake-crypto-platforms-37m-fraud?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": -0.64,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1652092153",
+    "timestamp": 1795155881000,
+    "title": "Anthropic’s $81B IPO draws half the net retail buying of SpaceX’s",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/anthropic-ipo-spacex-retail-buying-first-day-gains?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1988241279",
+    "timestamp": 1795155135000,
+    "title": "Here's what's crashing gold and likely weighing on bitcoin too",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/here-s-what-s-crashing-gold-and-likely-weighing-on-bitcoin-too",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.64,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1534248011",
+    "timestamp": 1795154908000,
+    "title": "Anthropic shares may fall 5% at Friday’s open, crypto futures suggest",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/crypto-traders-have-anthropic-trading-below-its-first-nasdaq-close-on-hyperliquid",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_2058678105",
+    "timestamp": 1795152745000,
+    "title": "This Bitcoin miner sold 267 BTC to clear $22 million debt. It still may not survive",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/this-bitcoin-miner-sold-267-btc-to-clear-usd22-million-debt-it-still-may-not-survive",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1483653888",
+    "timestamp": 1795152051000,
+    "title": "Big money bought a net $4 billion of bitcoin funds in Q3, ending 9 months of selling",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/big-money-bought-a-net-usd4-billion-of-bitcoin-funds-in-q3-ending-9-months-of-selling",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1220039508",
+    "timestamp": 1795150688000,
+    "title": "Ethereum’s next big upgrade is pushed into 2027 by apps it would break",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/20/ethereum-s-next-big-upgrade-is-pushed-into-2027-by-apps-it-would-break",
+    "matchedNodes": [
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1749089607",
+    "timestamp": 1795148932000,
+    "title": "VanEck drops Gemini as custodian of its bitcoin, ether and SOL ETFs",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/vaneck-drops-gemini-as-custodian-of-its-bitcoin-ether-and-sol-etfs",
+    "matchedNodes": [
+      "CRYPTO_BTC",
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_791387835",
+    "timestamp": 1795145602000,
+    "title": "Institutions pile back into US Bitcoin ETFs in Q3 after selling streak",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/institutional-bitcoin-etf-holdings-clock-record-quarter-after-selling-streak?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_393351864",
+    "timestamp": 1795145550000,
+    "title": "Bitcoin hits four-month low after Anthropic's IPO as tech stocks wilt",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/bitcoin-hits-four-month-low-after-anthropic-s-ipo-as-tech-stocks-wilt",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_Cointelegraph_2086734855",
     "timestamp": 1795131842000,
     "title": "Ledger CTO Charles Guillemet to leave after nine years at company",
