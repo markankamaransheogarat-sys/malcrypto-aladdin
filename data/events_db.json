@@ -1,5 +1,212 @@
 [
   {
+    "id": "rss_Federal Reserve_1864007783",
+    "timestamp": 1795201243459,
+    "title": "Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances",
+    "source": "Federal Reserve",
+    "category": "MACRO",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20261120a.htm",
+    "matchedNodes": [
+      "ACTOR_POWELL"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1590194738",
+    "timestamp": 1795199830000,
+    "title": "Sky Protocol sees $2 billion in stablecoin withdrawals, disputes illicit fund claims",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/sky-protocol-sees-2b-in-stablecoin-withdrawals-disputes-illicit-fund-claims?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1290962966",
+    "timestamp": 1795198432000,
+    "title": "Bitcoin plunges below $59,000 as rush to cash puts new bear market lows back in play",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/bitcoin-plunges-below-usd59-000-as-rush-to-cash-puts-new-bear-market-lows-back-in-play",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1715068979",
+    "timestamp": 1795193751000,
+    "title": "Bitcoin falls below $60K for first time since July amid broader market selloff",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-falls-below-60k-for-first-time-since-july-amid-broader-market-selloff?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_655546789",
+    "timestamp": 1795190122000,
+    "title": "US Senate advances prediction market restrictions with DEATH BETS Act",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/us-senate-advances-prediction-market-restrictions-with-death-bets-act?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.62,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_371529686",
+    "timestamp": 1795189926000,
+    "title": "Bitcoin price drops to $60K as Anthropic drops to $87 in tech sell-off",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-hits-new-20-week-low-anthropic-drops-87-tech-sell-off?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1451464062",
+    "timestamp": 1795188750000,
+    "title": "DBS bets it can lose the deposit and keep the client",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/dbs-bets-it-can-lose-the-deposit-and-keep-the-client?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1153849452",
+    "timestamp": 1795186470000,
+    "title": "Former Point72 head of proprietary research says AI could turn data into a new asset class for Wall Street",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/former-point72-head-of-proprietary-research-says-ai-could-turn-data-into-a-new-asset-class-for-wall-street",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1120474380",
+    "timestamp": 1795185510000,
+    "title": "Hong Kong moves to extend crypto licensing rules to brokers, advisers and custodians",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/20/hong-kong-moves-to-extend-crypto-licensing-rules-to-brokers-advisers-and-custodians",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_647922595",
+    "timestamp": 1795184757000,
+    "title": "U.S. Senate passes bill to ban prediction market bets on war and death",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/20/u-s-senated-passes-bill-to-ban-prediction-market-best-on-war-and-death",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_2092929703",
+    "timestamp": 1795181733000,
+    "title": "Live news: Bitcoin slips to fresh lows below $60,000 as Anthropic slides after Nasdaq debut",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/20/live-news-bitcoin-hovers-just-above-usd61-000-as-anthropic-slides-13-after-nasdaq-debut",
+    "matchedNodes": [
+      "EQ_QQQ",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_675321416",
+    "timestamp": 1795181422000,
+    "title": "Bitcoin bots pounced within seconds when researchers exposed their wallet keys",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/20/bitcoin-bots-pounced-within-seconds-when-researchers-exposed-their-keys",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_496624596",
+    "timestamp": 1795180899000,
+    "title": "Lagarde warns Europe could miss chance to unify tokenized markets",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/lagarde-europe-limited-window-tokenization-rules?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.6,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1066451077",
+    "timestamp": 1795180309000,
+    "title": "ECB’s Lagarde warns Europe could lose control of growing tokenized asset market",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/20/ecb-s-largarde-warns-europe-could-lose-control-of-growing-tokenized-asset-market",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_381752610",
+    "timestamp": 1795176908000,
+    "title": "Bitcoin, stocks and gold traders getting nervous, and volatility gauges are surging",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/daybook-us/2026/11/20/bitcoin-stocks-and-gold-traders-getting-nervous-and-volatility-gauges-are-surging",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1824742591",
+    "timestamp": 1795174922000,
+    "title": "Bitcoin drops for third straight day as Asian tech shares slide",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/20/bitcoin-drops-for-third-straight-day-as-asian-tech-shares-slide",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_2064652759",
+    "timestamp": 1795174301000,
+    "title": "Binance hacker moves nearly $600M in ETH, routes funds through THORChain, Chainflip",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/binance-hacker-600m-eth-routes-thorchain-chainflip?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "INFRA_BINANCE",
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
     "id": "rss_Cointelegraph_594783520",
     "timestamp": 1795172078000,
     "title": "VanEck to end Gemini ETF custody deals, keeps Coinbase",
@@ -90,6 +297,19 @@
     "id": "rss_Cointelegraph_1164097994",
     "timestamp": 1795161814000,
     "title": "SEC charges eight firms over fake crypto platforms tied to $37M fraud",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/sec-charges-eight-fake-crypto-platforms-37m-fraud?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": -0.64,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1141472095",
+    "timestamp": 1795161814000,
+    "title": "SEC charges 8 firms over fake crypto platforms tied to $37M fraud",
     "source": "Cointelegraph",
     "category": "CRYPTO",
     "url": "https://cointelegraph.com/news/sec-charges-eight-fake-crypto-platforms-37m-fraud?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
