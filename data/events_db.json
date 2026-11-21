@@ -1,5 +1,54 @@
 [
   {
+    "id": "rss_Federal Reserve_416373834",
+    "timestamp": 1795222080447,
+    "title": "Federal Reserve announces College Fed Challenge winners",
+    "source": "Federal Reserve",
+    "category": "MACRO",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/other20261120b.htm",
+    "matchedNodes": [
+      "ACTOR_POWELL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1736127355",
+    "timestamp": 1795215074000,
+    "title": "Kalshi races to get ahead of New York order that could shut down exchange",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/20/kalshi-races-to-get-ahead-of-new-york-order-that-could-shut-down-exchange",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_401280967",
+    "timestamp": 1795212331000,
+    "title": "Fairmint plans tokenized stock venue on Canton, Ethereum under SEC experiment",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/20/fairmint-plans-tokenized-stock-venue-on-canton-ethereum-under-sec-experiment",
+    "matchedNodes": [
+      "ACTOR_SEC",
+      "CRYPTO_ETH"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1261152984",
+    "timestamp": 1795203447000,
+    "title": "Wrapped Monero token crashes 99.8% amid suspected $13.5M exploit",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/wrapped-monero-token-crashes-998-amid-suspected-135m-exploit?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.79,
+    "impact": "CRITICAL"
+  },
+  {
     "id": "rss_Federal Reserve_1864007783",
     "timestamp": 1795201243459,
     "title": "Federal Reserve Board releases results from survey of senior financial officers at banks about their strategies and practices for managing reserve balances",
@@ -121,6 +170,20 @@
     "id": "rss_CoinDesk_2092929703",
     "timestamp": 1795181733000,
     "title": "Live news: Bitcoin slips to fresh lows below $60,000 as Anthropic slides after Nasdaq debut",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/20/live-news-bitcoin-hovers-just-above-usd61-000-as-anthropic-slides-13-after-nasdaq-debut",
+    "matchedNodes": [
+      "EQ_QQQ",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1133607811",
+    "timestamp": 1795181733000,
+    "title": "Live news: Bitcoin slips to fresh lows below $59,000 as Anthropic slides after Nasdaq debut",
     "source": "CoinDesk",
     "category": "CRYPTO",
     "url": "https://www.coindesk.com/tech/2026/11/20/live-news-bitcoin-hovers-just-above-usd61-000-as-anthropic-slides-13-after-nasdaq-debut",
