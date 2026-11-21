@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1795222085599,
+  "exportedAt": 1795248038319,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -122,8 +122,8 @@
       ],
       "systemicWeight": 0.96,
       "description": "Bellwether of global AI capex cycle and risk-on equity momentum.",
-      "price": 130.15,
-      "change24hPct": 1.38
+      "price": 145.98,
+      "change24hPct": -3.3
     },
     {
       "id": "EQ_TSMC",
@@ -152,8 +152,8 @@
         "advanced micro devices"
       ],
       "systemicWeight": 0.76,
-      "price": 437.55,
-      "change24hPct": 3.1
+      "price": 489.19,
+      "change24hPct": -7.72
     },
     {
       "id": "EQ_QQQ",
@@ -182,8 +182,8 @@
         "microstrategy stock"
       ],
       "systemicWeight": 0.8,
-      "price": 79.59,
-      "change24hPct": 2.3
+      "price": 86.13,
+      "change24hPct": -4.64
     },
     {
       "id": "EQ_COIN",
@@ -197,8 +197,8 @@
         "brian armstrong"
       ],
       "systemicWeight": 0.82,
-      "price": 102.36,
-      "change24hPct": 0.38
+      "price": 108.87,
+      "change24hPct": -1.48
     },
     {
       "id": "MACRO_DXY",
@@ -255,7 +255,7 @@
         "tether"
       ],
       "systemicWeight": 0.96,
-      "price": 0.99782
+      "price": 0.9984
     },
     {
       "id": "INFRA_USDC",
@@ -268,7 +268,7 @@
         "circle"
       ],
       "systemicWeight": 0.89,
-      "price": 1.0000251382000003
+      "price": 0.9999175679999999
     },
     {
       "id": "INFRA_BINANCE",
