@@ -1,5 +1,29 @@
 [
   {
+    "id": "rss_CoinDesk_56902158",
+    "timestamp": 1795283400000,
+    "title": "Bitcoin rebounds above $60,000 after $1.8 billion crypto liquidation wave",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/21/bitcoin-bounces-9-from-two-year-low-to-retake-usd60-000-as-traders-eye-monday-s-stock-open",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.6,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1137033948",
+    "timestamp": 1795279260000,
+    "title": "Cross-chain protocol Chainflip's FLIP tanks 30% after suspected $4.86 million vault drain",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/21/cross-chain-protocol-chainflip-s-flip-tanks-30-after-suspected-usd4-86-million-vault-drain",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
     "id": "rss_CoinDesk_364502275",
     "timestamp": 1795264200000,
     "title": "Ether treasury firm BTCS warns SEC its $54 million Aave loan could be liquidated",
