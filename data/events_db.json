@@ -1,5 +1,30 @@
 [
   {
+    "id": "rss_CoinDesk_364502275",
+    "timestamp": 1795264200000,
+    "title": "Ether treasury firm BTCS warns SEC its $54 million Aave loan could be liquidated",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/21/ether-treasury-firm-btcs-warns-sec-its-usd54-million-aave-loan-could-be-liquidated",
+    "matchedNodes": [
+      "ACTOR_SEC",
+      "INFRA_AAVE"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1161201759",
+    "timestamp": 1795254536000,
+    "title": "ECB seeks industry partners for tokenized deposits, securities experiments",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/ecb-tokenized-deposits-securities-experiments-appia?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
     "id": "rss_Cointelegraph_1990338611",
     "timestamp": 1795247507000,
     "title": "US lawmakers propose up to 30% rewards for prediction market whistleblowers",
