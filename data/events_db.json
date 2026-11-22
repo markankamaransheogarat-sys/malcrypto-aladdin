@@ -1,5 +1,27 @@
 [
   {
+    "id": "rss_Cointelegraph_1341508494",
+    "timestamp": 1795332245000,
+    "title": "South Korean exchanges halt CYBER transfers amid suspected bridge exploit",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/upbit-bithumb-suspend-cyber-transfers-bridge-exploit?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1129248551",
+    "timestamp": 1795325323000,
+    "title": "Chainflip confirms $12M hack, offers attacker 10% bounty",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/chainflip-12m-crypto-hack-10-percent-bounty?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
     "id": "rss_CoinDesk_56902158",
     "timestamp": 1795283400000,
     "title": "Bitcoin rebounds above $60,000 after $1.8 billion crypto liquidation wave",
