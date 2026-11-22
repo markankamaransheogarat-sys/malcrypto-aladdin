@@ -1,5 +1,16 @@
 [
   {
+    "id": "rss_CoinDesk_1862166417",
+    "timestamp": 1795375800000,
+    "title": "More on the pending oversight hearings: State of Crypto",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
     "id": "rss_Cointelegraph_1952048116",
     "timestamp": 1795357800000,
     "title": "The future of onchain FX could start with users, not institutional liquidity",
@@ -81,6 +92,19 @@
     "matchedNodes": [],
     "surpriseScore": 0,
     "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_743338752",
+    "timestamp": 1795269600000,
+    "title": "OpenAI, Anthropic and rivals seek AI agent rules to prevent commerce chaos",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/21/openai-anthropic-and-rivals-seek-ai-agent-rules-to-prevent-commerce-chaos",
+    "matchedNodes": [
+      "NAR_AI_COMPUTE"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
   },
   {
     "id": "rss_CoinDesk_364502275",
