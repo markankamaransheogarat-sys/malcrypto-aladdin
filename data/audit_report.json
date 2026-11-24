@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-11-13T23:09:36.234Z",
-  "systemHealthStatus": "ПОЛОЖИТЕЛЬНОЕ_МАТОЖИДАНИЕ",
+  "generatedAt": "2026-11-24T20:18:09.851Z",
+  "systemHealthStatus": "НЕТ_ДАННЫХ",
   "liveVerdicts": {
     "total": 0,
     "resolved": 0,
@@ -9,25 +9,25 @@
     "avgReturnPct": 0
   },
   "liveHorizons24h": {
-    "total": 1,
+    "total": 35,
     "resolved": 0,
     "p10p90CoveragePct": 0,
     "avgBrierScore": 0,
     "maePct": 0
   },
   "walkForward166d": {
-    "candlesTested": 1000,
-    "startDateIso": "2026-05-31",
-    "endDateIso": "2026-11-13",
-    "totalTrades": 40,
-    "wins": 25,
-    "losses": 15,
-    "winRate": 0.625,
-    "expectancyPct": 0.34,
-    "profitFactor": 1.48,
-    "maxDrawdownPct": 6.61,
-    "recommendedThreshold": 22,
-    "recommendedWinRate": 0.8
+    "candlesTested": 0,
+    "startDateIso": "",
+    "endDateIso": "",
+    "totalTrades": 0,
+    "wins": 0,
+    "losses": 0,
+    "winRate": 0,
+    "expectancyPct": 0,
+    "profitFactor": 0,
+    "maxDrawdownPct": 0,
+    "recommendedThreshold": 18,
+    "recommendedWinRate": 0
   },
   "historicalShocks4Cases": {
     "overallBrierScore": 0.0931,

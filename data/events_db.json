@@ -1,5 +1,353 @@
 [
   {
+    "id": "rss_Federal Reserve_1310886398",
+    "timestamp": 1795551479149,
+    "title": "Minutes of the Board's discount rate meetings on October 19 and October 28, 2026",
+    "source": "Federal Reserve",
+    "category": "MACRO",
+    "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261124a.htm",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_2128678038",
+    "timestamp": 1795549463000,
+    "title": "Bitcoin sell-off driven by weak demand, forced liquidations: 21Shares",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/bitcoin-selloff-weak-demand-forced-liquidations-21shares?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.6,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1037857468",
+    "timestamp": 1795547066000,
+    "title": "Coldcard reveals how Bitcoin wallet flaw went undetected for over 5 years",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/coldcard-how-security-reviews-missed-bitcoin-wallet-flaw-years?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_327657715",
+    "timestamp": 1795545102000,
+    "title": "CFTC sets new prediction market rules as more firms seek US entry",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/cftc-new-prediction-market-rules-firms-seek-us-entry?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_SEC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_688484110",
+    "timestamp": 1795543642000,
+    "title": "BlackRock launches tokenized money market fund accepting stablecoins in Hong Kong",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/blackrock-launches-tokenized-money-market-fund-stablecoins-hong-kong?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_BLACKROCK"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1426973173",
+    "timestamp": 1795542608000,
+    "title": "Utah moves to drop criminal pursuit of Kalshi after the firm halted services there",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/24/utah-moves-to-drop-criminal-pursuit-of-kalshi-after-the-firm-halted-services-there",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_2132715496",
+    "timestamp": 1795540151000,
+    "title": "Bitcoin slides amid US tariff nerves as Anthropic falls below IPO price",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-slides-us-tariff-nerves-anthropic-falls-ipo-price?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_49750613",
+    "timestamp": 1795538006000,
+    "title": "How South Korea’s proposed 20% cap could change who runs Upbit",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/how-south-koreas-proposed-20-cap-could-change-who-runs-upbit?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1593393207",
+    "timestamp": 1795536025000,
+    "title": "'AI trade never died': Traders see room for market recovery, but bitcoin's participation is another story",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/24/ai-trade-never-died-traders-see-room-for-market-recovery-despite-bitcoin-s-weakness",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_563891745",
+    "timestamp": 1795532792000,
+    "title": "Anchorage Digital to unveil new asset-management subsidiary",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/24/anchorage-digital-to-unveil-new-asset-management-subsidiary",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1370000754",
+    "timestamp": 1795531253000,
+    "title": "South Korea proposes ending 2017 ICO ban to boost jobs and onshore crypto investment",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/24/south-korea-proposes-ending-2017-ico-ban-to-boost-jobs-and-onshore-crypto-investment",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_343182257",
+    "timestamp": 1795529423000,
+    "title": "USDT buyers face 22% VAT when Moscow Exchange opens crypto trading",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/russia-usdt-buyer-face-22-tax-december-launch?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "INFRA_USDT"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_371000832",
+    "timestamp": 1795528676000,
+    "title": "Swiss central bank, UBS and SIX study ledger for tokenized settlement",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/swiss-central-bank-ubs-six-explore-ledger-tokenized-settlement?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_629569124",
+    "timestamp": 1795527826000,
+    "title": "Sky lender proposes buyback of up to $50M to fund stUSDS withdrawals",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/sky-community-proposes-50m-buybacks-stusds-liquidity-crisis?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1156292314",
+    "timestamp": 1795525904000,
+    "title": "Grayscale calls Bitcoin ‘oversold’ at $62K but warns of AI risks",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-oversold-ai-risks-grayscale?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_800343109",
+    "timestamp": 1795524469000,
+    "title": "Crypto trader Ansem says his wallet was hacked as $2 million in memecoins were sold",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/24/a-wallet-linked-to-popular-crypto-trader-ansem-sold-usd2-million-in-memecoins-as-his-namesake-token-cratered",
+    "matchedNodes": [],
+    "surpriseScore": -0.79,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_471168321",
+    "timestamp": 1795524460000,
+    "title": "Live updates: Bitcoin pulls back below $60,000, stock rally fades, as tariffs re-enter the picture",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/24/live-updates-bitcoin-pulls-back-to-usd60-000-as-stock-rally-fails-to-budge-crypto",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0.58,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_222309935",
+    "timestamp": 1795523788000,
+    "title": "Bitcoin drops as November spot ETF outflows increase to record $4.71 billion",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/daybook-us/2026/11/24/bitcoin-drops-as-november-spot-etf-outflows-increase-to-record-usd4-71-billion",
+    "matchedNodes": [
+      "CRYPTO_BTC",
+      "NAR_SPOT_ETF"
+    ],
+    "surpriseScore": -0.74,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_572267855",
+    "timestamp": 1795521879000,
+    "title": "JPMorgan, HSBC and StoneX complete first digital gold trades in London",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/24/jpmorgan-hsbc-and-stonex-complete-first-digital-gold-trades-in-london",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1232663098",
+    "timestamp": 1795521856000,
+    "title": "South Korea proposes bank-led stablecoins, 20% cap on crypto exchange stakes",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/south-korea-draft-bill-crypto-innovation-user-protection?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_805945466",
+    "timestamp": 1795520433000,
+    "title": "Bitcoin dipped on Huang’s Nvidia exit but jumped 5% on his return",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-huangs-return-18-below-pre-resignation-levels?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_HUANG",
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1610848783",
+    "timestamp": 1795519916000,
+    "title": "Bitcoin hands back Monday's Nvidia-driven gains, liquidations triple",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/24/bitcoin-hands-back-monday-s-nvidia-driven-gains-liquidations-triple",
+    "matchedNodes": [
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.6,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1469907055",
+    "timestamp": 1795518698000,
+    "title": "Bitcoin’s drop to $55,000 left a record 11.6 million BTC underwater",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/24/bitcoin-s-drop-to-usd55-000-left-a-record-11-6-million-btc-underwater",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1081483690",
+    "timestamp": 1795517931000,
+    "title": "U.S. seeks $1.1 billion seized in Binance hack as North Korean funds keep moving",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/24/u-s-seeks-usd1-1-billion-seized-in-binance-hack-as-north-korean-funds-keep-moving",
+    "matchedNodes": [
+      "INFRA_BINANCE"
+    ],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_473169266",
+    "timestamp": 1795517730000,
+    "title": "BTCS sells more than half its ether to repay $43.8 million in Aave debt",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/24/btcs-sells-more-than-half-its-ether-to-repay-usd43-8-million-in-aave-debt",
+    "matchedNodes": [
+      "INFRA_AAVE"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1675944754",
+    "timestamp": 1795516154000,
+    "title": "South Korea regulator backs bank-controlled stablecoins after months of dispute",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/policy/2026/11/24/south-korea-regulator-backs-bank-controlled-stablecoins-after-months-of-dispute",
+    "matchedNodes": [],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_1448104176",
+    "timestamp": 1795514918000,
+    "title": "Bitcoin falls below $60,000 as rally on Jensen Huang’s Nvidia return fades",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/24/bitcoin-falls-below-usd60-000-as-rally-on-jensen-huang-s-nvidia-return-fades",
+    "matchedNodes": [
+      "ACTOR_HUANG",
+      "EQ_NVDA",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0.58,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1449564642",
+    "timestamp": 1795512345000,
+    "title": "Bitcoin dips back under $60K as gold seals worst 60-day loss since 1980s",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-dips-60k-gold-worst-60-day-loss-1980s?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_Cointelegraph_561881755",
     "timestamp": 1795506110000,
     "title": "Bitcoin ETFs keep bleeding as BlackRock’s IBIT shares gain nearly 5%",
