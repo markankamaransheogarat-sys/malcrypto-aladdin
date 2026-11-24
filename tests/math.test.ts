@@ -3,6 +3,8 @@ import { describe, it } from "node:test";
 import {
   benjaminiHochbergFDR,
   brierScore,
+  sharpeRatio,
+  sortinoRatio,
   detectMarketRegime,
   grangerCausalityTest,
   tailBeta,
@@ -55,5 +57,14 @@ describe("Math & Statistical Engine", () => {
     assert.equal(detectMarketRegime(75, 0.01, -3), "STRESS_CORRELATION_ONE");
     assert.equal(detectMarketRegime(40, 0.04, -1), "EUPHORIA_OVERLEVERAGED");
     assert.equal(detectMarketRegime(35, 0.01, -1), "RISK_ON_CALM");
+  });
+  it("computes annualized sharpeRatio and sortinoRatio", () => {
+    const mixed = [0.02, -0.01, 0.03, -0.005, 0.015, 0.01];
+    const sr = sharpeRatio(mixed, 0, 252);
+    const so = sortinoRatio(mixed, 0, 252);
+    assert.ok(sr > 0);
+    assert.ok(so > sr);
+    assert.equal(sharpeRatio([0.01], 0, 252), 0);
+    assert.equal(sortinoRatio([0.01, 0.01, 0.01], 0, 252), 0);
   });
 });

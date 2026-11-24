@@ -5,6 +5,10 @@ on:
     - cron: '*/15 * * * *'
   workflow_dispatch:
 
+concurrency:
+  group: watchdog
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -30,12 +34,16 @@ jobs:
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: node --import tsx src/watchdog.ts
 
+      - name: Refresh Backtest & Forecast Audit Report
+        run: timeout 45s npm run audit || true
+
       - name: Commit updated Knowledge Graph snapshot
         run: |
           git config user.name "malcrypto-watchdog[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/snapshot.json data/verdicts.json data/events_db.json data/horizon_forecasts.json data/audit_report.json
           if ! git diff --cached --quiet; then
+            git pull --rebase origin main || true
             git commit -m "chore(watchdog): update bi-temporal graph snapshot [skip ci]"
             git push
           fi

@@ -344,3 +344,38 @@ export function brierScore(
   }
   return sum / predictions.length;
 }
+
+/**
+ * Annualized Sharpe Ratio from periodic return fractions (e.g., 0.01 = +1%).
+ */
+export function sharpeRatio(
+  returns: readonly number[],
+  riskFreePerPeriod = 0,
+  periodsPerYear = 252,
+): number {
+  if (returns.length < 2) return 0;
+  const excess = returns.map((r) => r - riskFreePerPeriod);
+  const sd = stdDev(excess);
+  if (sd <= 1e-12) return 0;
+  return (mean(excess) / sd) * Math.sqrt(periodsPerYear);
+}
+
+/**
+ * Annualized Sortino Ratio using downside deviation below `targetPerPeriod`.
+ */
+export function sortinoRatio(
+  returns: readonly number[],
+  targetPerPeriod = 0,
+  periodsPerYear = 252,
+): number {
+  if (returns.length < 2) return 0;
+  const excessMean = mean(returns.map((r) => r - targetPerPeriod));
+  const downsideSq =
+    returns.reduce((acc, r) => {
+      const diff = Math.min(0, r - targetPerPeriod);
+      return acc + diff * diff;
+    }, 0) / returns.length;
+  const downsideDev = Math.sqrt(downsideSq);
+  if (downsideDev <= 1e-12) return 0;
+  return (excessMean / downsideDev) * Math.sqrt(periodsPerYear);
+}
