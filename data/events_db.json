@@ -1,5 +1,277 @@
 [
   {
+    "id": "rss_Cointelegraph_627829800",
+    "timestamp": 1795611729000,
+    "title": "Ukraine passes bill to legalize crypto and tax profits at 23%",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/ukraine-passes-bill-crypto-regulation-tax?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_424388589",
+    "timestamp": 1795609126000,
+    "title": "Fed’s preferred inflation gauge lands with a December rate increase already priced in",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/daybook-us/2026/11/25/fed-s-preferred-inflation-gauge-lands-with-a-december-rate-increase-already-priced-in",
+    "matchedNodes": [
+      "ACTOR_POWELL",
+      "MACRO_US10Y"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_841441990",
+    "timestamp": 1795607870000,
+    "title": "Ether, DeFi fall twice as hard as bitcoin as equities selloff resumes",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/25/ether-defi-fall-twice-as-hard-as-bitcoin-as-equities-selloff-resumes",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_364740884",
+    "timestamp": 1795607514000,
+    "title": "Italy’s UniCredit launches six-year bitcoin certificate with gains capped at 65%",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/25/italy-s-unicredit-debuts-six-year-bitcoin-certificate-with-100-capital-protection-and-65-cap",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1125171236",
+    "timestamp": 1795607394000,
+    "title": "Japan’s SBI, SMFG launch Solana venture for stablecoins, tokenization",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/sbi-smfg-solana-global-stablecoin-tokenization?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1865564831",
+    "timestamp": 1795606270000,
+    "title": "Hong Kong launches tokenized debt platform with 24-hour settlement",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/hong-kong-central-bank-platform-tokenized-debt-securities?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_353096404",
+    "timestamp": 1795606232000,
+    "title": "Gold's haven status has lost its edge over bitcoin, and the Fed's to blame",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/25/bitcoin-hasn-t-paid-its-holders-for-the-risk-it-carries-and-now-gold-is-doing-the-same",
+    "matchedNodes": [
+      "ACTOR_POWELL",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_895688226",
+    "timestamp": 1795605146000,
+    "title": "Bitcoin ETFs near $5B in record monthly outflows amid AI stock rout",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-etfs-near-record-5-billion-monthly-outflows?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.74,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_1407022315",
+    "timestamp": 1795604978000,
+    "title": "Bitcoin price may fall below $53K if bear-market history repeats",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-price-bear-market-history-repeats?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1691955335",
+    "timestamp": 1795604427000,
+    "title": "EU proposes $54.7 billion fund for AI, quantum startups alongside post-quantum security push",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/25/eu-proposes-usd54-7-billion-fund-for-ai-quantum-startups-alongside-post-quantum-security-push",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1466332532",
+    "timestamp": 1795604272000,
+    "title": "HYPE drops 8% as Trump bump gives way to 40% slide from peak",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/hyperliquid-hype-price-falls-abraxas-capital-wallets?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "PROTO_HYPERLIQUID_BRIDGE"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1109800907",
+    "timestamp": 1795600692000,
+    "title": "French Senate rejects 100K euro crypto wallet disclosure requirement",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/french-senate-rejects-disclosing-self-custodied-crypto-wallets-100k?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1254047162",
+    "timestamp": 1795600342000,
+    "title": "Stablecoin redemptions hit $12B in 30 days, echoing 2022 bear market",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/stablecoin-cash-out-2022-bear-market?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1104761619",
+    "timestamp": 1795596028000,
+    "title": "EU seeks up to $55B for AI and quantum computing fund: Report",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/eu-55-billion-ai-quantum-computing-investment-fund?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_555392082",
+    "timestamp": 1795595747000,
+    "title": "Live updates: Bitcoin slips back under $59,000, with tech rout continuing",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/business/2026/11/25/live-updates-bitcoin-slips-back-under-usd60-000-as-hype-leads-altcoins-lower",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_17433937",
+    "timestamp": 1795589699000,
+    "title": "South Korea’s crypto bill could move stablecoin race beyond token issuance",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/south-korea-crypto-bill-stablecoin-race-beyond-issuance?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_1644891104",
+    "timestamp": 1795588390000,
+    "title": "Solana developers move to stop validators finishing work on blocks that already lost",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/25/solana-developers-move-to-stop-validators-finishing-work-on-blocks-that-already-lost",
+    "matchedNodes": [
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1269676855",
+    "timestamp": 1795587308000,
+    "title": "Just 10 accounts drove all of the XRP Ledger's trading growth last quarter",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/25/ten-accounts-drove-all-of-the-xrp-ledger-s-trading-growth-last-quarter",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1327787696",
+    "timestamp": 1795584775000,
+    "title": "Solana DEX Velocity halts trading over bug just months after relaunch",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/solana-dex-velocity-halts-transactions-over-bug-coming-2-months-after-relaunch?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_SOL"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_938688557",
+    "timestamp": 1795582642000,
+    "title": "Crypto traders can now hedge Nvidia, Anthropic and oil bets on Derive",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/25/crypto-traders-can-now-hedge-nvidia-and-oil-bets-on-derive",
+    "matchedNodes": [
+      "EQ_NVDA"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_1357997209",
+    "timestamp": 1795582208000,
+    "title": "A year after buying bitcoin, Czech central bank won't say what it's worth",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/23/a-year-after-buying-bitcoin-czech-central-bank-won-t-say-what-it-s-worth",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": -0.63,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_566001577",
+    "timestamp": 1795580082000,
+    "title": "Trump willing to pardon Jensen Huang, says it won’t be necessary",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/trump-willing-to-pardon-jensen-huang-but-says-it-wont-be-necessary?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_HUANG"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "sec_COIN_4@2026-11-24",
     "timestamp": 1795577990699,
     "title": "SEC EDGAR: COIN — 4 инсайдерских форм Form 4/144 за 30д (последняя: 4@2026-11-24)",
