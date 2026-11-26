@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-26T04:42:49.691Z",
+  "generatedAt": "2026-11-26T14:30:36.814Z",
   "systemHealthStatus": "НЕТ_ДАННЫХ",
   "liveVerdicts": {
     "total": 0,
@@ -9,7 +9,7 @@
     "avgReturnPct": 0
   },
   "liveHorizons24h": {
-    "total": 39,
+    "total": 40,
     "resolved": 0,
     "p10p90CoveragePct": 0,
     "avgBrierScore": 0,
