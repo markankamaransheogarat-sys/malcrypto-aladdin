@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1795703431960,
+  "exportedAt": 1795735178084,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -213,7 +213,7 @@
       ],
       "systemicWeight": 0.93,
       "description": "Inverse liquidity gauge: sharp DXY spikes compress global risk assets.",
-      "price": 91.95
+      "price": 91.72
     },
     {
       "id": "MACRO_US10Y",
@@ -255,7 +255,7 @@
         "tether"
       ],
       "systemicWeight": 0.96,
-      "price": 0.99875
+      "price": 0.99871
     },
     {
       "id": "INFRA_USDC",
@@ -268,7 +268,7 @@
         "circle"
       ],
       "systemicWeight": 0.89,
-      "price": 0.9998486250000002
+      "price": 0.9998734848499998
     },
     {
       "id": "INFRA_BINANCE",

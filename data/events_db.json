@@ -1,5 +1,149 @@
 [
   {
+    "id": "rss_Cointelegraph_190994087",
+    "timestamp": 1795732786000,
+    "title": "‘Very racist’ Netflix SBF series, BitMart’s $319M shortfall: Asia Express",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/magazine/very-racist-netflix-sbf-series-bitmarts-319m-shortfall-asia-express?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_209589856",
+    "timestamp": 1795729363000,
+    "title": "BNB Chain details new layer-1 for trading, private finance and AI",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/bnb-chain-details-new-layer-1-trading-private-finance-ai?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "PROTO_BINANCE_CEX"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1619101531",
+    "timestamp": 1795728827000,
+    "title": "Binance completes withdrawal recovery four weeks after $6.3B hack",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/binance-completes-withdrawal-recovery-four-weeks-after-63b-hack?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "INFRA_BINANCE"
+    ],
+    "surpriseScore": -0.66,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_Cointelegraph_792601818",
+    "timestamp": 1795727633000,
+    "title": "UK is ‘getting it wrong’ on DeFi regulation, says Coinbase",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/uk-wrong-defi-regulation-coinbase?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "EQ_COIN"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_964974165",
+    "timestamp": 1795723518000,
+    "title": "Japan weighs tighter oversight of DeFi, self-custodial wallets",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/japan-tighter-oversight-defi-self-custodial-wallets?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1881466146",
+    "timestamp": 1795717591000,
+    "title": "Spain moves to grant financial watchdog power to freeze crypto accounts",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/spain-moves-grant-financial-watchdog-power-freeze-crypto-accounts?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1666410292",
+    "timestamp": 1795714793000,
+    "title": "Crypto on notice as hawkish Fed risks December ‘meltdown’",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/crypto-hawkish-fed-risks-december-meltdown?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "ACTOR_POWELL"
+    ],
+    "surpriseScore": -0.6,
+    "impact": "CRITICAL"
+  },
+  {
+    "id": "rss_CoinDesk_567281419",
+    "timestamp": 1795714200000,
+    "title": "A tiny payment can expose the IP address behind a bitcoin wallet, developer finds",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/26/a-tiny-payment-can-expose-the-ip-address-behind-a-bitcoin-wallet-developer-finds",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_811532512",
+    "timestamp": 1795711823000,
+    "title": "Bitcoin’s dormant supply rises, a behavior seen during previous bear-market bottoming phases",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/markets/2026/11/26/bitcoin-s-dormant-supply-rises-a-behavior-seen-during-previous-bear-market-bottoming-phases",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_1056072915",
+    "timestamp": 1795711244000,
+    "title": "BIS chief Pablo Hernández de Cos set to become next ECB president: FT",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/bis-chief-pablo-hernndez-de-cos-next-ecb-president?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_751560638",
+    "timestamp": 1795707907000,
+    "title": "How EU brokers could lose access to Kyrgyz crypto exchanges",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/how-eu-brokers-could-lose-access-to-kyrgyz-crypto-exchanges?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_3598880",
+    "timestamp": 1795707763000,
+    "title": "Crypto for Advisors: Four questions to ask before trusting a crypto exchange",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/coindesk-indices/2026/11/26/crypto-for-advisors-four-questions-to-ask-before-trusting-a-crypto-exchange",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
     "id": "rss_CoinDesk_1311162731",
     "timestamp": 1795701958000,
     "title": "Spain gives anti-laundering unit power to freeze crypto accounts without a judge",
@@ -196,6 +340,17 @@
     "id": "rss_CoinDesk_243231782",
     "timestamp": 1795676965000,
     "title": "Zcash developers want users to move $300 million out of an older privacy system",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/26/zcash-developers-want-users-to-move-usd300-million-out-of-an-older-privacy-system",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_CoinDesk_930579765",
+    "timestamp": 1795676965000,
+    "title": "Zcash developers want to phase out older privacy system as a precaution against future attacks",
     "source": "CoinDesk",
     "category": "CRYPTO",
     "url": "https://www.coindesk.com/tech/2026/11/26/zcash-developers-want-users-to-move-usd300-million-out-of-an-older-privacy-system",
