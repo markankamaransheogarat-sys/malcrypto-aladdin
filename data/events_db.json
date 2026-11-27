@@ -1,5 +1,55 @@
 [
   {
+    "id": "rss_Cointelegraph_883778289",
+    "timestamp": 1795814129000,
+    "title": "Franklin Templeton makes room for HYPE in crypto index ETF",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/franklin-templeton-hype-crypto-index-etf?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "PROTO_HYPERLIQUID_BRIDGE"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_2088283109",
+    "timestamp": 1795807380000,
+    "title": "Bitcoin whales pile into BTC despite shrinking profit cushion",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-whales-pile-btc-despite-shrinking-profit-cushion?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_Cointelegraph_571599795",
+    "timestamp": 1795801043000,
+    "title": "China sets March 2027 rollout for blockchain identity regulations",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/news/china-march-2027-rollout-blockchain-identity-regulations?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [],
+    "surpriseScore": 0,
+    "impact": "MEDIUM"
+  },
+  {
+    "id": "rss_Cointelegraph_1231479895",
+    "timestamp": 1795798131000,
+    "title": "Bitcoin price drops below $59K as Anthropic joins tech stock rebound",
+    "source": "Cointelegraph",
+    "category": "CRYPTO",
+    "url": "https://cointelegraph.com/markets/bitcoin-price-below-59k-anthropic-tech-stock-rebound?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+    "matchedNodes": [
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
     "id": "rss_Cointelegraph_1794892644",
     "timestamp": 1795790454000,
     "title": "What was Coinbase worth while Nasdaq was closed?",
@@ -95,6 +145,19 @@
     "url": "https://www.coindesk.com/tech/2026/11/27/live-news-bitcoin-rebounds-above-usd61-000-as-ai-stocks-lead-premarket-gains",
     "matchedNodes": [
       "EQ_QQQ",
+      "CRYPTO_BTC"
+    ],
+    "surpriseScore": 0,
+    "impact": "HIGH"
+  },
+  {
+    "id": "rss_CoinDesk_2145806875",
+    "timestamp": 1795779277000,
+    "title": "Live updates: Bitcoin's Thanksgiving gains prove fleeting",
+    "source": "CoinDesk",
+    "category": "CRYPTO",
+    "url": "https://www.coindesk.com/tech/2026/11/27/live-news-bitcoin-rebounds-above-usd61-000-as-ai-stocks-lead-premarket-gains",
+    "matchedNodes": [
       "CRYPTO_BTC"
     ],
     "surpriseScore": 0,
