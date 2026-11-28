@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportedAt": 1795822212118,
+  "exportedAt": 1795841697592,
   "nodes": [
     {
       "id": "ACTOR_HUANG",
@@ -268,7 +268,7 @@
         "circle"
       ],
       "systemicWeight": 0.89,
-      "price": 0.9998941332
+      "price": 0.9999440057499999
     },
     {
       "id": "INFRA_BINANCE",
